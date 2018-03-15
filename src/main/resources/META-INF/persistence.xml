@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  <persistence-unit name="MySqlDSAtelier" transaction-type="JTA">
+    <jta-data-source>java:/MySqlDS</jta-data-source>
+    <class>com.universitaria.atelier.web.jpa.Tablaprueba</class>
+    <class>com.universitaria.atelier.web.jpa.Ordencompra</class>
+    <class>com.universitaria.atelier.web.jpa.Estado</class>
+    <class>com.universitaria.atelier.web.jpa.Prendatipo</class>
+    <class>com.universitaria.atelier.web.jpa.Ocasion</class>
+    <class>com.universitaria.atelier.web.jpa.Ordencompradeta</class>
+    <class>com.universitaria.atelier.web.jpa.Materialtipo</class>
+    <class>com.universitaria.atelier.web.jpa.Stockimagen</class>
+    <class>com.universitaria.atelier.web.jpa.Reservacion</class>
+    <class>com.universitaria.atelier.web.jpa.Ciudad</class>
+    <class>com.universitaria.atelier.web.jpa.Material</class>
+    <class>com.universitaria.atelier.web.jpa.Roll</class>
+    <class>com.universitaria.atelier.web.jpa.Facturaencab</class>
+    <class>com.universitaria.atelier.web.jpa.Stockprenda</class>
+    <class>com.universitaria.atelier.web.jpa.Permiso</class>
+    <class>com.universitaria.atelier.web.jpa.Proveedor</class>
+    <class>com.universitaria.atelier.web.jpa.Encabezadorequerimiento</class>
+    <class>com.universitaria.atelier.web.jpa.Producciondeta</class>
+    <class>com.universitaria.atelier.web.jpa.Opcion</class>
+    <class>com.universitaria.atelier.web.jpa.Color</class>
+    <class>com.universitaria.atelier.web.jpa.Facturadeta</class>
+    <class>com.universitaria.atelier.web.jpa.Produccion</class>
+    <class>com.universitaria.atelier.web.jpa.Pais</class>
+    <class>com.universitaria.atelier.web.jpa.Retornoprenda</class>
+    <class>com.universitaria.atelier.web.jpa.Prenda</class>
+    <class>com.universitaria.atelier.web.jpa.Usuario</class>
+    <class>com.universitaria.atelier.web.jpa.Departamento</class>
+    <class>com.universitaria.atelier.web.jpa.Renta</class>
+    <class>com.universitaria.atelier.web.jpa.Requestdeta</class>
+    <class>com.universitaria.atelier.web.jpa.Rentadeta</class>
+    <class>com.universitaria.atelier.web.jpa.Talla</class>
+    <class>com.universitaria.atelier.web.jpa.Marca</class>
+    <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    <properties>
+    </properties>
+  </persistence-unit>
+</persistence>
