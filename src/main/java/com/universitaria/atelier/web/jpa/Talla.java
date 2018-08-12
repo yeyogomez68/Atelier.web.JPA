@@ -30,7 +30,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Talla.findAll", query = "SELECT t FROM Talla t")
     , @NamedQuery(name = "Talla.findByTallaId", query = "SELECT t FROM Talla t WHERE t.tallaId = :tallaId")
-    , @NamedQuery(name = "Talla.findByTallaDescrip", query = "SELECT t FROM Talla t WHERE t.tallaDescrip = :tallaDescrip")})
+    , @NamedQuery(name = "Talla.findByTallaDescrip", query = "SELECT t FROM Talla t WHERE upper( t.tallaDescrip ) = upper( :tallaDescrip )")})
 public class Talla implements Serializable {
 
     private static final long serialVersionUID = 1L;
