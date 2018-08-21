@@ -17,6 +17,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -33,6 +34,13 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Opcion.findByOpcionPadre", query = "SELECT o FROM Opcion o WHERE o.opcionPadre = :opcionPadre")
     , @NamedQuery(name = "Opcion.findByFormulario", query = "SELECT o FROM Opcion o WHERE o.formulario = :formulario")})
 public class Opcion implements Serializable {
+
+    @Size(max = 200)
+    @Column(name = "Url")
+    private String url;
+    @Size(max = 1)
+    @Column(name = "Referencia")
+    private String referencia;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -116,6 +124,22 @@ public class Opcion implements Serializable {
     @Override
     public String toString() {
         return "com.universitaria.atelier.web.jpa.Opcion[ opcionId=" + opcionId + " ]";
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public String getReferencia() {
+        return referencia;
+    }
+
+    public void setReferencia(String referencia) {
+        this.referencia = referencia;
     }
     
 }
