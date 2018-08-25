@@ -37,7 +37,9 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Produccion.findByProduccionId", query = "SELECT p FROM Produccion p WHERE p.produccionId = :produccionId")
     , @NamedQuery(name = "Produccion.findByProduccionFecha", query = "SELECT p FROM Produccion p WHERE p.produccionFecha = :produccionFecha")
     , @NamedQuery(name = "Produccion.findByProduccionInicioHora", query = "SELECT p FROM Produccion p WHERE p.produccionInicioHora = :produccionInicioHora")
-    , @NamedQuery(name = "Produccion.findByProduccionDiaEstimated", query = "SELECT p FROM Produccion p WHERE p.produccionDiaEstimated = :produccionDiaEstimated")})
+    , @NamedQuery(name = "Produccion.findByProduccionDiaEstimated", query = "SELECT p FROM Produccion p WHERE p.produccionDiaEstimated = :produccionDiaEstimated")
+    , @NamedQuery(name = "Produccion.findByProduccionDescripcion", query = "SELECT p FROM Produccion p WHERE p.produccionDescripcion = :produccionDescripcion")})
+
 public class Produccion implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -55,6 +57,9 @@ public class Produccion implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "ProduccionDiaEstimated")
     private Float produccionDiaEstimated;
+    @Column(name = "ProduccionDescripcion")
+    private String produccionDescripcion;
+
     @JoinColumn(name = "EstadoId", referencedColumnName = "EstadoId")
     @ManyToOne
     private Estado estadoId;
@@ -150,6 +155,14 @@ public class Produccion implements Serializable {
         this.producciondetaCollection = producciondetaCollection;
     }
 
+    public String getProduccionDescripcion() {
+        return produccionDescripcion;
+    }
+
+    public void setProduccionDescripcion(String produccionDescripcion) {
+        this.produccionDescripcion = produccionDescripcion;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -174,5 +187,5 @@ public class Produccion implements Serializable {
     public String toString() {
         return "com.universitaria.atelier.web.jpa.Produccion[ produccionId=" + produccionId + " ]";
     }
-    
+
 }
