@@ -28,8 +28,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Permiso.findAll", query = "SELECT p FROM Permiso p")
-    , @NamedQuery(name = "Permiso.findPermByUserMod", query = "SELECT p.opcionId FROM Permiso p WHERE p.opcionId.opcionPadre is null")
-    , @NamedQuery(name = "Permiso.findPermByUserItem", query = "SELECT p.opcionId FROM Permiso p WHERE p.opcionId.opcionPadre is not null")
+    , @NamedQuery(name = "Permiso.findPermByUserMod", query = "SELECT p.opcionId FROM Permiso p WHERE p.opcionId.opcionPadre is null AND p.rollId.rollId = :rollId")
+    , @NamedQuery(name = "Permiso.findPermByUserItem", query = "SELECT p.opcionId FROM Permiso p WHERE p.opcionId.opcionPadre is not null AND p.rollId.rollId = :rollId")
     , @NamedQuery(name = "Permiso.findByPermisoId", query = "SELECT p FROM Permiso p WHERE p.permisoId = :permisoId")})
 public class Permiso implements Serializable {
 
