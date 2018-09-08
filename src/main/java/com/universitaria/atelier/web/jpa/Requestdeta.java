@@ -36,7 +36,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Requestdeta.findByRequestDetaFechaAprueba", query = "SELECT r FROM Requestdeta r WHERE r.requestDetaFechaAprueba = :requestDetaFechaAprueba")
     , @NamedQuery(name = "Requestdeta.findByRequestDetaFechaApruebaTwo", query = "SELECT r FROM Requestdeta r WHERE r.requestDetaFechaApruebaTwo = :requestDetaFechaApruebaTwo")
     , @NamedQuery(name = "Requestdeta.findByRequestDetaCantidad", query = "SELECT r FROM Requestdeta r WHERE r.requestDetaCantidad = :requestDetaCantidad")
-    , @NamedQuery(name = "Requestdeta.findByUsuarioId", query = "SELECT r FROM Requestdeta r WHERE r.usuarioId = :usuarioId")})
+    , @NamedQuery(name = "Requestdeta.findByUsuarioId", query = "SELECT r FROM Requestdeta r WHERE r.usuarioId = :usuarioId")
+    , @NamedQuery(name = "Requestdeta.findByIdRq", query = "SELECT r FROm Requestdeta r WHERE r.encabezadoRequerimientoId.encabezadoRequerimientoId = :idRq")})
 public class Requestdeta implements Serializable {
 
     private static final long serialVersionUID = 1L;
