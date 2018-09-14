@@ -36,6 +36,9 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Encabezadorequerimiento.findByUsuarioCreador", query = "SELECT e FROM Encabezadorequerimiento e WHERE e.usuarioCreador = :usuarioCreador")})
 public class Encabezadorequerimiento implements Serializable {
 
+    @OneToMany(mappedBy = "encabezadoRequerimientoId")
+    private Collection<Ordencompradeta> ordencompradetaCollection;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -140,6 +143,15 @@ public class Encabezadorequerimiento implements Serializable {
     @Override
     public String toString() {
         return "com.universitaria.atelier.web.jpa.Encabezadorequerimiento[ encabezadoRequerimientoId=" + encabezadoRequerimientoId + " ]";
+    }
+
+    @XmlTransient
+    public Collection<Ordencompradeta> getOrdencompradetaCollection() {
+        return ordencompradetaCollection;
+    }
+
+    public void setOrdencompradetaCollection(Collection<Ordencompradeta> ordencompradetaCollection) {
+        this.ordencompradetaCollection = ordencompradetaCollection;
     }
     
 }

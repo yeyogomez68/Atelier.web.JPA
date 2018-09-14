@@ -19,6 +19,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -41,6 +42,16 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Usuario.findByUsuarioDireccion", query = "SELECT u FROM Usuario u WHERE u.usuarioDireccion = :usuarioDireccion")
     , @NamedQuery(name = "Usuario.findByUsuarioCel", query = "SELECT u FROM Usuario u WHERE u.usuarioCel = :usuarioCel")})
 public class Usuario implements Serializable {
+
+    @OneToMany(mappedBy = "usuarioId")
+    private Collection<Produccionusuario> produccionusuarioCollection;
+
+    @Size(max = 50)
+    @Column(name = "Contrato")
+    private String contrato;
+    @JoinColumn(name = "CargoId", referencedColumnName = "CargoId")
+    @ManyToOne
+    private Cargo cargoId;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -66,8 +77,6 @@ public class Usuario implements Serializable {
     private Collection<Facturaencab> facturaencabCollection;
     @OneToMany(mappedBy = "usuarioId")
     private Collection<Ordencompra> ordencompraCollection;
-    @OneToMany(mappedBy = "usuarioCreador")
-    private Collection<Ordencompra> ordencompraCollection1;
     @OneToMany(mappedBy = "usuarioAprueba")
     private Collection<Ordencompra> ordencompraCollection2;
     @OneToMany(mappedBy = "usuarioId")
@@ -185,15 +194,6 @@ public class Usuario implements Serializable {
 
     public void setOrdencompraCollection(Collection<Ordencompra> ordencompraCollection) {
         this.ordencompraCollection = ordencompraCollection;
-    }
-
-    @XmlTransient
-    public Collection<Ordencompra> getOrdencompraCollection1() {
-        return ordencompraCollection1;
-    }
-
-    public void setOrdencompraCollection1(Collection<Ordencompra> ordencompraCollection1) {
-        this.ordencompraCollection1 = ordencompraCollection1;
     }
 
     @XmlTransient
@@ -333,6 +333,31 @@ public class Usuario implements Serializable {
     @Override
     public String toString() {
         return "com.universitaria.atelier.web.jpa.Usuario[ usuarioId=" + usuarioId + " ]";
+    }
+
+    public String getContrato() {
+        return contrato;
+    }
+
+    public void setContrato(String contrato) {
+        this.contrato = contrato;
+    }
+
+    public Cargo getCargoId() {
+        return cargoId;
+    }
+
+    public void setCargoId(Cargo cargoId) {
+        this.cargoId = cargoId;
+    }
+
+    @XmlTransient
+    public Collection<Produccionusuario> getProduccionusuarioCollection() {
+        return produccionusuarioCollection;
+    }
+
+    public void setProduccionusuarioCollection(Collection<Produccionusuario> produccionusuarioCollection) {
+        this.produccionusuarioCollection = produccionusuarioCollection;
     }
     
 }

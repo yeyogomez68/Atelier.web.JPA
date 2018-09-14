@@ -34,6 +34,9 @@
     <class>com.universitaria.atelier.web.jpa.Rentadeta</class>
     <class>com.universitaria.atelier.web.jpa.Talla</class>
     <class>com.universitaria.atelier.web.jpa.Marca</class>
+    <class>com.universitaria.atelier.web.jpa.Cargo</class>
+    <class>com.universitaria.atelier.web.jpa.Produccionusuario</class>
+    <class>com.universitaria.atelier.web.jpa.Cliente</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
     </properties>

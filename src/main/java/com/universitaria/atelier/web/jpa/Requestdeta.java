@@ -40,6 +40,10 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Requestdeta.findByIdRq", query = "SELECT r FROm Requestdeta r WHERE r.encabezadoRequerimientoId.encabezadoRequerimientoId = :idRq")})
 public class Requestdeta implements Serializable {
 
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Column(name = "RequestDetaCantidad")
+    private float requestDetaCantidad;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -56,9 +60,6 @@ public class Requestdeta implements Serializable {
     @Column(name = "RequestDetaFechaApruebaTwo")
     @Temporal(TemporalType.DATE)
     private Date requestDetaFechaApruebaTwo;
-    @Basic(optional = false)
-    @Column(name = "RequestDetaCantidad")
-    private float requestDetaCantidad;
     @Column(name = "UsuarioId")
     private Integer usuarioId;
     @JoinColumn(name = "EncabezadoRequerimientoId", referencedColumnName = "EncabezadoRequerimientoId")
@@ -122,13 +123,6 @@ public class Requestdeta implements Serializable {
         this.requestDetaFechaApruebaTwo = requestDetaFechaApruebaTwo;
     }
 
-    public float getRequestDetaCantidad() {
-        return requestDetaCantidad;
-    }
-
-    public void setRequestDetaCantidad(float requestDetaCantidad) {
-        this.requestDetaCantidad = requestDetaCantidad;
-    }
 
     public Integer getUsuarioId() {
         return usuarioId;
@@ -201,6 +195,14 @@ public class Requestdeta implements Serializable {
     @Override
     public String toString() {
         return "com.universitaria.atelier.web.jpa.Requestdeta[ requestDetaId=" + requestDetaId + " ]";
+    }
+
+    public float getRequestDetaCantidad() {
+        return requestDetaCantidad;
+    }
+
+    public void setRequestDetaCantidad(float requestDetaCantidad) {
+        this.requestDetaCantidad = requestDetaCantidad;
     }
     
 }

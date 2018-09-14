@@ -22,6 +22,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -43,6 +45,9 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Ordencompra.findByOrdenCompraTot", query = "SELECT o FROM Ordencompra o WHERE o.ordenCompraTot = :ordenCompraTot")})
 public class Ordencompra implements Serializable {
 
+    @OneToMany(mappedBy = "ordenCompraId")
+    private Collection<Ordencompradeta> ordencompradetaCollection;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -50,9 +55,13 @@ public class Ordencompra implements Serializable {
     @Column(name = "OrdenCompraId")
     private Integer ordenCompraId;
     @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 19)
     @Column(name = "OrdenCompraCode")
     private String ordenCompraCode;
     @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 600)
     @Column(name = "OrdenCompraDescrip")
     private String ordenCompraDescrip;
     @Column(name = "OrdenCompraApruebaFecha")
@@ -74,14 +83,9 @@ public class Ordencompra implements Serializable {
     @JoinColumn(name = "UsuarioId", referencedColumnName = "UsuarioId")
     @ManyToOne
     private Usuario usuarioId;
-    @JoinColumn(name = "UsuarioCreador", referencedColumnName = "UsuarioId")
-    @ManyToOne
-    private Usuario usuarioCreador;
     @JoinColumn(name = "UsuarioAprueba", referencedColumnName = "UsuarioId")
     @ManyToOne
     private Usuario usuarioAprueba;
-    @OneToMany(mappedBy = "ordenCompraId")
-    private Collection<Ordencompradeta> ordencompradetaCollection;
 
     public Ordencompra() {
     }
@@ -176,29 +180,12 @@ public class Ordencompra implements Serializable {
         this.usuarioId = usuarioId;
     }
 
-    public Usuario getUsuarioCreador() {
-        return usuarioCreador;
-    }
-
-    public void setUsuarioCreador(Usuario usuarioCreador) {
-        this.usuarioCreador = usuarioCreador;
-    }
-
     public Usuario getUsuarioAprueba() {
         return usuarioAprueba;
     }
 
     public void setUsuarioAprueba(Usuario usuarioAprueba) {
         this.usuarioAprueba = usuarioAprueba;
-    }
-
-    @XmlTransient
-    public Collection<Ordencompradeta> getOrdencompradetaCollection() {
-        return ordencompradetaCollection;
-    }
-
-    public void setOrdencompradetaCollection(Collection<Ordencompradeta> ordencompradetaCollection) {
-        this.ordencompradetaCollection = ordencompradetaCollection;
     }
 
     @Override
@@ -224,6 +211,15 @@ public class Ordencompra implements Serializable {
     @Override
     public String toString() {
         return "com.universitaria.atelier.web.jpa.Ordencompra[ ordenCompraId=" + ordenCompraId + " ]";
+    }
+
+    @XmlTransient
+    public Collection<Ordencompradeta> getOrdencompradetaCollection() {
+        return ordencompradetaCollection;
+    }
+
+    public void setOrdencompradetaCollection(Collection<Ordencompradeta> ordencompradetaCollection) {
+        this.ordencompradetaCollection = ordencompradetaCollection;
     }
     
 }
