@@ -6,6 +6,7 @@
 package com.universitaria.atelier.web.jpa;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -36,7 +37,6 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Produccion.findAll", query = "SELECT p FROM Produccion p")
     , @NamedQuery(name = "Produccion.findByProduccionId", query = "SELECT p FROM Produccion p WHERE p.produccionId = :produccionId")
     , @NamedQuery(name = "Produccion.findByProduccionFecha", query = "SELECT p FROM Produccion p WHERE p.produccionFecha = :produccionFecha")
-    , @NamedQuery(name = "Produccion.findByProduccionInicioHora", query = "SELECT p FROM Produccion p WHERE p.produccionInicioHora = :produccionInicioHora")
     , @NamedQuery(name = "Produccion.findByProduccionDiaEstimated", query = "SELECT p FROM Produccion p WHERE p.produccionDiaEstimated = :produccionDiaEstimated")
     , @NamedQuery(name = "Produccion.findByProduccionDescripcion", query = "SELECT p FROM Produccion p WHERE p.produccionDescripcion = :produccionDescripcion")})
 
@@ -49,26 +49,21 @@ public class Produccion implements Serializable {
     @Column(name = "ProduccionId")
     private Integer produccionId;
     @Column(name = "ProduccionFecha")
-    @Temporal(TemporalType.DATE)
-    private Date produccionFecha;
-    @Column(name = "ProduccionInicioHora")
-    @Temporal(TemporalType.DATE)
-    private Date produccionInicioHora;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Calendar produccionFecha;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "ProduccionDiaEstimated")
     private Float produccionDiaEstimated;
     @Column(name = "ProduccionDescripcion")
     private String produccionDescripcion;
 
+    @Column(name = "avance")
+    private Integer avance;
+
     @JoinColumn(name = "EstadoId", referencedColumnName = "EstadoId")
     @ManyToOne
     private Estado estadoId;
-    @JoinColumn(name = "PrendaId", referencedColumnName = "PrendaId")
-    @ManyToOne
-    private Prenda prendaId;
-    @JoinColumn(name = "UsuarioId", referencedColumnName = "UsuarioId")
-    @ManyToOne
-    private Usuario usuarioId;
+
     @JoinColumn(name = "UsuarioCreador", referencedColumnName = "UsuarioId")
     @ManyToOne
     private Usuario usuarioCreador;
@@ -90,20 +85,12 @@ public class Produccion implements Serializable {
         this.produccionId = produccionId;
     }
 
-    public Date getProduccionFecha() {
+    public Calendar getProduccionFecha() {
         return produccionFecha;
     }
 
-    public void setProduccionFecha(Date produccionFecha) {
+    public void setProduccionFecha(Calendar produccionFecha) {
         this.produccionFecha = produccionFecha;
-    }
-
-    public Date getProduccionInicioHora() {
-        return produccionInicioHora;
-    }
-
-    public void setProduccionInicioHora(Date produccionInicioHora) {
-        this.produccionInicioHora = produccionInicioHora;
     }
 
     public Float getProduccionDiaEstimated() {
@@ -122,28 +109,20 @@ public class Produccion implements Serializable {
         this.estadoId = estadoId;
     }
 
-    public Prenda getPrendaId() {
-        return prendaId;
-    }
-
-    public void setPrendaId(Prenda prendaId) {
-        this.prendaId = prendaId;
-    }
-
-    public Usuario getUsuarioId() {
-        return usuarioId;
-    }
-
-    public void setUsuarioId(Usuario usuarioId) {
-        this.usuarioId = usuarioId;
-    }
-
     public Usuario getUsuarioCreador() {
         return usuarioCreador;
     }
 
     public void setUsuarioCreador(Usuario usuarioCreador) {
         this.usuarioCreador = usuarioCreador;
+    }
+
+    public Integer getAvance() {
+        return avance;
+    }
+
+    public void setAvance(Integer avance) {
+        this.avance = avance;
     }
 
     @XmlTransient

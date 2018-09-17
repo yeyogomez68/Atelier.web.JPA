@@ -50,8 +50,8 @@ public class Prenda implements Serializable {
     private Collection<Rentadeta> rentadetaCollection;
     @OneToMany(mappedBy = "prendaId")
     private Collection<Facturadeta> facturadetaCollection;
-    @OneToMany(mappedBy = "prendaId")
-    private Collection<Produccion> produccionCollection;
+    //@OneToMany(mappedBy = "prendaId")
+    //private Collection<Produccion> produccionCollection;
     @OneToMany(mappedBy = "prendaId")
     private Collection<Stockprenda> stockprendaCollection;
     @OneToMany(mappedBy = "prendaId")
@@ -121,15 +121,13 @@ public class Prenda implements Serializable {
         this.facturadetaCollection = facturadetaCollection;
     }
 
-    @XmlTransient
-    public Collection<Produccion> getProduccionCollection() {
-        return produccionCollection;
-    }
-
-    public void setProduccionCollection(Collection<Produccion> produccionCollection) {
-        this.produccionCollection = produccionCollection;
-    }
-
+    // @XmlTransient
+    //public Collection<Produccion> getProduccionCollection() {
+//        return produccionCollection;
+    //  }
+    //public void setProduccionCollection(Collection<Produccion> produccionCollection) {
+    //  this.produccionCollection = produccionCollection;
+    //}
     @XmlTransient
     public Collection<Stockprenda> getStockprendaCollection() {
         return stockprendaCollection;
@@ -212,5 +210,5 @@ public class Prenda implements Serializable {
     public String toString() {
         return "com.universitaria.atelier.web.jpa.Prenda[ prendaId=" + prendaId + " ]";
     }
-    
+
 }

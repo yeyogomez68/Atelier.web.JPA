@@ -39,6 +39,7 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Usuario.findByUsuarioEmail", query = "SELECT u FROM Usuario u WHERE u.usuarioEmail = :usuarioEmail")
     , @NamedQuery(name = "Usuario.findByUsuarioPassword", query = "SELECT u FROM Usuario u WHERE u.usuarioPassword = :usuarioPassword")
     , @NamedQuery(name = "Usuario.findByUsuarioDireccion", query = "SELECT u FROM Usuario u WHERE u.usuarioDireccion = :usuarioDireccion")
+    , @NamedQuery(name = "Usuario.findByRoll", query = "SELECT u FROM Usuario u WHERE u.rollId = :rollId")
     , @NamedQuery(name = "Usuario.findByUsuarioCel", query = "SELECT u FROM Usuario u WHERE u.usuarioCel = :usuarioCel")})
 public class Usuario implements Serializable {
 
@@ -72,8 +73,8 @@ public class Usuario implements Serializable {
     private Collection<Ordencompra> ordencompraCollection2;
     @OneToMany(mappedBy = "usuarioId")
     private Collection<Encabezadorequerimiento> encabezadorequerimientoCollection;
-    @OneToMany(mappedBy = "usuarioId")
-    private Collection<Produccion> produccionCollection;
+    @OneToMany(mappedBy = "usuarioAsignado")
+    private Collection<Producciondeta> producciondetaCollection;
     @OneToMany(mappedBy = "usuarioCreador")
     private Collection<Produccion> produccionCollection1;
     @OneToMany(mappedBy = "usuarioIdApruebaTwo")
@@ -214,15 +215,16 @@ public class Usuario implements Serializable {
         this.encabezadorequerimientoCollection = encabezadorequerimientoCollection;
     }
 
+    
     @XmlTransient
-    public Collection<Produccion> getProduccionCollection() {
-        return produccionCollection;
+    public Collection<Producciondeta> getProduccionCollection() {
+        return producciondetaCollection;
     }
 
-    public void setProduccionCollection(Collection<Produccion> produccionCollection) {
-        this.produccionCollection = produccionCollection;
+    public void setProduccionCollection(Collection<Producciondeta> produccionCollection) {
+        this.producciondetaCollection = produccionCollection;
     }
-
+    
     @XmlTransient
     public Collection<Produccion> getProduccionCollection1() {
         return produccionCollection1;
@@ -334,5 +336,5 @@ public class Usuario implements Serializable {
     public String toString() {
         return "com.universitaria.atelier.web.jpa.Usuario[ usuarioId=" + usuarioId + " ]";
     }
-    
+
 }

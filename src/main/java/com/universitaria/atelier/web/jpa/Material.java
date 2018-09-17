@@ -50,6 +50,8 @@ public class Material implements Serializable {
     private Collection<Ordencompradeta> ordencompradetaCollection;
     @OneToMany(mappedBy = "materialId")
     private Collection<Requestdeta> requestdetaCollection;
+    @OneToMany(mappedBy = "materialId")
+    private Collection<Producciondeta> producciondetaCollection;
     @JoinColumn(name = "MaterialTipoId", referencedColumnName = "MaterialTipoId")
     @ManyToOne
     private Materialtipo materialTipoId;
@@ -133,6 +135,15 @@ public class Material implements Serializable {
         this.prendaCollection = prendaCollection;
     }
 
+    @XmlTransient
+    public Collection<Producciondeta> getProducciondetaCollection() {
+        return producciondetaCollection;
+    }
+
+    public void setProducciondetaCollection(Collection<Producciondeta> producciondetaCollection) {
+        this.producciondetaCollection = producciondetaCollection;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -157,5 +168,5 @@ public class Material implements Serializable {
     public String toString() {
         return "com.universitaria.atelier.web.jpa.Material[ materialId=" + materialId + " ]";
     }
-    
+
 }

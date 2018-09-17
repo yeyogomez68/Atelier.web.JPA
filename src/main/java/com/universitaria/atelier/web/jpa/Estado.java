@@ -61,6 +61,8 @@ public class Estado implements Serializable {
     private Collection<Usuario> usuarioCollection;
     @OneToMany(mappedBy = "estadoId")
     private Collection<Prenda> prendaCollection;
+    @OneToMany(mappedBy = "estadoId")
+    private Collection<Producciondeta> producciondetaCollection;
 
     public Estado() {
     }
@@ -175,6 +177,15 @@ public class Estado implements Serializable {
         this.prendaCollection = prendaCollection;
     }
 
+    @XmlTransient
+    public Collection<Producciondeta> getProducciondetaCollection() {
+        return producciondetaCollection;
+    }
+
+    public void setProducciondetaCollection(Collection<Producciondeta> producciondetaCollection) {
+        this.producciondetaCollection = producciondetaCollection;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -199,5 +210,5 @@ public class Estado implements Serializable {
     public String toString() {
         return "com.universitaria.atelier.web.jpa.Estado[ estadoId=" + estadoId + " ]";
     }
-    
+
 }
