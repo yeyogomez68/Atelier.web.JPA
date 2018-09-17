@@ -8,7 +8,6 @@ package com.universitaria.atelier.web.jpa;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Collection;
-import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -41,12 +40,6 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Produccion.findByProduccionDescripcion", query = "SELECT p FROM Produccion p WHERE p.produccionDescripcion = :produccionDescripcion")})
 
 public class Produccion implements Serializable {
-
-    @OneToMany(mappedBy = "produccionId")
-    private Collection<Produccionusuario> produccionusuarioCollection;
-
-    @OneToMany(mappedBy = "produccionId")
-    private Collection<Produccionusuario> produccionusuarioCollection;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -171,15 +164,6 @@ public class Produccion implements Serializable {
     @Override
     public String toString() {
         return "com.universitaria.atelier.web.jpa.Produccion[ produccionId=" + produccionId + " ]";
-    }
-
-    @XmlTransient
-    public Collection<Produccionusuario> getProduccionusuarioCollection() {
-        return produccionusuarioCollection;
-    }
-
-    public void setProduccionusuarioCollection(Collection<Produccionusuario> produccionusuarioCollection) {
-        this.produccionusuarioCollection = produccionusuarioCollection;
     }
 
 }
