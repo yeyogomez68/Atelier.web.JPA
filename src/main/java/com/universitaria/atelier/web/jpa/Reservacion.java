@@ -40,6 +40,10 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Reservacion.findByReservacionLimitFecha", query = "SELECT r FROM Reservacion r WHERE r.reservacionLimitFecha = :reservacionLimitFecha")})
 public class Reservacion implements Serializable {
 
+    @JoinColumn(name = "ClienteId", referencedColumnName = "ClienteId")
+    @ManyToOne
+    private Cliente clienteId;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -172,6 +176,14 @@ public class Reservacion implements Serializable {
     @Override
     public String toString() {
         return "com.universitaria.atelier.web.jpa.Reservacion[ reservacionId=" + reservacionId + " ]";
+    }
+
+    public Cliente getClienteId() {
+        return clienteId;
+    }
+
+    public void setClienteId(Cliente clienteId) {
+        this.clienteId = clienteId;
     }
     
 }

@@ -33,6 +33,10 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Stockprenda.findByStrockImagenId", query = "SELECT s FROM Stockprenda s WHERE s.strockImagenId = :strockImagenId")})
 public class Stockprenda implements Serializable {
 
+    @JoinColumn(name = "StrockImagenId", referencedColumnName = "StockImagenId")
+    @ManyToOne
+    private Stockimagen strockImagenId;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,8 +46,7 @@ public class Stockprenda implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "StockPrendaCant")
     private Float stockPrendaCant;
-    @Column(name = "StrockImagenId")
-    private Integer strockImagenId;
+    
     @JoinColumn(name = "PrendaId", referencedColumnName = "PrendaId")
     @ManyToOne
     private Prenda prendaId;
@@ -72,14 +75,6 @@ public class Stockprenda implements Serializable {
 
     public void setStockPrendaCant(Float stockPrendaCant) {
         this.stockPrendaCant = stockPrendaCant;
-    }
-
-    public Integer getStrockImagenId() {
-        return strockImagenId;
-    }
-
-    public void setStrockImagenId(Integer strockImagenId) {
-        this.strockImagenId = strockImagenId;
     }
 
     public Prenda getPrendaId() {
@@ -121,6 +116,14 @@ public class Stockprenda implements Serializable {
     @Override
     public String toString() {
         return "com.universitaria.atelier.web.jpa.Stockprenda[ stockPrendaId=" + stockPrendaId + " ]";
+    }
+
+    public Stockimagen getStrockImagenId() {
+        return strockImagenId;
+    }
+
+    public void setStrockImagenId(Stockimagen strockImagenId) {
+        this.strockImagenId = strockImagenId;
     }
     
 }

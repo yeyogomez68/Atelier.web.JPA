@@ -42,6 +42,10 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Renta.findByRentaTot", query = "SELECT r FROM Renta r WHERE r.rentaTot = :rentaTot")})
 public class Renta implements Serializable {
 
+    @JoinColumn(name = "ClienteId", referencedColumnName = "ClienteId")
+    @ManyToOne
+    private Cliente clienteId;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -173,6 +177,14 @@ public class Renta implements Serializable {
     @Override
     public String toString() {
         return "com.universitaria.atelier.web.jpa.Renta[ rentaId=" + rentaId + " ]";
+    }
+
+    public Cliente getClienteId() {
+        return clienteId;
+    }
+
+    public void setClienteId(Cliente clienteId) {
+        this.clienteId = clienteId;
     }
     
 }

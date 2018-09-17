@@ -40,6 +40,10 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Facturaencab.findByFacturaEncabUsuarioSell", query = "SELECT f FROM Facturaencab f WHERE f.facturaEncabUsuarioSell = :facturaEncabUsuarioSell")})
 public class Facturaencab implements Serializable {
 
+    @JoinColumn(name = "ClienteId", referencedColumnName = "ClienteId")
+    @ManyToOne
+    private Cliente clienteId;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -189,6 +193,14 @@ public class Facturaencab implements Serializable {
     @Override
     public String toString() {
         return "com.universitaria.atelier.web.jpa.Facturaencab[ facturaEncabId=" + facturaEncabId + " ]";
+    }
+
+    public Cliente getClienteId() {
+        return clienteId;
+    }
+
+    public void setClienteId(Cliente clienteId) {
+        this.clienteId = clienteId;
     }
     
 }

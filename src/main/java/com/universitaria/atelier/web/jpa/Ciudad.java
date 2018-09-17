@@ -35,6 +35,9 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Ciudad.findByCiudadNombre", query = "SELECT c FROM Ciudad c WHERE c.ciudadNombre = :ciudadNombre")})
 public class Ciudad implements Serializable {
 
+    @OneToMany(mappedBy = "ciudadId")
+    private Collection<Cliente> clienteCollection;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -123,6 +126,15 @@ public class Ciudad implements Serializable {
     @Override
     public String toString() {
         return "com.universitaria.atelier.web.jpa.Ciudad[ ciudadId=" + ciudadId + " ]";
+    }
+
+    @XmlTransient
+    public Collection<Cliente> getClienteCollection() {
+        return clienteCollection;
+    }
+
+    public void setClienteCollection(Collection<Cliente> clienteCollection) {
+        this.clienteCollection = clienteCollection;
     }
     
 }

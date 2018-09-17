@@ -33,6 +33,9 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Estado.findByEstadoDescrip", query = "SELECT e FROM Estado e WHERE e.estadoDescrip = :estadoDescrip")})
 public class Estado implements Serializable {
 
+    @OneToMany(mappedBy = "estadoId")
+    private Collection<Cliente> clienteCollection;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -211,4 +214,13 @@ public class Estado implements Serializable {
         return "com.universitaria.atelier.web.jpa.Estado[ estadoId=" + estadoId + " ]";
     }
 
+    @XmlTransient
+    public Collection<Cliente> getClienteCollection() {
+        return clienteCollection;
+    }
+
+    public void setClienteCollection(Collection<Cliente> clienteCollection) {
+        this.clienteCollection = clienteCollection;
+    }
+    
 }

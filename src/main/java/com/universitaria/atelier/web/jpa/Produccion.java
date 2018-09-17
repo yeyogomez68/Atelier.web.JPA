@@ -42,6 +42,9 @@ import javax.xml.bind.annotation.XmlTransient;
 
 public class Produccion implements Serializable {
 
+    @OneToMany(mappedBy = "produccionId")
+    private Collection<Produccionusuario> produccionusuarioCollection;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -165,6 +168,15 @@ public class Produccion implements Serializable {
     @Override
     public String toString() {
         return "com.universitaria.atelier.web.jpa.Produccion[ produccionId=" + produccionId + " ]";
+    }
+
+    @XmlTransient
+    public Collection<Produccionusuario> getProduccionusuarioCollection() {
+        return produccionusuarioCollection;
+    }
+
+    public void setProduccionusuarioCollection(Collection<Produccionusuario> produccionusuarioCollection) {
+        this.produccionusuarioCollection = produccionusuarioCollection;
     }
 
 }
