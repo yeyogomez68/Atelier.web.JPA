@@ -45,6 +45,9 @@ public class Produccion implements Serializable {
     @OneToMany(mappedBy = "produccionId")
     private Collection<Produccionusuario> produccionusuarioCollection;
 
+    @OneToMany(mappedBy = "produccionId")
+    private Collection<Produccionusuario> produccionusuarioCollection;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
