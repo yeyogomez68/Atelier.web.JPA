@@ -45,6 +45,9 @@ public class Talla implements Serializable {
     @OneToMany(mappedBy = "tallaId")
     private Collection<Stockprenda> stockprendaCollection;
 
+    @OneToMany(mappedBy = "tallaId")
+    private Collection<Prenda> prendaCollection;
+
     public Talla() {
     }
 
@@ -82,6 +85,15 @@ public class Talla implements Serializable {
         this.stockprendaCollection = stockprendaCollection;
     }
 
+    @XmlTransient
+    public Collection<Prenda> getPrendaCollection() {
+        return prendaCollection;
+    }
+
+    public void setPrendaCollection(Collection<Prenda> prendaCollection) {
+        this.prendaCollection = prendaCollection;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -106,5 +118,5 @@ public class Talla implements Serializable {
     public String toString() {
         return "com.universitaria.atelier.web.jpa.Talla[ tallaId=" + tallaId + " ]";
     }
-    
+
 }

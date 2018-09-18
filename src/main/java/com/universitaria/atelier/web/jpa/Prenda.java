@@ -56,12 +56,20 @@ public class Prenda implements Serializable {
     private Collection<Stockprenda> stockprendaCollection;
     @OneToMany(mappedBy = "prendaId")
     private Collection<Reservacion> reservacionCollection;
+
+    @OneToMany(mappedBy = "prendaId")
+    private Collection<Produccion> produccionCollection;
     @JoinColumn(name = "ColorId", referencedColumnName = "ColorId")
     @ManyToOne
     private Color colorId;
     @JoinColumn(name = "EstadoId", referencedColumnName = "EstadoId")
     @ManyToOne
     private Estado estadoId;
+
+    @JoinColumn(name = "TallaId", referencedColumnName = "TallaId")
+    @ManyToOne
+    private Talla tallaId;
+
     @JoinColumn(name = "PrendaTipoId", referencedColumnName = "PrendaTipoId")
     @ManyToOne
     private Prendatipo prendaTipoId;
@@ -121,13 +129,6 @@ public class Prenda implements Serializable {
         this.facturadetaCollection = facturadetaCollection;
     }
 
-    // @XmlTransient
-    //public Collection<Produccion> getProduccionCollection() {
-//        return produccionCollection;
-    //  }
-    //public void setProduccionCollection(Collection<Produccion> produccionCollection) {
-    //  this.produccionCollection = produccionCollection;
-    //}
     @XmlTransient
     public Collection<Stockprenda> getStockprendaCollection() {
         return stockprendaCollection;
@@ -144,6 +145,23 @@ public class Prenda implements Serializable {
 
     public void setReservacionCollection(Collection<Reservacion> reservacionCollection) {
         this.reservacionCollection = reservacionCollection;
+    }
+
+    @XmlTransient
+    public Collection<Produccion> getProduccionCollection() {
+        return produccionCollection;
+    }
+
+    public void setProduccionCollection(Collection<Produccion> produccionCollection) {
+        this.produccionCollection = produccionCollection;
+    }
+
+    public Talla getTallaId() {
+        return tallaId;
+    }
+
+    public void setTallaId(Talla tallaId) {
+        this.tallaId = tallaId;
     }
 
     public Color getColorId() {

@@ -63,6 +63,10 @@ public class Produccion implements Serializable {
     @ManyToOne
     private Estado estadoId;
 
+    @JoinColumn(name = "PrendaId", referencedColumnName = "PrendaId")
+    @ManyToOne
+    private Prenda prendaId;
+    
     @JoinColumn(name = "UsuarioCreador", referencedColumnName = "UsuarioId")
     @ManyToOne
     private Usuario usuarioCreador;
@@ -140,6 +144,16 @@ public class Produccion implements Serializable {
     public void setProduccionDescripcion(String produccionDescripcion) {
         this.produccionDescripcion = produccionDescripcion;
     }
+
+    public Prenda getPrendaId() {
+        return prendaId;
+    }
+
+    public void setPrendaId(Prenda prendaId) {
+        this.prendaId = prendaId;
+    }
+    
+    
 
     @Override
     public int hashCode() {
