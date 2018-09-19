@@ -66,6 +66,8 @@ public class Estado implements Serializable {
     private Collection<Prenda> prendaCollection;
     @OneToMany(mappedBy = "estadoId")
     private Collection<Producciondeta> producciondetaCollection;
+    @OneToMany(mappedBy = "estadoId")
+    private Collection<Ordencompradeta> ordencompradetaCollection;
 
     public Estado() {
     }
@@ -181,6 +183,15 @@ public class Estado implements Serializable {
     }
 
     @XmlTransient
+    public Collection<Ordencompradeta> getOrdencompradetaCollection() {
+        return ordencompradetaCollection;
+    }
+
+    public void setOrdencompradetaCollection(Collection<Ordencompradeta> ordencompradetaCollection) {
+        this.ordencompradetaCollection = ordencompradetaCollection;
+    }
+
+    @XmlTransient
     public Collection<Producciondeta> getProducciondetaCollection() {
         return producciondetaCollection;
     }
@@ -222,5 +233,5 @@ public class Estado implements Serializable {
     public void setClienteCollection(Collection<Cliente> clienteCollection) {
         this.clienteCollection = clienteCollection;
     }
-    
+
 }

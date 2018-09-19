@@ -36,6 +36,9 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Material.findByMaterialReference", query = "SELECT m FROM Material m WHERE m.materialReference = :materialReference")})
 public class Material implements Serializable {
 
+    @OneToMany(mappedBy = "materialId")
+    private Collection<Stockmateriales> stockmaterialesCollection;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -167,6 +170,15 @@ public class Material implements Serializable {
     @Override
     public String toString() {
         return "com.universitaria.atelier.web.jpa.Material[ materialId=" + materialId + " ]";
+    }
+
+    @XmlTransient
+    public Collection<Stockmateriales> getStockmaterialesCollection() {
+        return stockmaterialesCollection;
+    }
+
+    public void setStockmaterialesCollection(Collection<Stockmateriales> stockmaterialesCollection) {
+        this.stockmaterialesCollection = stockmaterialesCollection;
     }
 
 }
