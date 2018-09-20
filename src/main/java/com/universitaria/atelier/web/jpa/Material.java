@@ -47,6 +47,8 @@ public class Material implements Serializable {
     private Integer materialId;
     @Column(name = "MaterialNombre")
     private String materialNombre;
+    @Column(name = "ubicacion")
+    private String ubicacion;
     @Column(name = "MaterialReference")
     private String materialReference;
     @OneToMany(mappedBy = "materialId")
@@ -85,6 +87,14 @@ public class Material implements Serializable {
 
     public void setMaterialNombre(String materialNombre) {
         this.materialNombre = materialNombre;
+    }
+
+    public String getUbicacion() {
+        return ubicacion;
+    }
+
+    public void setUbicacion(String ubicacion) {
+        this.ubicacion = ubicacion;
     }
 
     public String getMaterialReference() {

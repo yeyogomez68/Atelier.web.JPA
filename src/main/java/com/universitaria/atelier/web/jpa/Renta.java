@@ -6,8 +6,8 @@
 package com.universitaria.atelier.web.jpa;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Collection;
-import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -55,13 +55,13 @@ public class Renta implements Serializable {
     @Column(name = "UsuarioRenta")
     private Integer usuarioRenta;
     @Column(name = "RentaIdFecha")
-    @Temporal(TemporalType.DATE)
-    private Date rentaIdFecha;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Calendar rentaIdFecha;
     @Column(name = "DiaRenta")
     private Integer diaRenta;
     @Column(name = "RentaReinEstadomentFecha")
-    @Temporal(TemporalType.DATE)
-    private Date rentaReinEstadomentFecha;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Calendar rentaReinEstadomentFecha;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "RentaTot")
     private Float rentaTot;
@@ -97,11 +97,11 @@ public class Renta implements Serializable {
         this.usuarioRenta = usuarioRenta;
     }
 
-    public Date getRentaIdFecha() {
+    public Calendar getRentaIdFecha() {
         return rentaIdFecha;
     }
 
-    public void setRentaIdFecha(Date rentaIdFecha) {
+    public void setRentaIdFecha(Calendar rentaIdFecha) {
         this.rentaIdFecha = rentaIdFecha;
     }
 
@@ -113,11 +113,11 @@ public class Renta implements Serializable {
         this.diaRenta = diaRenta;
     }
 
-    public Date getRentaReinEstadomentFecha() {
+    public Calendar getRentaReinEstadomentFecha() {
         return rentaReinEstadomentFecha;
     }
 
-    public void setRentaReinEstadomentFecha(Date rentaReinEstadomentFecha) {
+    public void setRentaReinEstadomentFecha(Calendar rentaReinEstadomentFecha) {
         this.rentaReinEstadomentFecha = rentaReinEstadomentFecha;
     }
 
@@ -186,5 +186,5 @@ public class Renta implements Serializable {
     public void setClienteId(Cliente clienteId) {
         this.clienteId = clienteId;
     }
-    
+
 }

@@ -6,6 +6,7 @@
 package com.universitaria.atelier.web.jpa;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -37,6 +38,7 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Reservacion.findByReservacionId", query = "SELECT r FROM Reservacion r WHERE r.reservacionId = :reservacionId")
     , @NamedQuery(name = "Reservacion.findByReservacionFecha", query = "SELECT r FROM Reservacion r WHERE r.reservacionFecha = :reservacionFecha")
     , @NamedQuery(name = "Reservacion.findByReservacionLimit", query = "SELECT r FROM Reservacion r WHERE r.reservacionLimit = :reservacionLimit")
+    , @NamedQuery(name = "Reservacion.findByEstadoId", query = "SELECT r FROM Reservacion r WHERE r.estadoId = :estadoId")
     , @NamedQuery(name = "Reservacion.findByReservacionLimitFecha", query = "SELECT r FROM Reservacion r WHERE r.reservacionLimitFecha = :reservacionLimitFecha")})
 public class Reservacion implements Serializable {
 
@@ -51,13 +53,13 @@ public class Reservacion implements Serializable {
     @Column(name = "ReservacionId")
     private Integer reservacionId;
     @Column(name = "ReservacionFecha")
-    @Temporal(TemporalType.DATE)
-    private Date reservacionFecha;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Calendar reservacionFecha;
     @Column(name = "ReservacionLimit")
     private Integer reservacionLimit;
     @Column(name = "ReservacionLimitFecha")
-    @Temporal(TemporalType.DATE)
-    private Date reservacionLimitFecha;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Calendar reservacionLimitFecha;
     @OneToMany(mappedBy = "reservacionId")
     private Collection<Rentadeta> rentadetaCollection;
     @JoinColumn(name = "UsuarioReservacionId", referencedColumnName = "UsuarioId")
@@ -88,11 +90,11 @@ public class Reservacion implements Serializable {
         this.reservacionId = reservacionId;
     }
 
-    public Date getReservacionFecha() {
+    public Calendar getReservacionFecha() {
         return reservacionFecha;
     }
 
-    public void setReservacionFecha(Date reservacionFecha) {
+    public void setReservacionFecha(Calendar reservacionFecha) {
         this.reservacionFecha = reservacionFecha;
     }
 
@@ -104,11 +106,11 @@ public class Reservacion implements Serializable {
         this.reservacionLimit = reservacionLimit;
     }
 
-    public Date getReservacionLimitFecha() {
+    public Calendar getReservacionLimitFecha() {
         return reservacionLimitFecha;
     }
 
-    public void setReservacionLimitFecha(Date reservacionLimitFecha) {
+    public void setReservacionLimitFecha(Calendar reservacionLimitFecha) {
         this.reservacionLimitFecha = reservacionLimitFecha;
     }
 
@@ -185,5 +187,5 @@ public class Reservacion implements Serializable {
     public void setClienteId(Cliente clienteId) {
         this.clienteId = clienteId;
     }
-    
+
 }

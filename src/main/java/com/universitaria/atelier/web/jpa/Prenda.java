@@ -44,8 +44,13 @@ public class Prenda implements Serializable {
     private Integer prendaId;
     @Column(name = "PrendaNombre")
     private String prendaNombre;
+    @Column(name = "ubicacion")
+    private String ubicacion;
+    @Column(name = "URL")
+    private String url;
     @Column(name = "PrendaDescripcion")
     private String prendaDescripcion;
+
     @OneToMany(mappedBy = "prendaId")
     private Collection<Rentadeta> rentadetaCollection;
     @OneToMany(mappedBy = "prendaId")
@@ -101,6 +106,22 @@ public class Prenda implements Serializable {
 
     public void setPrendaNombre(String prendaNombre) {
         this.prendaNombre = prendaNombre;
+    }
+
+    public String getUbicacion() {
+        return ubicacion;
+    }
+
+    public void setUbicacion(String ubicacion) {
+        this.ubicacion = ubicacion;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public String getPrendaDescripcion() {
