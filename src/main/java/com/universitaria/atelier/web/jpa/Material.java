@@ -61,6 +61,7 @@ public class Material implements Serializable {
     private Collection<Ordencompradeta> ordencompradetaCollection;
     @OneToMany(mappedBy = "materialId")
     private Collection<Requestdeta> requestdetaCollection;
+
     @JoinColumn(name = "MaterialTipoId", referencedColumnName = "MaterialTipoId")
     @ManyToOne
     private Materialtipo materialTipoId;
@@ -144,6 +145,15 @@ public class Material implements Serializable {
         this.prendaCollection = prendaCollection;
     }
 
+    @XmlTransient
+    public Collection<Producciondeta> getProducciondetaCollection() {
+        return producciondetaCollection;
+    }
+
+    public void setProducciondetaCollection(Collection<Producciondeta> producciondetaCollection) {
+        this.producciondetaCollection = producciondetaCollection;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -169,14 +179,6 @@ public class Material implements Serializable {
         return "com.universitaria.atelier.web.jpa.Material[ materialId=" + materialId + " ]";
     }
 
-    public String getUbicacion() {
-        return ubicacion;
-    }
-
-    public void setUbicacion(String ubicacion) {
-        this.ubicacion = ubicacion;
-    }
-
     @XmlTransient
     public Collection<Stockmateriales> getStockmaterialesCollection() {
         return stockmaterialesCollection;
@@ -186,22 +188,4 @@ public class Material implements Serializable {
         this.stockmaterialesCollection = stockmaterialesCollection;
     }
 
-    @XmlTransient
-    public Collection<Prendamaterial> getPrendamaterialCollection() {
-        return prendamaterialCollection;
-    }
-
-    public void setPrendamaterialCollection(Collection<Prendamaterial> prendamaterialCollection) {
-        this.prendamaterialCollection = prendamaterialCollection;
-    }
-
-    @XmlTransient
-    public Collection<Producciondeta> getProducciondetaCollection() {
-        return producciondetaCollection;
-    }
-
-    public void setProducciondetaCollection(Collection<Producciondeta> producciondetaCollection) {
-        this.producciondetaCollection = producciondetaCollection;
-    }
-    
 }

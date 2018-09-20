@@ -85,6 +85,15 @@ public class Talla implements Serializable {
         this.stockprendaCollection = stockprendaCollection;
     }
 
+    @XmlTransient
+    public Collection<Prenda> getPrendaCollection() {
+        return prendaCollection;
+    }
+
+    public void setPrendaCollection(Collection<Prenda> prendaCollection) {
+        this.prendaCollection = prendaCollection;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -110,13 +119,4 @@ public class Talla implements Serializable {
         return "com.universitaria.atelier.web.jpa.Talla[ tallaId=" + tallaId + " ]";
     }
 
-    @XmlTransient
-    public Collection<Prenda> getPrendaCollection() {
-        return prendaCollection;
-    }
-
-    public void setPrendaCollection(Collection<Prenda> prendaCollection) {
-        this.prendaCollection = prendaCollection;
-    }
-    
 }

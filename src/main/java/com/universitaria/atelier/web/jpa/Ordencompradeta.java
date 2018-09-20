@@ -33,6 +33,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Ordencompradeta.findByOrdenCompraCantidad", query = "SELECT o FROM Ordencompradeta o WHERE o.ordenCompraCantidad = :ordenCompraCantidad")
     , @NamedQuery(name = "Ordencompradeta.findByOrdenCompraValorUnit", query = "SELECT o FROM Ordencompradeta o WHERE o.ordenCompraValorUnit = :ordenCompraValorUnit")
     , @NamedQuery(name = "Ordencompradeta.findByOrdenCompraIVA", query = "SELECT o FROM Ordencompradeta o WHERE o.ordenCompraIVA = :ordenCompraIVA")
+    , @NamedQuery(name = "Ordencompradeta.findByEstadoId", query = "SELECT o FROM Ordencompradeta o WHERE o.estadoId = :estadoId")
     , @NamedQuery(name = "Ordencompradeta.findByOrdenCompraValorTot", query = "SELECT o FROM Ordencompradeta o WHERE o.ordenCompraValorTot = :ordenCompraValorTot")})
 public class Ordencompradeta implements Serializable {
 
@@ -146,6 +147,14 @@ public class Ordencompradeta implements Serializable {
         this.ordenCompraId = ordenCompraId;
     }
 
+    public Estado getEstadoId() {
+        return estadoId;
+    }
+
+    public void setEstadoId(Estado estadoId) {
+        this.estadoId = estadoId;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -179,12 +188,4 @@ public class Ordencompradeta implements Serializable {
         this.encabezadoRequerimientoId = encabezadoRequerimientoId;
     }
 
-    public Estado getEstadoId() {
-        return estadoId;
-    }
-
-    public void setEstadoId(Estado estadoId) {
-        this.estadoId = estadoId;
-    }
-    
 }

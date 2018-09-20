@@ -69,7 +69,6 @@ public class Estado implements Serializable {
     private Collection<Usuario> usuarioCollection;
     @OneToMany(mappedBy = "estadoId")
     private Collection<Prenda> prendaCollection;
-
     public Estado() {
     }
 
@@ -183,6 +182,24 @@ public class Estado implements Serializable {
         this.prendaCollection = prendaCollection;
     }
 
+    @XmlTransient
+    public Collection<Ordencompradeta> getOrdencompradetaCollection() {
+        return ordencompradetaCollection;
+    }
+
+    public void setOrdencompradetaCollection(Collection<Ordencompradeta> ordencompradetaCollection) {
+        this.ordencompradetaCollection = ordencompradetaCollection;
+    }
+
+    @XmlTransient
+    public Collection<Producciondeta> getProducciondetaCollection() {
+        return producciondetaCollection;
+    }
+
+    public void setProducciondetaCollection(Collection<Producciondeta> producciondetaCollection) {
+        this.producciondetaCollection = producciondetaCollection;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -216,23 +233,4 @@ public class Estado implements Serializable {
     public void setClienteCollection(Collection<Cliente> clienteCollection) {
         this.clienteCollection = clienteCollection;
     }
-
-    @XmlTransient
-    public Collection<Ordencompradeta> getOrdencompradetaCollection() {
-        return ordencompradetaCollection;
-    }
-
-    public void setOrdencompradetaCollection(Collection<Ordencompradeta> ordencompradetaCollection) {
-        this.ordencompradetaCollection = ordencompradetaCollection;
-    }
-
-    @XmlTransient
-    public Collection<Producciondeta> getProducciondetaCollection() {
-        return producciondetaCollection;
-    }
-
-    public void setProducciondetaCollection(Collection<Producciondeta> producciondetaCollection) {
-        this.producciondetaCollection = producciondetaCollection;
-    }
-    
 }

@@ -33,6 +33,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Producciondeta.findAll", query = "SELECT p FROM Producciondeta p")
     , @NamedQuery(name = "Producciondeta.findByProduccionDetaId", query = "SELECT p FROM Producciondeta p WHERE p.produccionDetaId = :produccionDetaId")
     , @NamedQuery(name = "Producciondeta.findByMaterialId", query = "SELECT p FROM Producciondeta p WHERE p.materialId = :materialId")
+    , @NamedQuery(name = "Producciondeta.findByProduccion", query = "SELECT p FROM Producciondeta p WHERE p.produccionId = :produccionId")
     , @NamedQuery(name = "Producciondeta.findByProduccionDetaCant", query = "SELECT p FROM Producciondeta p WHERE p.produccionDetaCant = :produccionDetaCant")
     , @NamedQuery(name = "Producciondeta.findByProduccionDetaFecha", query = "SELECT p FROM Producciondeta p WHERE p.produccionDetaFecha = :produccionDetaFecha")})
 public class Producciondeta implements Serializable {
@@ -55,10 +56,11 @@ public class Producciondeta implements Serializable {
     private Integer produccionDetaId;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "ProduccionDetaCant")
-    private Float produccionDetaCant;
+    private Integer produccionDetaCant;
     @Column(name = "ProduccionDetaFecha")
     @Temporal(TemporalType.DATE)
     private Date produccionDetaFecha;
+
     @JoinColumn(name = "ProduccionId", referencedColumnName = "ProduccionId")
     @ManyToOne
     private Produccion produccionId;
@@ -77,12 +79,20 @@ public class Producciondeta implements Serializable {
     public void setProduccionDetaId(Integer produccionDetaId) {
         this.produccionDetaId = produccionDetaId;
     }
-    
-    public Float getProduccionDetaCant() {
+
+    public Material getMaterialId() {
+        return materialId;
+    }
+
+    public void setMaterialId(Material materialId) {
+        this.materialId = materialId;
+    }
+
+    public Integer getProduccionDetaCant() {
         return produccionDetaCant;
     }
 
-    public void setProduccionDetaCant(Float produccionDetaCant) {
+    public void setProduccionDetaCant(Integer produccionDetaCant) {
         this.produccionDetaCant = produccionDetaCant;
     }
 
@@ -100,6 +110,22 @@ public class Producciondeta implements Serializable {
 
     public void setProduccionId(Produccion produccionId) {
         this.produccionId = produccionId;
+    }
+
+    public Usuario getUsuarioAsignado() {
+        return usuarioAsignado;
+    }
+
+    public void setUsuarioAsignado(Usuario usuarioAsignado) {
+        this.usuarioAsignado = usuarioAsignado;
+    }
+
+    public Estado getEstadoId() {
+        return estadoId;
+    }
+
+    public void setEstadoId(Estado estadoId) {
+        this.estadoId = estadoId;
     }
 
     @Override
@@ -126,29 +152,4 @@ public class Producciondeta implements Serializable {
     public String toString() {
         return "com.universitaria.atelier.web.jpa.Producciondeta[ produccionDetaId=" + produccionDetaId + " ]";
     }
-
-    public Estado getEstadoId() {
-        return estadoId;
-    }
-
-    public void setEstadoId(Estado estadoId) {
-        this.estadoId = estadoId;
-    }
-
-    public Material getMaterialId() {
-        return materialId;
-    }
-
-    public void setMaterialId(Material materialId) {
-        this.materialId = materialId;
-    }
-
-    public Usuario getUsuarioAsignado() {
-        return usuarioAsignado;
-    }
-
-    public void setUsuarioAsignado(Usuario usuarioAsignado) {
-        this.usuarioAsignado = usuarioAsignado;
-    }
-    
 }

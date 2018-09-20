@@ -63,12 +63,15 @@ public class Prenda implements Serializable {
     private Collection<Rentadeta> rentadetaCollection;
     @OneToMany(mappedBy = "prendaId")
     private Collection<Facturadeta> facturadetaCollection;
-    @OneToMany(mappedBy = "prendaId")
-    private Collection<Produccion> produccionCollection;
+    //@OneToMany(mappedBy = "prendaId")
+    //private Collection<Produccion> produccionCollection;
     @OneToMany(mappedBy = "prendaId")
     private Collection<Stockprenda> stockprendaCollection;
     @OneToMany(mappedBy = "prendaId")
     private Collection<Reservacion> reservacionCollection;
+
+    @OneToMany(mappedBy = "prendaId")
+    private Collection<Produccion> produccionCollection;
     @JoinColumn(name = "ColorId", referencedColumnName = "ColorId")
     @ManyToOne
     private Color colorId;
@@ -135,15 +138,6 @@ public class Prenda implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Produccion> getProduccionCollection() {
-        return produccionCollection;
-    }
-
-    public void setProduccionCollection(Collection<Produccion> produccionCollection) {
-        this.produccionCollection = produccionCollection;
-    }
-
-    @XmlTransient
     public Collection<Stockprenda> getStockprendaCollection() {
         return stockprendaCollection;
     }
@@ -159,6 +153,23 @@ public class Prenda implements Serializable {
 
     public void setReservacionCollection(Collection<Reservacion> reservacionCollection) {
         this.reservacionCollection = reservacionCollection;
+    }
+
+    @XmlTransient
+    public Collection<Produccion> getProduccionCollection() {
+        return produccionCollection;
+    }
+
+    public void setProduccionCollection(Collection<Produccion> produccionCollection) {
+        this.produccionCollection = produccionCollection;
+    }
+
+    public Talla getTallaId() {
+        return tallaId;
+    }
+
+    public void setTallaId(Talla tallaId) {
+        this.tallaId = tallaId;
     }
 
     public Color getColorId() {
@@ -250,13 +261,4 @@ public class Prenda implements Serializable {
     public void setPrendamaterialCollection(Collection<Prendamaterial> prendamaterialCollection) {
         this.prendamaterialCollection = prendamaterialCollection;
     }
-
-    public Talla getTallaId() {
-        return tallaId;
-    }
-
-    public void setTallaId(Talla tallaId) {
-        this.tallaId = tallaId;
-    }
-    
 }

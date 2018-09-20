@@ -30,6 +30,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Stockprenda.findAll", query = "SELECT s FROM Stockprenda s")
     , @NamedQuery(name = "Stockprenda.findByStockPrendaId", query = "SELECT s FROM Stockprenda s WHERE s.stockPrendaId = :stockPrendaId")
     , @NamedQuery(name = "Stockprenda.findByStockPrendaCant", query = "SELECT s FROM Stockprenda s WHERE s.stockPrendaCant = :stockPrendaCant")
+    , @NamedQuery(name = "Stockprenda.findByPrendaId", query = "SELECT s FROM Stockprenda s WHERE s.prendaId = :prendaId")
     , @NamedQuery(name = "Stockprenda.findByStrockImagenId", query = "SELECT s FROM Stockprenda s WHERE s.strockImagenId = :strockImagenId")})
 public class Stockprenda implements Serializable {
 
@@ -46,7 +47,7 @@ public class Stockprenda implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "StockPrendaCant")
     private Float stockPrendaCant;
-    
+
     @JoinColumn(name = "PrendaId", referencedColumnName = "PrendaId")
     @ManyToOne
     private Prenda prendaId;
@@ -125,5 +126,5 @@ public class Stockprenda implements Serializable {
     public void setStrockImagenId(Stockimagen strockImagenId) {
         this.strockImagenId = strockImagenId;
     }
-    
+
 }
