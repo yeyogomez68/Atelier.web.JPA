@@ -36,6 +36,10 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Ordencompradeta.findByOrdenCompraValorTot", query = "SELECT o FROM Ordencompradeta o WHERE o.ordenCompraValorTot = :ordenCompraValorTot")})
 public class Ordencompradeta implements Serializable {
 
+    @JoinColumn(name = "estadoId", referencedColumnName = "EstadoId")
+    @ManyToOne
+    private Estado estadoId;
+
     @JoinColumn(name = "EncabezadoRequerimientoId", referencedColumnName = "EncabezadoRequerimientoId")
     @ManyToOne
     private Encabezadorequerimiento encabezadoRequerimientoId;
@@ -173,6 +177,14 @@ public class Ordencompradeta implements Serializable {
 
     public void setEncabezadoRequerimientoId(Encabezadorequerimiento encabezadoRequerimientoId) {
         this.encabezadoRequerimientoId = encabezadoRequerimientoId;
+    }
+
+    public Estado getEstadoId() {
+        return estadoId;
+    }
+
+    public void setEstadoId(Estado estadoId) {
+        this.estadoId = estadoId;
     }
     
 }

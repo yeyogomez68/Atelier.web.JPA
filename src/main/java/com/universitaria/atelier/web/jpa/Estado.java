@@ -34,6 +34,11 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Estado implements Serializable {
 
     @OneToMany(mappedBy = "estadoId")
+    private Collection<Ordencompradeta> ordencompradetaCollection;
+    @OneToMany(mappedBy = "estadoId")
+    private Collection<Producciondeta> producciondetaCollection;
+
+    @OneToMany(mappedBy = "estadoId")
     private Collection<Cliente> clienteCollection;
 
     private static final long serialVersionUID = 1L;
@@ -210,6 +215,24 @@ public class Estado implements Serializable {
 
     public void setClienteCollection(Collection<Cliente> clienteCollection) {
         this.clienteCollection = clienteCollection;
+    }
+
+    @XmlTransient
+    public Collection<Ordencompradeta> getOrdencompradetaCollection() {
+        return ordencompradetaCollection;
+    }
+
+    public void setOrdencompradetaCollection(Collection<Ordencompradeta> ordencompradetaCollection) {
+        this.ordencompradetaCollection = ordencompradetaCollection;
+    }
+
+    @XmlTransient
+    public Collection<Producciondeta> getProducciondetaCollection() {
+        return producciondetaCollection;
+    }
+
+    public void setProducciondetaCollection(Collection<Producciondeta> producciondetaCollection) {
+        this.producciondetaCollection = producciondetaCollection;
     }
     
 }

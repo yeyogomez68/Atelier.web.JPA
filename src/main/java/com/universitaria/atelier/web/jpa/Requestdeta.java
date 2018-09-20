@@ -41,8 +41,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Requestdeta implements Serializable {
 
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "RequestDetaCantidad")
-    private float requestDetaCantidad;
+    private Double requestDetaCantidad;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -85,7 +86,7 @@ public class Requestdeta implements Serializable {
         this.requestDetaId = requestDetaId;
     }
 
-    public Requestdeta(Integer requestDetaId, Date requestDetaFecha, float requestDetaCantidad) {
+    public Requestdeta(Integer requestDetaId, Date requestDetaFecha, Double requestDetaCantidad) {
         this.requestDetaId = requestDetaId;
         this.requestDetaFecha = requestDetaFecha;
         this.requestDetaCantidad = requestDetaCantidad;
@@ -197,11 +198,11 @@ public class Requestdeta implements Serializable {
         return "com.universitaria.atelier.web.jpa.Requestdeta[ requestDetaId=" + requestDetaId + " ]";
     }
 
-    public float getRequestDetaCantidad() {
+    public Double getRequestDetaCantidad() {
         return requestDetaCantidad;
     }
 
-    public void setRequestDetaCantidad(float requestDetaCantidad) {
+    public void setRequestDetaCantidad(Double requestDetaCantidad) {
         this.requestDetaCantidad = requestDetaCantidad;
     }
     

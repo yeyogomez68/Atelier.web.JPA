@@ -87,13 +87,6 @@ public class Stockimagen implements Serializable {
         return "com.universitaria.atelier.web.jpa.Stockimagen[ stockImagenId=" + stockImagenId + " ]";
     }
 
-    public byte[] getStockImagen() {
-        return stockImagen;
-    }
-
-    public void setStockImagen(byte[] stockImagen) {
-        this.stockImagen = stockImagen;
-    }
 
     @XmlTransient
     public Collection<Stockprenda> getStockprendaCollection() {
@@ -102,6 +95,14 @@ public class Stockimagen implements Serializable {
 
     public void setStockprendaCollection(Collection<Stockprenda> stockprendaCollection) {
         this.stockprendaCollection = stockprendaCollection;
+    }
+
+    public byte[] getStockImagen() {
+        return stockImagen;
+    }
+
+    public void setStockImagen(byte[] stockImagen) {
+        this.stockImagen = stockImagen;
     }
     
 }

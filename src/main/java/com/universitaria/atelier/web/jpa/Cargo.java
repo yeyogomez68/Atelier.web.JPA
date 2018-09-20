@@ -34,6 +34,9 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Cargo.findByCargoDesc", query = "SELECT c FROM Cargo c WHERE c.cargoDesc = :cargoDesc")})
 public class Cargo implements Serializable {
 
+    @OneToMany(mappedBy = "cargoId")
+    private Collection<Contrato> contratoCollection;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,8 +46,7 @@ public class Cargo implements Serializable {
     @Size(max = 50)
     @Column(name = "CargoDesc")
     private String cargoDesc;
-    @OneToMany(mappedBy = "cargoId")
-    private Collection<Usuario> usuarioCollection;
+
 
     public Cargo() {
     }
@@ -67,15 +69,6 @@ public class Cargo implements Serializable {
 
     public void setCargoDesc(String cargoDesc) {
         this.cargoDesc = cargoDesc;
-    }
-
-    @XmlTransient
-    public Collection<Usuario> getUsuarioCollection() {
-        return usuarioCollection;
-    }
-
-    public void setUsuarioCollection(Collection<Usuario> usuarioCollection) {
-        this.usuarioCollection = usuarioCollection;
     }
 
     @Override
@@ -101,6 +94,15 @@ public class Cargo implements Serializable {
     @Override
     public String toString() {
         return "com.universitaria.atelier.web.jpa.Cargo[ cargoId=" + cargoId + " ]";
+    }
+
+    @XmlTransient
+    public Collection<Contrato> getContratoCollection() {
+        return contratoCollection;
+    }
+
+    public void setContratoCollection(Collection<Contrato> contratoCollection) {
+        this.contratoCollection = contratoCollection;
     }
     
 }

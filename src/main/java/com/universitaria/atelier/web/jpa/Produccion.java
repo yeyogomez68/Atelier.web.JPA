@@ -42,6 +42,9 @@ import javax.xml.bind.annotation.XmlTransient;
 
 public class Produccion implements Serializable {
 
+    @Column(name = "avance")
+    private Integer avance;
+
     @OneToMany(mappedBy = "produccionId")
     private Collection<Produccionusuario> produccionusuarioCollection;
 
@@ -198,6 +201,14 @@ public class Produccion implements Serializable {
 
     public void setProduccionusuarioCollection(Collection<Produccionusuario> produccionusuarioCollection) {
         this.produccionusuarioCollection = produccionusuarioCollection;
+    }
+
+    public Integer getAvance() {
+        return avance;
+    }
+
+    public void setAvance(Integer avance) {
+        this.avance = avance;
     }
 
 }

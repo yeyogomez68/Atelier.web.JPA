@@ -37,6 +37,9 @@
     <class>com.universitaria.atelier.web.jpa.Cargo</class>
     <class>com.universitaria.atelier.web.jpa.Produccionusuario</class>
     <class>com.universitaria.atelier.web.jpa.Cliente</class>
+    <class>com.universitaria.atelier.web.jpa.Prendamaterial</class>
+    <class>com.universitaria.atelier.web.jpa.Stockmateriales</class>
+    <class>com.universitaria.atelier.web.jpa.Contrato</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
     </properties>
