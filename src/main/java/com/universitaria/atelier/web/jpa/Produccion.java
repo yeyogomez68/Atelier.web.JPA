@@ -41,6 +41,12 @@ import javax.xml.bind.annotation.XmlTransient;
 
 public class Produccion implements Serializable {
 
+    @Column(name = "avance")
+    private Integer avance;
+
+    @OneToMany(mappedBy = "produccionId")
+    private Collection<Produccionusuario> produccionusuarioCollection;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -55,9 +61,6 @@ public class Produccion implements Serializable {
     private Float produccionDiaEstimated;
     @Column(name = "ProduccionDescripcion")
     private String produccionDescripcion;
-
-    @Column(name = "avance")
-    private Integer avance;
 
     @JoinColumn(name = "EstadoId", referencedColumnName = "EstadoId")
     @ManyToOne
@@ -179,5 +182,4 @@ public class Produccion implements Serializable {
     public String toString() {
         return "com.universitaria.atelier.web.jpa.Produccion[ produccionId=" + produccionId + " ]";
     }
-
 }

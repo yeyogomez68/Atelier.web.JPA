@@ -24,47 +24,39 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author jeisson.gomez
  */
 @Entity
-@Table(name = "stockmateriales")
+@Table(name = "prendamaterial")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Stockmateriales.findAll", query = "SELECT s FROM Stockmateriales s")
-    , @NamedQuery(name = "Stockmateriales.findByStockMaterialId", query = "SELECT s FROM Stockmateriales s WHERE s.stockMaterialId = :stockMaterialId")
-    , @NamedQuery(name = "Stockmateriales.findByCantidad", query = "SELECT s FROM Stockmateriales s WHERE s.cantidad = :cantidad")})
-public class Stockmateriales implements Serializable {
+    @NamedQuery(name = "Prendamaterial.findAll", query = "SELECT p FROM Prendamaterial p")
+    , @NamedQuery(name = "Prendamaterial.findByPrendaMaterial", query = "SELECT p FROM Prendamaterial p WHERE p.prendaMaterial = :prendaMaterial")})
+public class Prendamaterial implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "StockMaterialId")
-    private Integer stockMaterialId;
-    @Column(name = "Cantidad")
-    private Integer cantidad;
+    @Column(name = "PrendaMaterial")
+    private Integer prendaMaterial;
     @JoinColumn(name = "MaterialId", referencedColumnName = "MaterialId")
     @ManyToOne
     private Material materialId;
+    @JoinColumn(name = "PrendaId", referencedColumnName = "PrendaId")
+    @ManyToOne
+    private Prenda prendaId;
 
-    public Stockmateriales() {
+    public Prendamaterial() {
     }
 
-    public Stockmateriales(Integer stockMaterialId) {
-        this.stockMaterialId = stockMaterialId;
+    public Prendamaterial(Integer prendaMaterial) {
+        this.prendaMaterial = prendaMaterial;
     }
 
-    public Integer getStockMaterialId() {
-        return stockMaterialId;
+    public Integer getPrendaMaterial() {
+        return prendaMaterial;
     }
 
-    public void setStockMaterialId(Integer stockMaterialId) {
-        this.stockMaterialId = stockMaterialId;
-    }
-
-    public Integer getCantidad() {
-        return cantidad;
-    }
-
-    public void setCantidad(Integer cantidad) {
-        this.cantidad = cantidad;
+    public void setPrendaMaterial(Integer prendaMaterial) {
+        this.prendaMaterial = prendaMaterial;
     }
 
     public Material getMaterialId() {
@@ -75,21 +67,29 @@ public class Stockmateriales implements Serializable {
         this.materialId = materialId;
     }
 
+    public Prenda getPrendaId() {
+        return prendaId;
+    }
+
+    public void setPrendaId(Prenda prendaId) {
+        this.prendaId = prendaId;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (stockMaterialId != null ? stockMaterialId.hashCode() : 0);
+        hash += (prendaMaterial != null ? prendaMaterial.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Stockmateriales)) {
+        if (!(object instanceof Prendamaterial)) {
             return false;
         }
-        Stockmateriales other = (Stockmateriales) object;
-        if ((this.stockMaterialId == null && other.stockMaterialId != null) || (this.stockMaterialId != null && !this.stockMaterialId.equals(other.stockMaterialId))) {
+        Prendamaterial other = (Prendamaterial) object;
+        if ((this.prendaMaterial == null && other.prendaMaterial != null) || (this.prendaMaterial != null && !this.prendaMaterial.equals(other.prendaMaterial))) {
             return false;
         }
         return true;
@@ -97,7 +97,7 @@ public class Stockmateriales implements Serializable {
 
     @Override
     public String toString() {
-        return "com.universitaria.atelier.web.jpa.Stockmateriales[ stockMaterialId=" + stockMaterialId + " ]";
+        return "com.universitaria.atelier.web.jpa.Prendamaterial[ prendaMaterial=" + prendaMaterial + " ]";
     }
     
 }

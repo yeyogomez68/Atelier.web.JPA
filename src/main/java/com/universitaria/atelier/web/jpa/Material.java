@@ -19,6 +19,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -36,8 +37,15 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Material.findByMaterialReference", query = "SELECT m FROM Material m WHERE m.materialReference = :materialReference")})
 public class Material implements Serializable {
 
+    @Size(max = 60)
+    @Column(name = "ubicacion")
+    private String ubicacion;
     @OneToMany(mappedBy = "materialId")
     private Collection<Stockmateriales> stockmaterialesCollection;
+    @OneToMany(mappedBy = "materialId")
+    private Collection<Prendamaterial> prendamaterialCollection;
+    @OneToMany(mappedBy = "materialId")
+    private Collection<Producciondeta> producciondetaCollection;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -55,8 +63,7 @@ public class Material implements Serializable {
     private Collection<Ordencompradeta> ordencompradetaCollection;
     @OneToMany(mappedBy = "materialId")
     private Collection<Requestdeta> requestdetaCollection;
-    @OneToMany(mappedBy = "materialId")
-    private Collection<Producciondeta> producciondetaCollection;
+
     @JoinColumn(name = "MaterialTipoId", referencedColumnName = "MaterialTipoId")
     @ManyToOne
     private Materialtipo materialTipoId;

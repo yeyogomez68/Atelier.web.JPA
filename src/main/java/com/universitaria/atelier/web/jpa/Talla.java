@@ -33,6 +33,9 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Talla.findByTallaDescrip", query = "SELECT t FROM Talla t WHERE upper( t.tallaDescrip ) = upper( :tallaDescrip )")})
 public class Talla implements Serializable {
 
+    @OneToMany(mappedBy = "tallaId")
+    private Collection<Prenda> prendaCollection;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,9 +47,6 @@ public class Talla implements Serializable {
     private String tallaDescrip;
     @OneToMany(mappedBy = "tallaId")
     private Collection<Stockprenda> stockprendaCollection;
-
-    @OneToMany(mappedBy = "tallaId")
-    private Collection<Prenda> prendaCollection;
 
     public Talla() {
     }

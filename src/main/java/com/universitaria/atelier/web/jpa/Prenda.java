@@ -19,6 +19,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -35,6 +36,18 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Prenda.findByPrendaNombre", query = "SELECT p FROM Prenda p WHERE p.prendaNombre = :prendaNombre")
     , @NamedQuery(name = "Prenda.findByPrendaDescripcion", query = "SELECT p FROM Prenda p WHERE p.prendaDescripcion = :prendaDescripcion")})
 public class Prenda implements Serializable {
+
+    @Size(max = 60)
+    @Column(name = "ubicacion")
+    private String ubicacion;
+    @Size(max = 200)
+    @Column(name = "URL")
+    private String url;
+    @OneToMany(mappedBy = "prendaId")
+    private Collection<Prendamaterial> prendamaterialCollection;
+    @JoinColumn(name = "tallaId", referencedColumnName = "TallaId")
+    @ManyToOne
+    private Talla tallaId;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -70,11 +83,6 @@ public class Prenda implements Serializable {
     @JoinColumn(name = "EstadoId", referencedColumnName = "EstadoId")
     @ManyToOne
     private Estado estadoId;
-
-    @JoinColumn(name = "TallaId", referencedColumnName = "TallaId")
-    @ManyToOne
-    private Talla tallaId;
-
     @JoinColumn(name = "PrendaTipoId", referencedColumnName = "PrendaTipoId")
     @ManyToOne
     private Prendatipo prendaTipoId;
@@ -250,4 +258,28 @@ public class Prenda implements Serializable {
         return "com.universitaria.atelier.web.jpa.Prenda[ prendaId=" + prendaId + " ]";
     }
 
+    public String getUbicacion() {
+        return ubicacion;
+    }
+
+    public void setUbicacion(String ubicacion) {
+        this.ubicacion = ubicacion;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    @XmlTransient
+    public Collection<Prendamaterial> getPrendamaterialCollection() {
+        return prendamaterialCollection;
+    }
+
+    public void setPrendamaterialCollection(Collection<Prendamaterial> prendamaterialCollection) {
+        this.prendamaterialCollection = prendamaterialCollection;
+    }
 }

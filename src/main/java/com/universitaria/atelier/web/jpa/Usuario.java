@@ -19,7 +19,6 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -44,15 +43,15 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Usuario.findByUsuarioCel", query = "SELECT u FROM Usuario u WHERE u.usuarioCel = :usuarioCel")})
 public class Usuario implements Serializable {
 
+    @OneToMany(mappedBy = "usuarioAsignado")
+    private Collection<Producciondeta> producciondetaCollection;
+    @JoinColumn(name = "contratoId", referencedColumnName = "ContratoId")
+    @ManyToOne
+    private Contrato contratoId;
+
     @OneToMany(mappedBy = "usuarioId")
     private Collection<Produccionusuario> produccionusuarioCollection;
-
-    @Size(max = 50)
-    @Column(name = "Contrato")
-    private String contrato;
-    @JoinColumn(name = "CargoId", referencedColumnName = "CargoId")
-    @ManyToOne
-    private Cargo cargoId;
+   
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -82,8 +81,6 @@ public class Usuario implements Serializable {
     private Collection<Ordencompra> ordencompraCollection2;
     @OneToMany(mappedBy = "usuarioId")
     private Collection<Encabezadorequerimiento> encabezadorequerimientoCollection;
-    @OneToMany(mappedBy = "usuarioAsignado")
-    private Collection<Producciondeta> producciondetaCollection;
     @OneToMany(mappedBy = "usuarioCreador")
     private Collection<Produccion> produccionCollection1;
     @OneToMany(mappedBy = "usuarioIdApruebaTwo")
@@ -337,22 +334,6 @@ public class Usuario implements Serializable {
         return "com.universitaria.atelier.web.jpa.Usuario[ usuarioId=" + usuarioId + " ]";
     }
 
-    public String getContrato() {
-        return contrato;
-    }
-
-    public void setContrato(String contrato) {
-        this.contrato = contrato;
-    }
-
-    public Cargo getCargoId() {
-        return cargoId;
-    }
-
-    public void setCargoId(Cargo cargoId) {
-        this.cargoId = cargoId;
-    }
-
     @XmlTransient
     public Collection<Produccionusuario> getProduccionusuarioCollection() {
         return produccionusuarioCollection;
@@ -360,6 +341,23 @@ public class Usuario implements Serializable {
 
     public void setProduccionusuarioCollection(Collection<Produccionusuario> produccionusuarioCollection) {
         this.produccionusuarioCollection = produccionusuarioCollection;
+    }
+
+    @XmlTransient
+    public Collection<Producciondeta> getProducciondetaCollection() {
+        return producciondetaCollection;
+    }
+
+    public void setProducciondetaCollection(Collection<Producciondeta> producciondetaCollection) {
+        this.producciondetaCollection = producciondetaCollection;
+    }
+
+    public Contrato getContratoId() {
+        return contratoId;
+    }
+
+    public void setContratoId(Contrato contratoId) {
+        this.contratoId = contratoId;
     }
     
 }

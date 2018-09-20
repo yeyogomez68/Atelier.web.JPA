@@ -38,6 +38,16 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Producciondeta.findByProduccionDetaFecha", query = "SELECT p FROM Producciondeta p WHERE p.produccionDetaFecha = :produccionDetaFecha")})
 public class Producciondeta implements Serializable {
 
+    @JoinColumn(name = "estadoId", referencedColumnName = "EstadoId")
+    @ManyToOne
+    private Estado estadoId;
+    @JoinColumn(name = "MaterialId", referencedColumnName = "MaterialId")
+    @ManyToOne
+    private Material materialId;
+    @JoinColumn(name = "usuarioAsignado", referencedColumnName = "UsuarioId")
+    @ManyToOne
+    private Usuario usuarioAsignado;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -51,19 +61,9 @@ public class Producciondeta implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date produccionDetaFecha;
 
-    @JoinColumn(name = "MaterialId", referencedColumnName = "MaterialId")
-    @ManyToOne
-    private Material materialId;
     @JoinColumn(name = "ProduccionId", referencedColumnName = "ProduccionId")
     @ManyToOne
     private Produccion produccionId;
-    @JoinColumn(name = "UsuarioAsignado", referencedColumnName = "UsuarioId")
-    @ManyToOne
-    private Usuario usuarioAsignado;
-
-    @JoinColumn(name = "EstadoId", referencedColumnName = "EstadoId")
-    @ManyToOne
-    private Estado estadoId;
 
     public Producciondeta() {
     }
@@ -152,5 +152,4 @@ public class Producciondeta implements Serializable {
     public String toString() {
         return "com.universitaria.atelier.web.jpa.Producciondeta[ produccionDetaId=" + produccionDetaId + " ]";
     }
-
 }
