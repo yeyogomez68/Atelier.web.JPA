@@ -37,12 +37,6 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Prenda.findByPrendaDescripcion", query = "SELECT p FROM Prenda p WHERE p.prendaDescripcion = :prendaDescripcion")})
 public class Prenda implements Serializable {
 
-    @Size(max = 60)
-    @Column(name = "ubicacion")
-    private String ubicacion;
-    @Size(max = 200)
-    @Column(name = "URL")
-    private String url;
     @OneToMany(mappedBy = "prendaId")
     private Collection<Prendamaterial> prendamaterialCollection;
     @JoinColumn(name = "tallaId", referencedColumnName = "TallaId")
@@ -57,8 +51,10 @@ public class Prenda implements Serializable {
     private Integer prendaId;
     @Column(name = "PrendaNombre")
     private String prendaNombre;
+    @Size(max = 60)
     @Column(name = "ubicacion")
     private String ubicacion;
+    @Size(max = 200)
     @Column(name = "URL")
     private String url;
     @Column(name = "PrendaDescripcion")
@@ -86,9 +82,6 @@ public class Prenda implements Serializable {
     @JoinColumn(name = "PrendaTipoId", referencedColumnName = "PrendaTipoId")
     @ManyToOne
     private Prendatipo prendaTipoId;
-    @JoinColumn(name = "MaterialId", referencedColumnName = "MaterialId")
-    @ManyToOne
-    private Material materialId;
     @JoinColumn(name = "OcasionId", referencedColumnName = "OcasionId")
     @ManyToOne
     private Ocasion ocasionId;
@@ -217,14 +210,6 @@ public class Prenda implements Serializable {
         this.prendaTipoId = prendaTipoId;
     }
 
-    public Material getMaterialId() {
-        return materialId;
-    }
-
-    public void setMaterialId(Material materialId) {
-        this.materialId = materialId;
-    }
-
     public Ocasion getOcasionId() {
         return ocasionId;
     }
@@ -256,22 +241,6 @@ public class Prenda implements Serializable {
     @Override
     public String toString() {
         return "com.universitaria.atelier.web.jpa.Prenda[ prendaId=" + prendaId + " ]";
-    }
-
-    public String getUbicacion() {
-        return ubicacion;
-    }
-
-    public void setUbicacion(String ubicacion) {
-        this.ubicacion = ubicacion;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
     }
 
     @XmlTransient

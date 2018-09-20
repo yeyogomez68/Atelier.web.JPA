@@ -28,6 +28,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Prendamaterial.findAll", query = "SELECT p FROM Prendamaterial p")
+    , @NamedQuery(name = "Prendamaterial.findByPrendaIdMaterialId", query = "SELECT p FROM Prendamaterial p WHERE p.prendaId = :prendaId and p.materialId = :materialId")
     , @NamedQuery(name = "Prendamaterial.findByPrendaMaterial", query = "SELECT p FROM Prendamaterial p WHERE p.prendaMaterial = :prendaMaterial")})
 public class Prendamaterial implements Serializable {
 
@@ -99,5 +100,5 @@ public class Prendamaterial implements Serializable {
     public String toString() {
         return "com.universitaria.atelier.web.jpa.Prendamaterial[ prendaMaterial=" + prendaMaterial + " ]";
     }
-    
+
 }

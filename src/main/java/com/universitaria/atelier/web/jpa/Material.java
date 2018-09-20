@@ -37,9 +37,6 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Material.findByMaterialReference", query = "SELECT m FROM Material m WHERE m.materialReference = :materialReference")})
 public class Material implements Serializable {
 
-    @Size(max = 60)
-    @Column(name = "ubicacion")
-    private String ubicacion;
     @OneToMany(mappedBy = "materialId")
     private Collection<Stockmateriales> stockmaterialesCollection;
     @OneToMany(mappedBy = "materialId")
@@ -55,6 +52,7 @@ public class Material implements Serializable {
     private Integer materialId;
     @Column(name = "MaterialNombre")
     private String materialNombre;
+    @Size(max = 60)
     @Column(name = "ubicacion")
     private String ubicacion;
     @Column(name = "MaterialReference")
@@ -70,8 +68,6 @@ public class Material implements Serializable {
     @JoinColumn(name = "MarcaId", referencedColumnName = "MarcaId")
     @ManyToOne
     private Marca marcaId;
-    @OneToMany(mappedBy = "materialId")
-    private Collection<Prenda> prendaCollection;
 
     public Material() {
     }
@@ -147,12 +143,12 @@ public class Material implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Prenda> getPrendaCollection() {
-        return prendaCollection;
+    public Collection<Prendamaterial> getPrendamaterialCollection() {
+        return prendamaterialCollection;
     }
 
-    public void setPrendaCollection(Collection<Prenda> prendaCollection) {
-        this.prendaCollection = prendaCollection;
+    public void setPrendamaterialCollection(Collection<Prendamaterial> prendamaterialCollection) {
+        this.prendamaterialCollection = prendamaterialCollection;
     }
 
     @XmlTransient
