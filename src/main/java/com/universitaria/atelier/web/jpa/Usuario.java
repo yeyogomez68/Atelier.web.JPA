@@ -83,10 +83,6 @@ public class Usuario implements Serializable {
     private Collection<Encabezadorequerimiento> encabezadorequerimientoCollection;
     @OneToMany(mappedBy = "usuarioCreador")
     private Collection<Produccion> produccionCollection1;
-    @OneToMany(mappedBy = "usuarioIdApruebaTwo")
-    private Collection<Requestdeta> requestdetaCollection;
-    @OneToMany(mappedBy = "usuarioIdAprueba")
-    private Collection<Requestdeta> requestdetaCollection1;
     @OneToMany(mappedBy = "usuarioReservacionId")
     private Collection<Reservacion> reservacionCollection;
     @OneToMany(mappedBy = "usuarioId")
@@ -229,24 +225,6 @@ public class Usuario implements Serializable {
 
     public void setProduccionCollection1(Collection<Produccion> produccionCollection1) {
         this.produccionCollection1 = produccionCollection1;
-    }
-
-    @XmlTransient
-    public Collection<Requestdeta> getRequestdetaCollection() {
-        return requestdetaCollection;
-    }
-
-    public void setRequestdetaCollection(Collection<Requestdeta> requestdetaCollection) {
-        this.requestdetaCollection = requestdetaCollection;
-    }
-
-    @XmlTransient
-    public Collection<Requestdeta> getRequestdetaCollection1() {
-        return requestdetaCollection1;
-    }
-
-    public void setRequestdetaCollection1(Collection<Requestdeta> requestdetaCollection1) {
-        this.requestdetaCollection1 = requestdetaCollection1;
     }
 
     @XmlTransient

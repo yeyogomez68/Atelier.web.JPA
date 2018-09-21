@@ -81,9 +81,6 @@ public class Prenda implements Serializable {
     @JoinColumn(name = "PrendaTipoId", referencedColumnName = "PrendaTipoId")
     @ManyToOne
     private Prendatipo prendaTipoId;
-    @JoinColumn(name = "MaterialId", referencedColumnName = "MaterialId")
-    @ManyToOne
-    private Material materialId;
     @JoinColumn(name = "OcasionId", referencedColumnName = "OcasionId")
     @ManyToOne
     private Ocasion ocasionId;
@@ -194,14 +191,6 @@ public class Prenda implements Serializable {
 
     public void setPrendaTipoId(Prendatipo prendaTipoId) {
         this.prendaTipoId = prendaTipoId;
-    }
-
-    public Material getMaterialId() {
-        return materialId;
-    }
-
-    public void setMaterialId(Material materialId) {
-        this.materialId = materialId;
     }
 
     public Ocasion getOcasionId() {

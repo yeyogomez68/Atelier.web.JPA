@@ -68,8 +68,7 @@ public class Material implements Serializable {
     @JoinColumn(name = "MarcaId", referencedColumnName = "MarcaId")
     @ManyToOne
     private Marca marcaId;
-    @OneToMany(mappedBy = "materialId")
-    private Collection<Prenda> prendaCollection;
+
 
     public Material() {
     }
@@ -134,15 +133,6 @@ public class Material implements Serializable {
 
     public void setMarcaId(Marca marcaId) {
         this.marcaId = marcaId;
-    }
-
-    @XmlTransient
-    public Collection<Prenda> getPrendaCollection() {
-        return prendaCollection;
-    }
-
-    public void setPrendaCollection(Collection<Prenda> prendaCollection) {
-        this.prendaCollection = prendaCollection;
     }
 
     @XmlTransient
