@@ -49,7 +49,7 @@ public class Cliente implements Serializable {
     @Column(name = "ClienteId")
     private Integer clienteId;
     @Column(name = "ClienteIdentificacion")
-    private Integer clienteIdentificacion;
+    private String clienteIdentificacion;
     @Size(max = 60)
     @Column(name = "ClienteNombre")
     private String clienteNombre;
@@ -78,10 +78,7 @@ public class Cliente implements Serializable {
     @JoinColumn(name = "EstadoId", referencedColumnName = "EstadoId")
     @ManyToOne
     private Estado estadoId;
-    @JoinColumn(name = "RollId", referencedColumnName = "RollId")
-    @ManyToOne
-    private Roll rollId;
-    @OneToMany(mappedBy = "clienteId")
+    @OneToMany(mappedBy = "usuarioRenta")
     private Collection<Renta> rentaCollection;
 
     public Cliente() {
@@ -99,11 +96,11 @@ public class Cliente implements Serializable {
         this.clienteId = clienteId;
     }
 
-    public Integer getClienteIdentificacion() {
+    public String getClienteIdentificacion() {
         return clienteIdentificacion;
     }
 
-    public void setClienteIdentificacion(Integer clienteIdentificacion) {
+    public void setClienteIdentificacion(String clienteIdentificacion) {
         this.clienteIdentificacion = clienteIdentificacion;
     }
 
@@ -187,14 +184,6 @@ public class Cliente implements Serializable {
 
     public void setEstadoId(Estado estadoId) {
         this.estadoId = estadoId;
-    }
-
-    public Roll getRollId() {
-        return rollId;
-    }
-
-    public void setRollId(Roll rollId) {
-        this.rollId = rollId;
     }
 
     @XmlTransient

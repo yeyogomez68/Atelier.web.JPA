@@ -51,7 +51,6 @@ public class Usuario implements Serializable {
 
     @OneToMany(mappedBy = "usuarioId")
     private Collection<Produccionusuario> produccionusuarioCollection;
-   
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -100,8 +99,6 @@ public class Usuario implements Serializable {
     @JoinColumn(name = "CiudadId", referencedColumnName = "CiudadId")
     @ManyToOne
     private Ciudad ciudadId;
-    @OneToMany(mappedBy = "usuarioId")
-    private Collection<Renta> rentaCollection;
     @OneToMany(mappedBy = "usuarioCreador")
     private Collection<Renta> rentaCollection1;
 
@@ -212,7 +209,6 @@ public class Usuario implements Serializable {
         this.encabezadorequerimientoCollection = encabezadorequerimientoCollection;
     }
 
-    
     @XmlTransient
     public Collection<Producciondeta> getProduccionCollection() {
         return producciondetaCollection;
@@ -221,7 +217,7 @@ public class Usuario implements Serializable {
     public void setProduccionCollection(Collection<Producciondeta> produccionCollection) {
         this.producciondetaCollection = produccionCollection;
     }
-    
+
     @XmlTransient
     public Collection<Produccion> getProduccionCollection1() {
         return produccionCollection1;
@@ -292,15 +288,6 @@ public class Usuario implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Renta> getRentaCollection() {
-        return rentaCollection;
-    }
-
-    public void setRentaCollection(Collection<Renta> rentaCollection) {
-        this.rentaCollection = rentaCollection;
-    }
-
-    @XmlTransient
     public Collection<Renta> getRentaCollection1() {
         return rentaCollection1;
     }
@@ -359,5 +346,5 @@ public class Usuario implements Serializable {
     public void setContratoId(Contrato contratoId) {
         this.contratoId = contratoId;
     }
-    
+
 }

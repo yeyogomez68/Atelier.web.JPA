@@ -19,6 +19,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -39,12 +40,9 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Renta.findByRentaIdFecha", query = "SELECT r FROM Renta r WHERE r.rentaIdFecha = :rentaIdFecha")
     , @NamedQuery(name = "Renta.findByDiaRenta", query = "SELECT r FROM Renta r WHERE r.diaRenta = :diaRenta")
     , @NamedQuery(name = "Renta.findByRentaReinEstadomentFecha", query = "SELECT r FROM Renta r WHERE r.rentaReinEstadomentFecha = :rentaReinEstadomentFecha")
+    , @NamedQuery(name = "Renta.findByRentaEstadoId", query = "SELECT r FROM Renta r WHERE r.estadoId = :estadoId")
     , @NamedQuery(name = "Renta.findByRentaTot", query = "SELECT r FROM Renta r WHERE r.rentaTot = :rentaTot")})
 public class Renta implements Serializable {
-
-    @JoinColumn(name = "ClienteId", referencedColumnName = "ClienteId")
-    @ManyToOne
-    private Cliente clienteId;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -52,8 +50,6 @@ public class Renta implements Serializable {
     @Basic(optional = false)
     @Column(name = "RentaId")
     private Integer rentaId;
-    @Column(name = "UsuarioRenta")
-    private Integer usuarioRenta;
     @Column(name = "RentaIdFecha")
     @Temporal(TemporalType.TIMESTAMP)
     private Calendar rentaIdFecha;
@@ -67,12 +63,15 @@ public class Renta implements Serializable {
     private Float rentaTot;
     @OneToMany(mappedBy = "rentaId")
     private Collection<Rentadeta> rentadetaCollection;
-    @JoinColumn(name = "UsuarioId", referencedColumnName = "UsuarioId")
-    @ManyToOne
-    private Usuario usuarioId;
     @JoinColumn(name = "UsuarioCreador", referencedColumnName = "UsuarioId")
     @ManyToOne
     private Usuario usuarioCreador;
+    @JoinColumn(name = "UsuarioRenta", referencedColumnName = "ClienteId")
+    @ManyToOne
+    private Cliente usuarioRenta;
+    @JoinColumn(name = "estadoId", referencedColumnName = "estadoId")
+    @ManyToOne
+    private Estado estadoId;
 
     public Renta() {
     }
@@ -89,11 +88,11 @@ public class Renta implements Serializable {
         this.rentaId = rentaId;
     }
 
-    public Integer getUsuarioRenta() {
+    public Cliente getUsuarioRenta() {
         return usuarioRenta;
     }
 
-    public void setUsuarioRenta(Integer usuarioRenta) {
+    public void setUsuarioRenta(Cliente usuarioRenta) {
         this.usuarioRenta = usuarioRenta;
     }
 
@@ -138,20 +137,20 @@ public class Renta implements Serializable {
         this.rentadetaCollection = rentadetaCollection;
     }
 
-    public Usuario getUsuarioId() {
-        return usuarioId;
-    }
-
-    public void setUsuarioId(Usuario usuarioId) {
-        this.usuarioId = usuarioId;
-    }
-
     public Usuario getUsuarioCreador() {
         return usuarioCreador;
     }
 
     public void setUsuarioCreador(Usuario usuarioCreador) {
         this.usuarioCreador = usuarioCreador;
+    }
+
+    public Estado getEstadoId() {
+        return estadoId;
+    }
+
+    public void setEstadoId(Estado estadoId) {
+        this.estadoId = estadoId;
     }
 
     @Override
@@ -177,14 +176,6 @@ public class Renta implements Serializable {
     @Override
     public String toString() {
         return "com.universitaria.atelier.web.jpa.Renta[ rentaId=" + rentaId + " ]";
-    }
-
-    public Cliente getClienteId() {
-        return clienteId;
-    }
-
-    public void setClienteId(Cliente clienteId) {
-        this.clienteId = clienteId;
     }
 
 }
