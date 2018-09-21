@@ -42,6 +42,10 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Cliente.findByClienteCel", query = "SELECT c FROM Cliente c WHERE c.clienteCel = :clienteCel")})
 public class Cliente implements Serializable {
 
+    @JoinColumn(name = "RollId", referencedColumnName = "RollId")
+    @ManyToOne
+    private Roll rollId;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -78,8 +82,6 @@ public class Cliente implements Serializable {
     @JoinColumn(name = "EstadoId", referencedColumnName = "EstadoId")
     @ManyToOne
     private Estado estadoId;
-    @OneToMany(mappedBy = "usuarioRenta")
-    private Collection<Renta> rentaCollection;
 
     public Cliente() {
     }
@@ -186,15 +188,6 @@ public class Cliente implements Serializable {
         this.estadoId = estadoId;
     }
 
-    @XmlTransient
-    public Collection<Renta> getRentaCollection() {
-        return rentaCollection;
-    }
-
-    public void setRentaCollection(Collection<Renta> rentaCollection) {
-        this.rentaCollection = rentaCollection;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -219,5 +212,13 @@ public class Cliente implements Serializable {
     public String toString() {
         return "com.universitaria.atelier.web.jpa.Cliente[ clienteId=" + clienteId + " ]";
     }
-    
+
+    public Roll getRollId() {
+        return rollId;
+    }
+
+    public void setRollId(Roll rollId) {
+        this.rollId = rollId;
+    }
+
 }

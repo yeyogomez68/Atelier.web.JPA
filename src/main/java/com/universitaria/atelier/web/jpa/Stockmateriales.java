@@ -29,6 +29,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Stockmateriales.findAll", query = "SELECT s FROM Stockmateriales s")
     , @NamedQuery(name = "Stockmateriales.findByStockMaterialId", query = "SELECT s FROM Stockmateriales s WHERE s.stockMaterialId = :stockMaterialId")
+    , @NamedQuery(name = "Stockmateriales.findByMaterialId", query = "SELECT s FROM Stockmateriales s WHERE s.materialId = :materialId")
     , @NamedQuery(name = "Stockmateriales.findByCantidad", query = "SELECT s FROM Stockmateriales s WHERE s.cantidad = :cantidad")})
 public class Stockmateriales implements Serializable {
 
@@ -99,5 +100,5 @@ public class Stockmateriales implements Serializable {
     public String toString() {
         return "com.universitaria.atelier.web.jpa.Stockmateriales[ stockMaterialId=" + stockMaterialId + " ]";
     }
-    
+
 }

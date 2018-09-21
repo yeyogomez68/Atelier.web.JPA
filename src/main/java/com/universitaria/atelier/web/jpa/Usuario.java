@@ -80,14 +80,11 @@ public class Usuario implements Serializable {
     private Collection<Ordencompra> ordencompraCollection2;
     @OneToMany(mappedBy = "usuarioId")
     private Collection<Encabezadorequerimiento> encabezadorequerimientoCollection;
-    @OneToMany(mappedBy = "usuarioCreador")
-    private Collection<Produccion> produccionCollection1;
     @OneToMany(mappedBy = "usuarioIdApruebaTwo")
     private Collection<Requestdeta> requestdetaCollection;
     @OneToMany(mappedBy = "usuarioIdAprueba")
     private Collection<Requestdeta> requestdetaCollection1;
-    @OneToMany(mappedBy = "usuarioReservacionId")
-    private Collection<Reservacion> reservacionCollection;
+
     @OneToMany(mappedBy = "usuarioId")
     private Collection<Reservacion> reservacionCollection1;
     @JoinColumn(name = "EstadoId", referencedColumnName = "EstadoId")
@@ -99,8 +96,6 @@ public class Usuario implements Serializable {
     @JoinColumn(name = "CiudadId", referencedColumnName = "CiudadId")
     @ManyToOne
     private Ciudad ciudadId;
-    @OneToMany(mappedBy = "usuarioCreador")
-    private Collection<Renta> rentaCollection1;
 
     public Usuario() {
     }
@@ -219,15 +214,6 @@ public class Usuario implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Produccion> getProduccionCollection1() {
-        return produccionCollection1;
-    }
-
-    public void setProduccionCollection1(Collection<Produccion> produccionCollection1) {
-        this.produccionCollection1 = produccionCollection1;
-    }
-
-    @XmlTransient
     public Collection<Requestdeta> getRequestdetaCollection() {
         return requestdetaCollection;
     }
@@ -243,15 +229,6 @@ public class Usuario implements Serializable {
 
     public void setRequestdetaCollection1(Collection<Requestdeta> requestdetaCollection1) {
         this.requestdetaCollection1 = requestdetaCollection1;
-    }
-
-    @XmlTransient
-    public Collection<Reservacion> getReservacionCollection() {
-        return reservacionCollection;
-    }
-
-    public void setReservacionCollection(Collection<Reservacion> reservacionCollection) {
-        this.reservacionCollection = reservacionCollection;
     }
 
     @XmlTransient
@@ -285,15 +262,6 @@ public class Usuario implements Serializable {
 
     public void setCiudadId(Ciudad ciudadId) {
         this.ciudadId = ciudadId;
-    }
-
-    @XmlTransient
-    public Collection<Renta> getRentaCollection1() {
-        return rentaCollection1;
-    }
-
-    public void setRentaCollection1(Collection<Renta> rentaCollection1) {
-        this.rentaCollection1 = rentaCollection1;
     }
 
     @Override

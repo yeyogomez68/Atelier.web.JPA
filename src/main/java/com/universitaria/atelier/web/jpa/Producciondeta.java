@@ -38,6 +38,10 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Producciondeta.findByProduccionDetaFecha", query = "SELECT p FROM Producciondeta p WHERE p.produccionDetaFecha = :produccionDetaFecha")})
 public class Producciondeta implements Serializable {
 
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Column(name = "ProduccionDetaCant")
+    private Float produccionDetaCant;
+
     @JoinColumn(name = "estadoId", referencedColumnName = "EstadoId")
     @ManyToOne
     private Estado estadoId;
@@ -54,9 +58,6 @@ public class Producciondeta implements Serializable {
     @Basic(optional = false)
     @Column(name = "ProduccionDetaId")
     private Integer produccionDetaId;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "ProduccionDetaCant")
-    private Integer produccionDetaCant;
     @Column(name = "ProduccionDetaFecha")
     @Temporal(TemporalType.DATE)
     private Date produccionDetaFecha;
@@ -88,13 +89,6 @@ public class Producciondeta implements Serializable {
         this.materialId = materialId;
     }
 
-    public Integer getProduccionDetaCant() {
-        return produccionDetaCant;
-    }
-
-    public void setProduccionDetaCant(Integer produccionDetaCant) {
-        this.produccionDetaCant = produccionDetaCant;
-    }
 
     public Date getProduccionDetaFecha() {
         return produccionDetaFecha;
@@ -151,5 +145,13 @@ public class Producciondeta implements Serializable {
     @Override
     public String toString() {
         return "com.universitaria.atelier.web.jpa.Producciondeta[ produccionDetaId=" + produccionDetaId + " ]";
+    }
+
+    public Float getProduccionDetaCant() {
+        return produccionDetaCant;
+    }
+
+    public void setProduccionDetaCant(Float produccionDetaCant) {
+        this.produccionDetaCant = produccionDetaCant;
     }
 }

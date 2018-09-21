@@ -43,21 +43,22 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Rentadeta.findByRentaVu", query = "SELECT r FROM Rentadeta r WHERE r.rentaVu = :rentaVu")})
 public class Rentadeta implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "RentaDetaId")
-    private Integer rentaDetaId;
     @Column(name = "RentaDetaFecha")
     @Temporal(TemporalType.TIMESTAMP)
     private Calendar rentaDetaFecha;
     @Column(name = "RentaDetaReinEstadomentFecha")
     @Temporal(TemporalType.TIMESTAMP)
     private Calendar rentaDetaReinEstadomentFecha;
+
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "RentaDetaId")
+    private Integer rentaDetaId;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "RentaVu")
-    private Float rentaVu;
+    private Integer rentaVu;
     @JoinColumn(name = "PrendaId", referencedColumnName = "PrendaId")
     @ManyToOne
     private Prenda prendaId;
@@ -88,27 +89,11 @@ public class Rentadeta implements Serializable {
         this.rentaDetaId = rentaDetaId;
     }
 
-    public Calendar getRentaDetaFecha() {
-        return rentaDetaFecha;
-    }
-
-    public void setRentaDetaFecha(Calendar rentaDetaFecha) {
-        this.rentaDetaFecha = rentaDetaFecha;
-    }
-
-    public Calendar getRentaDetaReinEstadomentFecha() {
-        return rentaDetaReinEstadomentFecha;
-    }
-
-    public void setRentaDetaReinEstadomentFecha(Calendar rentaDetaReinEstadomentFecha) {
-        this.rentaDetaReinEstadomentFecha = rentaDetaReinEstadomentFecha;
-    }
-
-        public Float getRentaVu() {
+    public Integer getRentaVu() {
         return rentaVu;
     }
 
-    public void setRentaVu(Float rentaVu) {
+    public void setRentaVu(Integer rentaVu) {
         this.rentaVu = rentaVu;
     }
 
@@ -176,6 +161,22 @@ public class Rentadeta implements Serializable {
     @Override
     public String toString() {
         return "com.universitaria.atelier.web.jpa.Rentadeta[ rentaDetaId=" + rentaDetaId + " ]";
+    }
+
+    public Calendar getRentaDetaFecha() {
+        return rentaDetaFecha;
+    }
+
+    public void setRentaDetaFecha(Calendar rentaDetaFecha) {
+        this.rentaDetaFecha = rentaDetaFecha;
+    }
+
+    public Calendar getRentaDetaReinEstadomentFecha() {
+        return rentaDetaReinEstadomentFecha;
+    }
+
+    public void setRentaDetaReinEstadomentFecha(Calendar rentaDetaReinEstadomentFecha) {
+        this.rentaDetaReinEstadomentFecha = rentaDetaReinEstadomentFecha;
     }
 
 }

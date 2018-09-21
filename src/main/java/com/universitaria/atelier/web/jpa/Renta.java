@@ -8,6 +8,7 @@ package com.universitaria.atelier.web.jpa;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Collection;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -36,7 +37,6 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Renta.findAll", query = "SELECT r FROM Renta r")
     , @NamedQuery(name = "Renta.findByRentaId", query = "SELECT r FROM Renta r WHERE r.rentaId = :rentaId")
-    , @NamedQuery(name = "Renta.findByUsuarioRenta", query = "SELECT r FROM Renta r WHERE r.usuarioRenta = :usuarioRenta")
     , @NamedQuery(name = "Renta.findByRentaIdFecha", query = "SELECT r FROM Renta r WHERE r.rentaIdFecha = :rentaIdFecha")
     , @NamedQuery(name = "Renta.findByDiaRenta", query = "SELECT r FROM Renta r WHERE r.diaRenta = :diaRenta")
     , @NamedQuery(name = "Renta.findByRentaReinEstadomentFecha", query = "SELECT r FROM Renta r WHERE r.rentaReinEstadomentFecha = :rentaReinEstadomentFecha")
@@ -44,31 +44,35 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Renta.findByRentaTot", query = "SELECT r FROM Renta r WHERE r.rentaTot = :rentaTot")})
 public class Renta implements Serializable {
 
+    @Column(name = "RentaIdFecha")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Calendar rentaIdFecha;
+    @Column(name = "RentaReinEstadomentFecha")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Calendar rentaReinEstadomentFecha;
+    @JoinColumn(name = "ClienteId", referencedColumnName = "ClienteId")
+    @ManyToOne
+    private Cliente clienteId;
+    @JoinColumn(name = "UsuarioId", referencedColumnName = "UsuarioId")
+    @ManyToOne
+    private Usuario usuarioId;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "RentaId")
     private Integer rentaId;
-    @Column(name = "RentaIdFecha")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Calendar rentaIdFecha;
     @Column(name = "DiaRenta")
     private Integer diaRenta;
-    @Column(name = "RentaReinEstadomentFecha")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Calendar rentaReinEstadomentFecha;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "RentaTot")
-    private Float rentaTot;
+    private Integer rentaTot;
     @OneToMany(mappedBy = "rentaId")
     private Collection<Rentadeta> rentadetaCollection;
     @JoinColumn(name = "UsuarioCreador", referencedColumnName = "UsuarioId")
     @ManyToOne
     private Usuario usuarioCreador;
-    @JoinColumn(name = "UsuarioRenta", referencedColumnName = "ClienteId")
-    @ManyToOne
-    private Cliente usuarioRenta;
     @JoinColumn(name = "estadoId", referencedColumnName = "estadoId")
     @ManyToOne
     private Estado estadoId;
@@ -88,22 +92,6 @@ public class Renta implements Serializable {
         this.rentaId = rentaId;
     }
 
-    public Cliente getUsuarioRenta() {
-        return usuarioRenta;
-    }
-
-    public void setUsuarioRenta(Cliente usuarioRenta) {
-        this.usuarioRenta = usuarioRenta;
-    }
-
-    public Calendar getRentaIdFecha() {
-        return rentaIdFecha;
-    }
-
-    public void setRentaIdFecha(Calendar rentaIdFecha) {
-        this.rentaIdFecha = rentaIdFecha;
-    }
-
     public Integer getDiaRenta() {
         return diaRenta;
     }
@@ -112,19 +100,11 @@ public class Renta implements Serializable {
         this.diaRenta = diaRenta;
     }
 
-    public Calendar getRentaReinEstadomentFecha() {
-        return rentaReinEstadomentFecha;
-    }
-
-    public void setRentaReinEstadomentFecha(Calendar rentaReinEstadomentFecha) {
-        this.rentaReinEstadomentFecha = rentaReinEstadomentFecha;
-    }
-
-    public Float getRentaTot() {
+    public Integer getRentaTot() {
         return rentaTot;
     }
 
-    public void setRentaTot(Float rentaTot) {
+    public void setRentaTot(Integer rentaTot) {
         this.rentaTot = rentaTot;
     }
 
@@ -176,6 +156,38 @@ public class Renta implements Serializable {
     @Override
     public String toString() {
         return "com.universitaria.atelier.web.jpa.Renta[ rentaId=" + rentaId + " ]";
+    }
+
+    public Calendar getRentaIdFecha() {
+        return rentaIdFecha;
+    }
+
+    public void setRentaIdFecha(Calendar rentaIdFecha) {
+        this.rentaIdFecha = rentaIdFecha;
+    }
+
+    public Calendar getRentaReinEstadomentFecha() {
+        return rentaReinEstadomentFecha;
+    }
+
+    public void setRentaReinEstadomentFecha(Calendar rentaReinEstadomentFecha) {
+        this.rentaReinEstadomentFecha = rentaReinEstadomentFecha;
+    }
+
+    public Cliente getClienteId() {
+        return clienteId;
+    }
+
+    public void setClienteId(Cliente clienteId) {
+        this.clienteId = clienteId;
+    }
+
+    public Usuario getUsuarioId() {
+        return usuarioId;
+    }
+
+    public void setUsuarioId(Usuario usuarioId) {
+        this.usuarioId = usuarioId;
     }
 
 }
