@@ -30,7 +30,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Materialtipo.findAll", query = "SELECT m FROM Materialtipo m")
     , @NamedQuery(name = "Materialtipo.findByMaterialTipoId", query = "SELECT m FROM Materialtipo m WHERE m.materialTipoId = :materialTipoId")
-    , @NamedQuery(name = "Materialtipo.findByMaterialTipoDescript", query = "SELECT m FROM Materialtipo m WHERE m.materialTipoDescript = :materialTipoDescript")})
+    , @NamedQuery(name = "Materialtipo.findByMaterialTipoDescript", query = "SELECT m FROM Materialtipo m WHERE upper (m.materialTipoDescript) = upper (:materialTipoDescript)")})
 public class Materialtipo implements Serializable {
 
     private static final long serialVersionUID = 1L;

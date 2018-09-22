@@ -32,7 +32,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Material.findAll", query = "SELECT m FROM Material m")
     , @NamedQuery(name = "Material.findByMaterialId", query = "SELECT m FROM Material m WHERE m.materialId = :materialId")
-    , @NamedQuery(name = "Material.findByMaterialNombre", query = "SELECT m FROM Material m WHERE m.materialNombre = :materialNombre")
+    , @NamedQuery(name = "Material.findByMaterialNombre", query = "SELECT m FROM Material m WHERE upper (m.materialNombre) = upper (:materialNombre)")
     , @NamedQuery(name = "Material.findByMaterialReference", query = "SELECT m FROM Material m WHERE m.materialReference = :materialReference")})
 public class Material implements Serializable {
 

@@ -19,6 +19,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -34,13 +35,20 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Usuario.findByLogin", query = "SELECT u FROM Usuario u WHERE u.usuarioEmail = :usuarioEmail and u.usuarioPassword = :usuarioPassword ")
     , @NamedQuery(name = "Usuario.findByUsuarioId", query = "SELECT u FROM Usuario u WHERE u.usuarioId = :usuarioId")
     , @NamedQuery(name = "Usuario.findByUsuarioIdentificacion", query = "SELECT u FROM Usuario u WHERE u.usuarioIdentificacion = :usuarioIdentificacion")
-    , @NamedQuery(name = "Usuario.findByUsuarioNombre", query = "SELECT u FROM Usuario u WHERE u.usuarioNombre = :usuarioNombre")
-    , @NamedQuery(name = "Usuario.findByUsuarioApellido", query = "SELECT u FROM Usuario u WHERE u.usuarioApellido = :usuarioApellido")
+    , @NamedQuery(name = "Usuario.findByUsuarioNombre", query = "SELECT u FROM Usuario u WHERE upper (u.usuarioNombre) = upper (:usuarioNombre)")
+    , @NamedQuery(name = "Usuario.findByUsuarioApellido", query = "SELECT u FROM Usuario u WHERE upper (u.usuarioApellido) = upper (:usuarioApellido)")
     , @NamedQuery(name = "Usuario.findByUsuarioEmail", query = "SELECT u FROM Usuario u WHERE u.usuarioEmail = :usuarioEmail")
     , @NamedQuery(name = "Usuario.findByUsuarioPassword", query = "SELECT u FROM Usuario u WHERE u.usuarioPassword = :usuarioPassword")
     , @NamedQuery(name = "Usuario.findByUsuarioDireccion", query = "SELECT u FROM Usuario u WHERE u.usuarioDireccion = :usuarioDireccion")
     , @NamedQuery(name = "Usuario.findByUsuarioCel", query = "SELECT u FROM Usuario u WHERE u.usuarioCel = :usuarioCel")})
 public class Usuario implements Serializable {
+
+    @Size(max = 50)
+    @Column(name = "Contrato")
+    private String contrato;
+    @JoinColumn(name = "CargoId", referencedColumnName = "CargoId")
+    @ManyToOne
+    private Cargo cargoId;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -333,6 +341,22 @@ public class Usuario implements Serializable {
     @Override
     public String toString() {
         return "com.universitaria.atelier.web.jpa.Usuario[ usuarioId=" + usuarioId + " ]";
+    }
+
+    public String getContrato() {
+        return contrato;
+    }
+
+    public void setContrato(String contrato) {
+        this.contrato = contrato;
+    }
+
+    public Cargo getCargoId() {
+        return cargoId;
+    }
+
+    public void setCargoId(Cargo cargoId) {
+        this.cargoId = cargoId;
     }
     
 }

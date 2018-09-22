@@ -32,8 +32,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Prenda.findAll", query = "SELECT p FROM Prenda p")
     , @NamedQuery(name = "Prenda.findByPrendaId", query = "SELECT p FROM Prenda p WHERE p.prendaId = :prendaId")
-    , @NamedQuery(name = "Prenda.findByPrendaNombre", query = "SELECT p FROM Prenda p WHERE p.prendaNombre = :prendaNombre")
-    , @NamedQuery(name = "Prenda.findByPrendaDescripcion", query = "SELECT p FROM Prenda p WHERE p.prendaDescripcion = :prendaDescripcion")})
+    , @NamedQuery(name = "Prenda.findByPrendaNombre", query = "SELECT p FROM Prenda p WHERE upper (p.prendaNombre) = upper (:prendaNombre)")
+    , @NamedQuery(name = "Prenda.findByPrendaDescripcion", query = "SELECT p FROM Prenda p WHERE upper (p.prendaDescripcion) = upper (:prendaDescripcion)")})
 public class Prenda implements Serializable {
 
     private static final long serialVersionUID = 1L;
