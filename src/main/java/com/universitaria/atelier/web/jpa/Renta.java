@@ -70,9 +70,6 @@ public class Renta implements Serializable {
     private Integer rentaTot;
     @OneToMany(mappedBy = "rentaId")
     private Collection<Rentadeta> rentadetaCollection;
-    @JoinColumn(name = "UsuarioCreador", referencedColumnName = "UsuarioId")
-    @ManyToOne
-    private Usuario usuarioCreador;
     @JoinColumn(name = "estadoId", referencedColumnName = "estadoId")
     @ManyToOne
     private Estado estadoId;
@@ -115,14 +112,6 @@ public class Renta implements Serializable {
 
     public void setRentadetaCollection(Collection<Rentadeta> rentadetaCollection) {
         this.rentadetaCollection = rentadetaCollection;
-    }
-
-    public Usuario getUsuarioCreador() {
-        return usuarioCreador;
-    }
-
-    public void setUsuarioCreador(Usuario usuarioCreador) {
-        this.usuarioCreador = usuarioCreador;
     }
 
     public Estado getEstadoId() {
