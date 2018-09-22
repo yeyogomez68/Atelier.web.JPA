@@ -32,7 +32,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Departamento.findAll", query = "SELECT d FROM Departamento d")
     , @NamedQuery(name = "Departamento.findByDepartamentoId", query = "SELECT d FROM Departamento d WHERE d.departamentoId = :departamentoId")
-    , @NamedQuery(name = "Departamento.findByDepartamentoNombre", query = "SELECT d FROM Departamento d WHERE d.departamentoNombre = :departamentoNombre")})
+    , @NamedQuery(name = "Departamento.findByDepartamentoNombre", query = "SELECT d FROM Departamento d WHERE upper (d.departamentoNombre) = upper (:departamentoNombre)")})
 public class Departamento implements Serializable {
 
     private static final long serialVersionUID = 1L;

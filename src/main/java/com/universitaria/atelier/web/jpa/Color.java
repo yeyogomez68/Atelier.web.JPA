@@ -30,7 +30,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Color.findAll", query = "SELECT c FROM Color c")
     , @NamedQuery(name = "Color.findByColorId", query = "SELECT c FROM Color c WHERE c.colorId = :colorId")
-    , @NamedQuery(name = "Color.findByColorDescrip", query = "SELECT c FROM Color c WHERE c.colorDescrip = :colorDescrip")})
+    , @NamedQuery(name = "Color.findByColorDescrip", query = "SELECT c FROM Color c WHERE  upper( c.colorDescrip) = upper (:colorDescrip)")})
 public class Color implements Serializable {
 
     private static final long serialVersionUID = 1L;

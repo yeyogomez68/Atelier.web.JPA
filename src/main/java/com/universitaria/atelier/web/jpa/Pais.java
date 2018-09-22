@@ -30,7 +30,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Pais.findAll", query = "SELECT p FROM Pais p")
     , @NamedQuery(name = "Pais.findByPaisId", query = "SELECT p FROM Pais p WHERE p.paisId = :paisId")
-    , @NamedQuery(name = "Pais.findByPaisNombre", query = "SELECT p FROM Pais p WHERE p.paisNombre = :paisNombre")})
+    , @NamedQuery(name = "Pais.findByPaisNombre", query = "SELECT p FROM Pais p WHERE upper (p.paisNombre) = upper (:paisNombre)")})
 public class Pais implements Serializable {
 
     private static final long serialVersionUID = 1L;

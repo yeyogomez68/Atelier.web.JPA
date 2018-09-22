@@ -30,7 +30,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Ocasion.findAll", query = "SELECT o FROM Ocasion o")
     , @NamedQuery(name = "Ocasion.findByOcasionId", query = "SELECT o FROM Ocasion o WHERE o.ocasionId = :ocasionId")
-    , @NamedQuery(name = "Ocasion.findByOcasionDescrip", query = "SELECT o FROM Ocasion o WHERE o.ocasionDescrip = :ocasionDescrip")})
+    , @NamedQuery(name = "Ocasion.findByOcasionDescrip", query = "SELECT o FROM Ocasion o WHERE upper (o.ocasionDescrip) = upper (:ocasionDescrip)")})
 public class Ocasion implements Serializable {
 
     private static final long serialVersionUID = 1L;

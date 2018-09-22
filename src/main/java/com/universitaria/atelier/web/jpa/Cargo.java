@@ -31,7 +31,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Cargo.findAll", query = "SELECT c FROM Cargo c")
     , @NamedQuery(name = "Cargo.findByCargoId", query = "SELECT c FROM Cargo c WHERE c.cargoId = :cargoId")
-    , @NamedQuery(name = "Cargo.findByCargoDesc", query = "SELECT c FROM Cargo c WHERE c.cargoDesc = :cargoDesc")})
+    , @NamedQuery(name = "Cargo.findByCargoDesc", query = "SELECT c FROM Cargo c WHERE upper( c.cargoDesc ) = upper( :cargoDesc )")})
 public class Cargo implements Serializable {
 
     @OneToMany(mappedBy = "cargoId")

@@ -32,7 +32,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Roll.findAll", query = "SELECT r FROM Roll r")
     , @NamedQuery(name = "Roll.findByRollId", query = "SELECT r FROM Roll r WHERE r.rollId = :rollId")
-    , @NamedQuery(name = "Roll.findByRollDesc", query = "SELECT r FROM Roll r WHERE r.rollDesc = :rollDesc")})
+    , @NamedQuery(name = "Roll.findByRollDesc", query = "SELECT r FROM Roll r WHERE upper (r.rollDesc) = upper (:rollDesc)")})
 public class Roll implements Serializable {
 
     @OneToMany(mappedBy = "rollId")

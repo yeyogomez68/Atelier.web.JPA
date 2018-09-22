@@ -30,7 +30,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Estado.findAll", query = "SELECT e FROM Estado e")
     , @NamedQuery(name = "Estado.findByEstadoId", query = "SELECT e FROM Estado e WHERE e.estadoId = :estadoId")
-    , @NamedQuery(name = "Estado.findByEstadoDescrip", query = "SELECT e FROM Estado e WHERE e.estadoDescrip = :estadoDescrip")})
+    , @NamedQuery(name = "Estado.findByEstadoDescrip", query = "SELECT e FROM Estado e WHERE upper (e.estadoDescrip) = upper (:estadoDescrip)")})
 public class Estado implements Serializable {
 
     @OneToMany(mappedBy = "estadoId")
