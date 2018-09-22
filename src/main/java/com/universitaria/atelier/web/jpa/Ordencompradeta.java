@@ -53,17 +53,17 @@ public class Ordencompradeta implements Serializable {
     private Integer ordenCompraDetaId;
     @Basic(optional = false)
     @Column(name = "OrdenCompraCantidad")
-    private float ordenCompraCantidad;
+    private Double ordenCompraCantidad;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "OrdenCompraValorUnit")
-    private Float ordenCompraValorUnit;
+    private Double ordenCompraValorUnit;
     @Lob
     @Column(name = "OrdenCompraDetaTotBruto")
-    private String ordenCompraDetaTotBruto;
+    private Double ordenCompraDetaTotBruto;
     @Column(name = "OrdenCompraIVA")
-    private Float ordenCompraIVA;
+    private Double ordenCompraIVA;
     @Column(name = "OrdenCompraValorTot")
-    private Float ordenCompraValorTot;
+    private Double ordenCompraValorTot;
     @JoinColumn(name = "MaterialId", referencedColumnName = "MaterialId")
     @ManyToOne
     private Material materialId;
@@ -78,7 +78,7 @@ public class Ordencompradeta implements Serializable {
         this.ordenCompraDetaId = ordenCompraDetaId;
     }
 
-    public Ordencompradeta(Integer ordenCompraDetaId, float ordenCompraCantidad) {
+    public Ordencompradeta(Integer ordenCompraDetaId, Double ordenCompraCantidad) {
         this.ordenCompraDetaId = ordenCompraDetaId;
         this.ordenCompraCantidad = ordenCompraCantidad;
     }
@@ -91,43 +91,43 @@ public class Ordencompradeta implements Serializable {
         this.ordenCompraDetaId = ordenCompraDetaId;
     }
 
-    public float getOrdenCompraCantidad() {
+    public Double getOrdenCompraCantidad() {
         return ordenCompraCantidad;
     }
 
-    public void setOrdenCompraCantidad(float ordenCompraCantidad) {
+    public void setOrdenCompraCantidad(Double ordenCompraCantidad) {
         this.ordenCompraCantidad = ordenCompraCantidad;
     }
 
-    public Float getOrdenCompraValorUnit() {
+    public Double getOrdenCompraValorUnit() {
         return ordenCompraValorUnit;
     }
 
-    public void setOrdenCompraValorUnit(Float ordenCompraValorUnit) {
+    public void setOrdenCompraValorUnit(Double ordenCompraValorUnit) {
         this.ordenCompraValorUnit = ordenCompraValorUnit;
     }
 
-    public String getOrdenCompraDetaTotBruto() {
+    public Double getOrdenCompraDetaTotBruto() {
         return ordenCompraDetaTotBruto;
     }
 
-    public void setOrdenCompraDetaTotBruto(String ordenCompraDetaTotBruto) {
+    public void setOrdenCompraDetaTotBruto(Double ordenCompraDetaTotBruto) {
         this.ordenCompraDetaTotBruto = ordenCompraDetaTotBruto;
     }
 
-    public Float getOrdenCompraIVA() {
+    public Double getOrdenCompraIVA() {
         return ordenCompraIVA;
     }
 
-    public void setOrdenCompraIVA(Float ordenCompraIVA) {
+    public void setOrdenCompraIVA(Double ordenCompraIVA) {
         this.ordenCompraIVA = ordenCompraIVA;
     }
 
-    public Float getOrdenCompraValorTot() {
+    public Double getOrdenCompraValorTot() {
         return ordenCompraValorTot;
     }
 
-    public void setOrdenCompraValorTot(Float ordenCompraValorTot) {
+    public void setOrdenCompraValorTot(Double ordenCompraValorTot) {
         this.ordenCompraValorTot = ordenCompraValorTot;
     }
 

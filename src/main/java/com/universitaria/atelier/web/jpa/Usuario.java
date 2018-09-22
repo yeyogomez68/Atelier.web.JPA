@@ -77,8 +77,6 @@ public class Usuario implements Serializable {
     private Collection<Facturaencab> facturaencabCollection;
     @OneToMany(mappedBy = "usuarioId")
     private Collection<Ordencompra> ordencompraCollection;
-    @OneToMany(mappedBy = "usuarioAprueba")
-    private Collection<Ordencompra> ordencompraCollection2;
     @OneToMany(mappedBy = "usuarioId")
     private Collection<Encabezadorequerimiento> encabezadorequerimientoCollection;
     @OneToMany(mappedBy = "usuarioCreador")
@@ -188,15 +186,6 @@ public class Usuario implements Serializable {
 
     public void setOrdencompraCollection(Collection<Ordencompra> ordencompraCollection) {
         this.ordencompraCollection = ordencompraCollection;
-    }
-
-    @XmlTransient
-    public Collection<Ordencompra> getOrdencompraCollection2() {
-        return ordencompraCollection2;
-    }
-
-    public void setOrdencompraCollection2(Collection<Ordencompra> ordencompraCollection2) {
-        this.ordencompraCollection2 = ordencompraCollection2;
     }
 
     @XmlTransient

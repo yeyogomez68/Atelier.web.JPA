@@ -37,9 +37,9 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Ordencompra.findAll", query = "SELECT o FROM Ordencompra o")
     , @NamedQuery(name = "Ordencompra.findByOrdenCompraId", query = "SELECT o FROM Ordencompra o WHERE o.ordenCompraId = :ordenCompraId")
+    , @NamedQuery(name = "Ordencompra.findByOrdenByUserId", query = "SELECT o FROM Ordencompra o WHERE o.usuarioId.usuarioId = :usuarioId")
     , @NamedQuery(name = "Ordencompra.findByOrdenCompraCode", query = "SELECT o FROM Ordencompra o WHERE o.ordenCompraCode = :ordenCompraCode")
     , @NamedQuery(name = "Ordencompra.findByOrdenCompraDescrip", query = "SELECT o FROM Ordencompra o WHERE o.ordenCompraDescrip = :ordenCompraDescrip")
-    , @NamedQuery(name = "Ordencompra.findByOrdenCompraApruebaFecha", query = "SELECT o FROM Ordencompra o WHERE o.ordenCompraApruebaFecha = :ordenCompraApruebaFecha")
     , @NamedQuery(name = "Ordencompra.findByOrdenCompraBruto", query = "SELECT o FROM Ordencompra o WHERE o.ordenCompraBruto = :ordenCompraBruto")
     , @NamedQuery(name = "Ordencompra.findByOrdenCompraIVA", query = "SELECT o FROM Ordencompra o WHERE o.ordenCompraIVA = :ordenCompraIVA")
     , @NamedQuery(name = "Ordencompra.findByOrdenCompraTot", query = "SELECT o FROM Ordencompra o WHERE o.ordenCompraTot = :ordenCompraTot")})
@@ -64,16 +64,14 @@ public class Ordencompra implements Serializable {
     @Size(min = 1, max = 600)
     @Column(name = "OrdenCompraDescrip")
     private String ordenCompraDescrip;
-    @Column(name = "OrdenCompraApruebaFecha")
-    @Temporal(TemporalType.DATE)
-    private Date ordenCompraApruebaFecha;
+
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "OrdenCompraBruto")
-    private Float ordenCompraBruto;
+    private Double ordenCompraBruto;
     @Column(name = "OrdenCompraIVA")
-    private Float ordenCompraIVA;
+    private Double ordenCompraIVA;
     @Column(name = "OrdenCompraTot")
-    private Float ordenCompraTot;
+    private Double ordenCompraTot;
     @JoinColumn(name = "EstadoId", referencedColumnName = "EstadoId")
     @ManyToOne
     private Estado estadoId;
@@ -83,9 +81,7 @@ public class Ordencompra implements Serializable {
     @JoinColumn(name = "UsuarioId", referencedColumnName = "UsuarioId")
     @ManyToOne
     private Usuario usuarioId;
-    @JoinColumn(name = "UsuarioAprueba", referencedColumnName = "UsuarioId")
-    @ManyToOne
-    private Usuario usuarioAprueba;
+
 
     public Ordencompra() {
     }
@@ -124,35 +120,27 @@ public class Ordencompra implements Serializable {
         this.ordenCompraDescrip = ordenCompraDescrip;
     }
 
-    public Date getOrdenCompraApruebaFecha() {
-        return ordenCompraApruebaFecha;
-    }
-
-    public void setOrdenCompraApruebaFecha(Date ordenCompraApruebaFecha) {
-        this.ordenCompraApruebaFecha = ordenCompraApruebaFecha;
-    }
-
-    public Float getOrdenCompraBruto() {
+    public Double getOrdenCompraBruto() {
         return ordenCompraBruto;
     }
 
-    public void setOrdenCompraBruto(Float ordenCompraBruto) {
+    public void setOrdenCompraBruto(Double ordenCompraBruto) {
         this.ordenCompraBruto = ordenCompraBruto;
     }
 
-    public Float getOrdenCompraIVA() {
+    public Double getOrdenCompraIVA() {
         return ordenCompraIVA;
     }
 
-    public void setOrdenCompraIVA(Float ordenCompraIVA) {
+    public void setOrdenCompraIVA(Double ordenCompraIVA) {
         this.ordenCompraIVA = ordenCompraIVA;
     }
 
-    public Float getOrdenCompraTot() {
+    public Double getOrdenCompraTot() {
         return ordenCompraTot;
     }
 
-    public void setOrdenCompraTot(Float ordenCompraTot) {
+    public void setOrdenCompraTot(Double ordenCompraTot) {
         this.ordenCompraTot = ordenCompraTot;
     }
 
@@ -178,14 +166,6 @@ public class Ordencompra implements Serializable {
 
     public void setUsuarioId(Usuario usuarioId) {
         this.usuarioId = usuarioId;
-    }
-
-    public Usuario getUsuarioAprueba() {
-        return usuarioAprueba;
-    }
-
-    public void setUsuarioAprueba(Usuario usuarioAprueba) {
-        this.usuarioAprueba = usuarioAprueba;
     }
 
     @Override
