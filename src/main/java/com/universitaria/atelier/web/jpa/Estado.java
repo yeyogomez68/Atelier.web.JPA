@@ -33,6 +33,14 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Estado.findByEstadoDescrip", query = "SELECT e FROM Estado e WHERE upper (e.estadoDescrip) = upper (:estadoDescrip)")})
 public class Estado implements Serializable {
 
+    @OneToMany(mappedBy = "estadoId")
+    private Collection<Ordencompradeta> ordencompradetaCollection;
+    @OneToMany(mappedBy = "estadoId")
+    private Collection<Producciondeta> producciondetaCollection;
+
+    @OneToMany(mappedBy = "estadoId")
+    private Collection<Cliente> clienteCollection;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -61,6 +69,10 @@ public class Estado implements Serializable {
     private Collection<Usuario> usuarioCollection;
     @OneToMany(mappedBy = "estadoId")
     private Collection<Prenda> prendaCollection;
+    @OneToMany(mappedBy = "estadoId")
+    private Collection<Renta> rentaCollection;
+    @OneToMany(mappedBy = "estadoId")
+    private Collection<Renta> rentadetaCollection;
 
     public Estado() {
     }
@@ -140,6 +152,15 @@ public class Estado implements Serializable {
     }
 
     @XmlTransient
+    public Collection<Renta> getRentadetaCollection() {
+        return rentadetaCollection;
+    }
+
+    public void setRentadetaCollection(Collection<Renta> rentadetaCollection) {
+        this.rentadetaCollection = rentadetaCollection;
+    }
+
+    @XmlTransient
     public Collection<Reservacion> getReservacionCollection() {
         return reservacionCollection;
     }
@@ -167,12 +188,39 @@ public class Estado implements Serializable {
     }
 
     @XmlTransient
+    public Collection<Renta> getRentaCollection() {
+        return rentaCollection;
+    }
+
+    public void setRentaCollection(Collection<Renta> rentaCollection) {
+        this.rentaCollection = rentaCollection;
+    }
+
+    @XmlTransient
     public Collection<Prenda> getPrendaCollection() {
         return prendaCollection;
     }
 
     public void setPrendaCollection(Collection<Prenda> prendaCollection) {
         this.prendaCollection = prendaCollection;
+    }
+
+    @XmlTransient
+    public Collection<Ordencompradeta> getOrdencompradetaCollection() {
+        return ordencompradetaCollection;
+    }
+
+    public void setOrdencompradetaCollection(Collection<Ordencompradeta> ordencompradetaCollection) {
+        this.ordencompradetaCollection = ordencompradetaCollection;
+    }
+
+    @XmlTransient
+    public Collection<Producciondeta> getProducciondetaCollection() {
+        return producciondetaCollection;
+    }
+
+    public void setProducciondetaCollection(Collection<Producciondeta> producciondetaCollection) {
+        this.producciondetaCollection = producciondetaCollection;
     }
 
     @Override
@@ -199,5 +247,13 @@ public class Estado implements Serializable {
     public String toString() {
         return "com.universitaria.atelier.web.jpa.Estado[ estadoId=" + estadoId + " ]";
     }
-    
+
+    @XmlTransient
+    public Collection<Cliente> getClienteCollection() {
+        return clienteCollection;
+    }
+
+    public void setClienteCollection(Collection<Cliente> clienteCollection) {
+        this.clienteCollection = clienteCollection;
+    }
 }

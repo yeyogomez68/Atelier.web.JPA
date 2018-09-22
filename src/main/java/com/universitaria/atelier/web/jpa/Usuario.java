@@ -40,15 +40,18 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Usuario.findByUsuarioEmail", query = "SELECT u FROM Usuario u WHERE u.usuarioEmail = :usuarioEmail")
     , @NamedQuery(name = "Usuario.findByUsuarioPassword", query = "SELECT u FROM Usuario u WHERE u.usuarioPassword = :usuarioPassword")
     , @NamedQuery(name = "Usuario.findByUsuarioDireccion", query = "SELECT u FROM Usuario u WHERE u.usuarioDireccion = :usuarioDireccion")
+    , @NamedQuery(name = "Usuario.findByRoll", query = "SELECT u FROM Usuario u WHERE u.rollId = :rollId")
     , @NamedQuery(name = "Usuario.findByUsuarioCel", query = "SELECT u FROM Usuario u WHERE u.usuarioCel = :usuarioCel")})
 public class Usuario implements Serializable {
 
-    @Size(max = 50)
-    @Column(name = "Contrato")
-    private String contrato;
-    @JoinColumn(name = "CargoId", referencedColumnName = "CargoId")
+    @OneToMany(mappedBy = "usuarioAsignado")
+    private Collection<Producciondeta> producciondetaCollection;
+    @JoinColumn(name = "contratoId", referencedColumnName = "ContratoId")
     @ManyToOne
-    private Cargo cargoId;
+    private Contrato contratoId;
+
+    @OneToMany(mappedBy = "usuarioId")
+    private Collection<Produccionusuario> produccionusuarioCollection;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -74,22 +77,11 @@ public class Usuario implements Serializable {
     private Collection<Facturaencab> facturaencabCollection;
     @OneToMany(mappedBy = "usuarioId")
     private Collection<Ordencompra> ordencompraCollection;
-    @OneToMany(mappedBy = "usuarioCreador")
-    private Collection<Ordencompra> ordencompraCollection1;
-    @OneToMany(mappedBy = "usuarioAprueba")
-    private Collection<Ordencompra> ordencompraCollection2;
     @OneToMany(mappedBy = "usuarioId")
     private Collection<Encabezadorequerimiento> encabezadorequerimientoCollection;
-    @OneToMany(mappedBy = "usuarioId")
-    private Collection<Produccion> produccionCollection;
     @OneToMany(mappedBy = "usuarioCreador")
     private Collection<Produccion> produccionCollection1;
-    @OneToMany(mappedBy = "usuarioIdApruebaTwo")
-    private Collection<Requestdeta> requestdetaCollection;
-    @OneToMany(mappedBy = "usuarioIdAprueba")
-    private Collection<Requestdeta> requestdetaCollection1;
-    @OneToMany(mappedBy = "usuarioReservacionId")
-    private Collection<Reservacion> reservacionCollection;
+
     @OneToMany(mappedBy = "usuarioId")
     private Collection<Reservacion> reservacionCollection1;
     @JoinColumn(name = "EstadoId", referencedColumnName = "EstadoId")
@@ -101,10 +93,6 @@ public class Usuario implements Serializable {
     @JoinColumn(name = "CiudadId", referencedColumnName = "CiudadId")
     @ManyToOne
     private Ciudad ciudadId;
-    @OneToMany(mappedBy = "usuarioId")
-    private Collection<Renta> rentaCollection;
-    @OneToMany(mappedBy = "usuarioCreador")
-    private Collection<Renta> rentaCollection1;
 
     public Usuario() {
     }
@@ -196,24 +184,6 @@ public class Usuario implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Ordencompra> getOrdencompraCollection1() {
-        return ordencompraCollection1;
-    }
-
-    public void setOrdencompraCollection1(Collection<Ordencompra> ordencompraCollection1) {
-        this.ordencompraCollection1 = ordencompraCollection1;
-    }
-
-    @XmlTransient
-    public Collection<Ordencompra> getOrdencompraCollection2() {
-        return ordencompraCollection2;
-    }
-
-    public void setOrdencompraCollection2(Collection<Ordencompra> ordencompraCollection2) {
-        this.ordencompraCollection2 = ordencompraCollection2;
-    }
-
-    @XmlTransient
     public Collection<Encabezadorequerimiento> getEncabezadorequerimientoCollection() {
         return encabezadorequerimientoCollection;
     }
@@ -223,14 +193,14 @@ public class Usuario implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Produccion> getProduccionCollection() {
-        return produccionCollection;
+    public Collection<Producciondeta> getProduccionCollection() {
+        return producciondetaCollection;
     }
 
-    public void setProduccionCollection(Collection<Produccion> produccionCollection) {
-        this.produccionCollection = produccionCollection;
+    public void setProduccionCollection(Collection<Producciondeta> produccionCollection) {
+        this.producciondetaCollection = produccionCollection;
     }
-
+    
     @XmlTransient
     public Collection<Produccion> getProduccionCollection1() {
         return produccionCollection1;
@@ -238,33 +208,6 @@ public class Usuario implements Serializable {
 
     public void setProduccionCollection1(Collection<Produccion> produccionCollection1) {
         this.produccionCollection1 = produccionCollection1;
-    }
-
-    @XmlTransient
-    public Collection<Requestdeta> getRequestdetaCollection() {
-        return requestdetaCollection;
-    }
-
-    public void setRequestdetaCollection(Collection<Requestdeta> requestdetaCollection) {
-        this.requestdetaCollection = requestdetaCollection;
-    }
-
-    @XmlTransient
-    public Collection<Requestdeta> getRequestdetaCollection1() {
-        return requestdetaCollection1;
-    }
-
-    public void setRequestdetaCollection1(Collection<Requestdeta> requestdetaCollection1) {
-        this.requestdetaCollection1 = requestdetaCollection1;
-    }
-
-    @XmlTransient
-    public Collection<Reservacion> getReservacionCollection() {
-        return reservacionCollection;
-    }
-
-    public void setReservacionCollection(Collection<Reservacion> reservacionCollection) {
-        this.reservacionCollection = reservacionCollection;
     }
 
     @XmlTransient
@@ -300,24 +243,6 @@ public class Usuario implements Serializable {
         this.ciudadId = ciudadId;
     }
 
-    @XmlTransient
-    public Collection<Renta> getRentaCollection() {
-        return rentaCollection;
-    }
-
-    public void setRentaCollection(Collection<Renta> rentaCollection) {
-        this.rentaCollection = rentaCollection;
-    }
-
-    @XmlTransient
-    public Collection<Renta> getRentaCollection1() {
-        return rentaCollection1;
-    }
-
-    public void setRentaCollection1(Collection<Renta> rentaCollection1) {
-        this.rentaCollection1 = rentaCollection1;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -343,20 +268,30 @@ public class Usuario implements Serializable {
         return "com.universitaria.atelier.web.jpa.Usuario[ usuarioId=" + usuarioId + " ]";
     }
 
-    public String getContrato() {
-        return contrato;
+    @XmlTransient
+    public Collection<Produccionusuario> getProduccionusuarioCollection() {
+        return produccionusuarioCollection;
     }
 
-    public void setContrato(String contrato) {
-        this.contrato = contrato;
+    public void setProduccionusuarioCollection(Collection<Produccionusuario> produccionusuarioCollection) {
+        this.produccionusuarioCollection = produccionusuarioCollection;
     }
 
-    public Cargo getCargoId() {
-        return cargoId;
+    @XmlTransient
+    public Collection<Producciondeta> getProducciondetaCollection() {
+        return producciondetaCollection;
     }
 
-    public void setCargoId(Cargo cargoId) {
-        this.cargoId = cargoId;
+    public void setProducciondetaCollection(Collection<Producciondeta> producciondetaCollection) {
+        this.producciondetaCollection = producciondetaCollection;
     }
-    
+
+    public Contrato getContratoId() {
+        return contratoId;
+    }
+
+    public void setContratoId(Contrato contratoId) {
+        this.contratoId = contratoId;
+    }
+
 }

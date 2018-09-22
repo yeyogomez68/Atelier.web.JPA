@@ -33,6 +33,9 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Talla.findByTallaDescrip", query = "SELECT t FROM Talla t WHERE upper( t.tallaDescrip ) = upper( :tallaDescrip )")})
 public class Talla implements Serializable {
 
+    @OneToMany(mappedBy = "tallaId")
+    private Collection<Prenda> prendaCollection;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -82,6 +85,15 @@ public class Talla implements Serializable {
         this.stockprendaCollection = stockprendaCollection;
     }
 
+    @XmlTransient
+    public Collection<Prenda> getPrendaCollection() {
+        return prendaCollection;
+    }
+
+    public void setPrendaCollection(Collection<Prenda> prendaCollection) {
+        this.prendaCollection = prendaCollection;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -106,5 +118,5 @@ public class Talla implements Serializable {
     public String toString() {
         return "com.universitaria.atelier.web.jpa.Talla[ tallaId=" + tallaId + " ]";
     }
-    
+
 }

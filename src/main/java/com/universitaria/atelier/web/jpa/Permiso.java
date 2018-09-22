@@ -101,5 +101,7 @@ public class Permiso implements Serializable {
     public String toString() {
         return "com.universitaria.atelier.web.jpa.Permiso[ permisoId=" + permisoId + " ]";
     }
-    
+
+
+
 }

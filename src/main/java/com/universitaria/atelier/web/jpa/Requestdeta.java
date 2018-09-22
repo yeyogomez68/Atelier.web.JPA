@@ -32,13 +32,17 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Requestdeta.findAll", query = "SELECT r FROM Requestdeta r")
     , @NamedQuery(name = "Requestdeta.findByRequestDetaId", query = "SELECT r FROM Requestdeta r WHERE r.requestDetaId = :requestDetaId")
+    , @NamedQuery(name = "Requestdeta.findByPendCompra", query = "SELECT r FROM Requestdeta r WHERE r.estadoId.estadoId = :estadoId")
     , @NamedQuery(name = "Requestdeta.findByRequestDetaFecha", query = "SELECT r FROM Requestdeta r WHERE r.requestDetaFecha = :requestDetaFecha")
-    , @NamedQuery(name = "Requestdeta.findByRequestDetaFechaAprueba", query = "SELECT r FROM Requestdeta r WHERE r.requestDetaFechaAprueba = :requestDetaFechaAprueba")
-    , @NamedQuery(name = "Requestdeta.findByRequestDetaFechaApruebaTwo", query = "SELECT r FROM Requestdeta r WHERE r.requestDetaFechaApruebaTwo = :requestDetaFechaApruebaTwo")
     , @NamedQuery(name = "Requestdeta.findByRequestDetaCantidad", query = "SELECT r FROM Requestdeta r WHERE r.requestDetaCantidad = :requestDetaCantidad")
     , @NamedQuery(name = "Requestdeta.findByUsuarioId", query = "SELECT r FROM Requestdeta r WHERE r.usuarioId = :usuarioId")
     , @NamedQuery(name = "Requestdeta.findByIdRq", query = "SELECT r FROm Requestdeta r WHERE r.encabezadoRequerimientoId.encabezadoRequerimientoId = :idRq")})
 public class Requestdeta implements Serializable {
+
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Column(name = "RequestDetaCantidad")
+    private Double requestDetaCantidad;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -50,15 +54,7 @@ public class Requestdeta implements Serializable {
     @Column(name = "RequestDetaFecha")
     @Temporal(TemporalType.DATE)
     private Date requestDetaFecha;
-    @Column(name = "RequestDetaFechaAprueba")
-    @Temporal(TemporalType.DATE)
-    private Date requestDetaFechaAprueba;
-    @Column(name = "RequestDetaFechaApruebaTwo")
-    @Temporal(TemporalType.DATE)
-    private Date requestDetaFechaApruebaTwo;
-    @Basic(optional = false)
-    @Column(name = "RequestDetaCantidad")
-    private float requestDetaCantidad;
+
     @Column(name = "UsuarioId")
     private Integer usuarioId;
     @JoinColumn(name = "EncabezadoRequerimientoId", referencedColumnName = "EncabezadoRequerimientoId")
@@ -70,12 +66,6 @@ public class Requestdeta implements Serializable {
     @JoinColumn(name = "MaterialId", referencedColumnName = "MaterialId")
     @ManyToOne
     private Material materialId;
-    @JoinColumn(name = "UsuarioIdApruebaTwo", referencedColumnName = "UsuarioId")
-    @ManyToOne
-    private Usuario usuarioIdApruebaTwo;
-    @JoinColumn(name = "UsuarioIdAprueba", referencedColumnName = "UsuarioId")
-    @ManyToOne
-    private Usuario usuarioIdAprueba;
 
     public Requestdeta() {
     }
@@ -84,7 +74,7 @@ public class Requestdeta implements Serializable {
         this.requestDetaId = requestDetaId;
     }
 
-    public Requestdeta(Integer requestDetaId, Date requestDetaFecha, float requestDetaCantidad) {
+    public Requestdeta(Integer requestDetaId, Date requestDetaFecha, Double requestDetaCantidad) {
         this.requestDetaId = requestDetaId;
         this.requestDetaFecha = requestDetaFecha;
         this.requestDetaCantidad = requestDetaCantidad;
@@ -104,30 +94,6 @@ public class Requestdeta implements Serializable {
 
     public void setRequestDetaFecha(Date requestDetaFecha) {
         this.requestDetaFecha = requestDetaFecha;
-    }
-
-    public Date getRequestDetaFechaAprueba() {
-        return requestDetaFechaAprueba;
-    }
-
-    public void setRequestDetaFechaAprueba(Date requestDetaFechaAprueba) {
-        this.requestDetaFechaAprueba = requestDetaFechaAprueba;
-    }
-
-    public Date getRequestDetaFechaApruebaTwo() {
-        return requestDetaFechaApruebaTwo;
-    }
-
-    public void setRequestDetaFechaApruebaTwo(Date requestDetaFechaApruebaTwo) {
-        this.requestDetaFechaApruebaTwo = requestDetaFechaApruebaTwo;
-    }
-
-    public float getRequestDetaCantidad() {
-        return requestDetaCantidad;
-    }
-
-    public void setRequestDetaCantidad(float requestDetaCantidad) {
-        this.requestDetaCantidad = requestDetaCantidad;
     }
 
     public Integer getUsuarioId() {
@@ -162,22 +128,6 @@ public class Requestdeta implements Serializable {
         this.materialId = materialId;
     }
 
-    public Usuario getUsuarioIdApruebaTwo() {
-        return usuarioIdApruebaTwo;
-    }
-
-    public void setUsuarioIdApruebaTwo(Usuario usuarioIdApruebaTwo) {
-        this.usuarioIdApruebaTwo = usuarioIdApruebaTwo;
-    }
-
-    public Usuario getUsuarioIdAprueba() {
-        return usuarioIdAprueba;
-    }
-
-    public void setUsuarioIdAprueba(Usuario usuarioIdAprueba) {
-        this.usuarioIdAprueba = usuarioIdAprueba;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -201,6 +151,14 @@ public class Requestdeta implements Serializable {
     @Override
     public String toString() {
         return "com.universitaria.atelier.web.jpa.Requestdeta[ requestDetaId=" + requestDetaId + " ]";
+    }
+
+    public Double getRequestDetaCantidad() {
+        return requestDetaCantidad;
+    }
+
+    public void setRequestDetaCantidad(Double requestDetaCantidad) {
+        this.requestDetaCantidad = requestDetaCantidad;
     }
     
 }

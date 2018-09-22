@@ -22,6 +22,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -35,13 +37,16 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Ordencompra.findAll", query = "SELECT o FROM Ordencompra o")
     , @NamedQuery(name = "Ordencompra.findByOrdenCompraId", query = "SELECT o FROM Ordencompra o WHERE o.ordenCompraId = :ordenCompraId")
+    , @NamedQuery(name = "Ordencompra.findByOrdenByUserId", query = "SELECT o FROM Ordencompra o WHERE o.usuarioId.usuarioId = :usuarioId")
     , @NamedQuery(name = "Ordencompra.findByOrdenCompraCode", query = "SELECT o FROM Ordencompra o WHERE o.ordenCompraCode = :ordenCompraCode")
     , @NamedQuery(name = "Ordencompra.findByOrdenCompraDescrip", query = "SELECT o FROM Ordencompra o WHERE o.ordenCompraDescrip = :ordenCompraDescrip")
-    , @NamedQuery(name = "Ordencompra.findByOrdenCompraApruebaFecha", query = "SELECT o FROM Ordencompra o WHERE o.ordenCompraApruebaFecha = :ordenCompraApruebaFecha")
     , @NamedQuery(name = "Ordencompra.findByOrdenCompraBruto", query = "SELECT o FROM Ordencompra o WHERE o.ordenCompraBruto = :ordenCompraBruto")
     , @NamedQuery(name = "Ordencompra.findByOrdenCompraIVA", query = "SELECT o FROM Ordencompra o WHERE o.ordenCompraIVA = :ordenCompraIVA")
     , @NamedQuery(name = "Ordencompra.findByOrdenCompraTot", query = "SELECT o FROM Ordencompra o WHERE o.ordenCompraTot = :ordenCompraTot")})
 public class Ordencompra implements Serializable {
+
+    @OneToMany(mappedBy = "ordenCompraId")
+    private Collection<Ordencompradeta> ordencompradetaCollection;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -50,21 +55,23 @@ public class Ordencompra implements Serializable {
     @Column(name = "OrdenCompraId")
     private Integer ordenCompraId;
     @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 19)
     @Column(name = "OrdenCompraCode")
     private String ordenCompraCode;
     @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 600)
     @Column(name = "OrdenCompraDescrip")
     private String ordenCompraDescrip;
-    @Column(name = "OrdenCompraApruebaFecha")
-    @Temporal(TemporalType.DATE)
-    private Date ordenCompraApruebaFecha;
+
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "OrdenCompraBruto")
-    private Float ordenCompraBruto;
+    private Double ordenCompraBruto;
     @Column(name = "OrdenCompraIVA")
-    private Float ordenCompraIVA;
+    private Double ordenCompraIVA;
     @Column(name = "OrdenCompraTot")
-    private Float ordenCompraTot;
+    private Double ordenCompraTot;
     @JoinColumn(name = "EstadoId", referencedColumnName = "EstadoId")
     @ManyToOne
     private Estado estadoId;
@@ -74,14 +81,7 @@ public class Ordencompra implements Serializable {
     @JoinColumn(name = "UsuarioId", referencedColumnName = "UsuarioId")
     @ManyToOne
     private Usuario usuarioId;
-    @JoinColumn(name = "UsuarioCreador", referencedColumnName = "UsuarioId")
-    @ManyToOne
-    private Usuario usuarioCreador;
-    @JoinColumn(name = "UsuarioAprueba", referencedColumnName = "UsuarioId")
-    @ManyToOne
-    private Usuario usuarioAprueba;
-    @OneToMany(mappedBy = "ordenCompraId")
-    private Collection<Ordencompradeta> ordencompradetaCollection;
+
 
     public Ordencompra() {
     }
@@ -120,35 +120,27 @@ public class Ordencompra implements Serializable {
         this.ordenCompraDescrip = ordenCompraDescrip;
     }
 
-    public Date getOrdenCompraApruebaFecha() {
-        return ordenCompraApruebaFecha;
-    }
-
-    public void setOrdenCompraApruebaFecha(Date ordenCompraApruebaFecha) {
-        this.ordenCompraApruebaFecha = ordenCompraApruebaFecha;
-    }
-
-    public Float getOrdenCompraBruto() {
+    public Double getOrdenCompraBruto() {
         return ordenCompraBruto;
     }
 
-    public void setOrdenCompraBruto(Float ordenCompraBruto) {
+    public void setOrdenCompraBruto(Double ordenCompraBruto) {
         this.ordenCompraBruto = ordenCompraBruto;
     }
 
-    public Float getOrdenCompraIVA() {
+    public Double getOrdenCompraIVA() {
         return ordenCompraIVA;
     }
 
-    public void setOrdenCompraIVA(Float ordenCompraIVA) {
+    public void setOrdenCompraIVA(Double ordenCompraIVA) {
         this.ordenCompraIVA = ordenCompraIVA;
     }
 
-    public Float getOrdenCompraTot() {
+    public Double getOrdenCompraTot() {
         return ordenCompraTot;
     }
 
-    public void setOrdenCompraTot(Float ordenCompraTot) {
+    public void setOrdenCompraTot(Double ordenCompraTot) {
         this.ordenCompraTot = ordenCompraTot;
     }
 
@@ -176,31 +168,6 @@ public class Ordencompra implements Serializable {
         this.usuarioId = usuarioId;
     }
 
-    public Usuario getUsuarioCreador() {
-        return usuarioCreador;
-    }
-
-    public void setUsuarioCreador(Usuario usuarioCreador) {
-        this.usuarioCreador = usuarioCreador;
-    }
-
-    public Usuario getUsuarioAprueba() {
-        return usuarioAprueba;
-    }
-
-    public void setUsuarioAprueba(Usuario usuarioAprueba) {
-        this.usuarioAprueba = usuarioAprueba;
-    }
-
-    @XmlTransient
-    public Collection<Ordencompradeta> getOrdencompradetaCollection() {
-        return ordencompradetaCollection;
-    }
-
-    public void setOrdencompradetaCollection(Collection<Ordencompradeta> ordencompradetaCollection) {
-        this.ordencompradetaCollection = ordencompradetaCollection;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -224,6 +191,15 @@ public class Ordencompra implements Serializable {
     @Override
     public String toString() {
         return "com.universitaria.atelier.web.jpa.Ordencompra[ ordenCompraId=" + ordenCompraId + " ]";
+    }
+
+    @XmlTransient
+    public Collection<Ordencompradeta> getOrdencompradetaCollection() {
+        return ordencompradetaCollection;
+    }
+
+    public void setOrdencompradetaCollection(Collection<Ordencompradeta> ordencompradetaCollection) {
+        this.ordencompradetaCollection = ordencompradetaCollection;
     }
     
 }

@@ -33,8 +33,17 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Ordencompradeta.findByOrdenCompraCantidad", query = "SELECT o FROM Ordencompradeta o WHERE o.ordenCompraCantidad = :ordenCompraCantidad")
     , @NamedQuery(name = "Ordencompradeta.findByOrdenCompraValorUnit", query = "SELECT o FROM Ordencompradeta o WHERE o.ordenCompraValorUnit = :ordenCompraValorUnit")
     , @NamedQuery(name = "Ordencompradeta.findByOrdenCompraIVA", query = "SELECT o FROM Ordencompradeta o WHERE o.ordenCompraIVA = :ordenCompraIVA")
+    , @NamedQuery(name = "Ordencompradeta.findByEstadoId", query = "SELECT o FROM Ordencompradeta o WHERE o.estadoId = :estadoId")
     , @NamedQuery(name = "Ordencompradeta.findByOrdenCompraValorTot", query = "SELECT o FROM Ordencompradeta o WHERE o.ordenCompraValorTot = :ordenCompraValorTot")})
 public class Ordencompradeta implements Serializable {
+
+    @JoinColumn(name = "estadoId", referencedColumnName = "EstadoId")
+    @ManyToOne
+    private Estado estadoId;
+
+    @JoinColumn(name = "EncabezadoRequerimientoId", referencedColumnName = "EncabezadoRequerimientoId")
+    @ManyToOne
+    private Encabezadorequerimiento encabezadoRequerimientoId;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -44,17 +53,17 @@ public class Ordencompradeta implements Serializable {
     private Integer ordenCompraDetaId;
     @Basic(optional = false)
     @Column(name = "OrdenCompraCantidad")
-    private float ordenCompraCantidad;
+    private Double ordenCompraCantidad;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "OrdenCompraValorUnit")
-    private Float ordenCompraValorUnit;
+    private Double ordenCompraValorUnit;
     @Lob
     @Column(name = "OrdenCompraDetaTotBruto")
-    private String ordenCompraDetaTotBruto;
+    private Double ordenCompraDetaTotBruto;
     @Column(name = "OrdenCompraIVA")
-    private Float ordenCompraIVA;
+    private Double ordenCompraIVA;
     @Column(name = "OrdenCompraValorTot")
-    private Float ordenCompraValorTot;
+    private Double ordenCompraValorTot;
     @JoinColumn(name = "MaterialId", referencedColumnName = "MaterialId")
     @ManyToOne
     private Material materialId;
@@ -69,7 +78,7 @@ public class Ordencompradeta implements Serializable {
         this.ordenCompraDetaId = ordenCompraDetaId;
     }
 
-    public Ordencompradeta(Integer ordenCompraDetaId, float ordenCompraCantidad) {
+    public Ordencompradeta(Integer ordenCompraDetaId, Double ordenCompraCantidad) {
         this.ordenCompraDetaId = ordenCompraDetaId;
         this.ordenCompraCantidad = ordenCompraCantidad;
     }
@@ -82,43 +91,43 @@ public class Ordencompradeta implements Serializable {
         this.ordenCompraDetaId = ordenCompraDetaId;
     }
 
-    public float getOrdenCompraCantidad() {
+    public Double getOrdenCompraCantidad() {
         return ordenCompraCantidad;
     }
 
-    public void setOrdenCompraCantidad(float ordenCompraCantidad) {
+    public void setOrdenCompraCantidad(Double ordenCompraCantidad) {
         this.ordenCompraCantidad = ordenCompraCantidad;
     }
 
-    public Float getOrdenCompraValorUnit() {
+    public Double getOrdenCompraValorUnit() {
         return ordenCompraValorUnit;
     }
 
-    public void setOrdenCompraValorUnit(Float ordenCompraValorUnit) {
+    public void setOrdenCompraValorUnit(Double ordenCompraValorUnit) {
         this.ordenCompraValorUnit = ordenCompraValorUnit;
     }
 
-    public String getOrdenCompraDetaTotBruto() {
+    public Double getOrdenCompraDetaTotBruto() {
         return ordenCompraDetaTotBruto;
     }
 
-    public void setOrdenCompraDetaTotBruto(String ordenCompraDetaTotBruto) {
+    public void setOrdenCompraDetaTotBruto(Double ordenCompraDetaTotBruto) {
         this.ordenCompraDetaTotBruto = ordenCompraDetaTotBruto;
     }
 
-    public Float getOrdenCompraIVA() {
+    public Double getOrdenCompraIVA() {
         return ordenCompraIVA;
     }
 
-    public void setOrdenCompraIVA(Float ordenCompraIVA) {
+    public void setOrdenCompraIVA(Double ordenCompraIVA) {
         this.ordenCompraIVA = ordenCompraIVA;
     }
 
-    public Float getOrdenCompraValorTot() {
+    public Double getOrdenCompraValorTot() {
         return ordenCompraValorTot;
     }
 
-    public void setOrdenCompraValorTot(Float ordenCompraValorTot) {
+    public void setOrdenCompraValorTot(Double ordenCompraValorTot) {
         this.ordenCompraValorTot = ordenCompraValorTot;
     }
 
@@ -136,6 +145,14 @@ public class Ordencompradeta implements Serializable {
 
     public void setOrdenCompraId(Ordencompra ordenCompraId) {
         this.ordenCompraId = ordenCompraId;
+    }
+
+    public Estado getEstadoId() {
+        return estadoId;
+    }
+
+    public void setEstadoId(Estado estadoId) {
+        this.estadoId = estadoId;
     }
 
     @Override
@@ -162,5 +179,13 @@ public class Ordencompradeta implements Serializable {
     public String toString() {
         return "com.universitaria.atelier.web.jpa.Ordencompradeta[ ordenCompraDetaId=" + ordenCompraDetaId + " ]";
     }
-    
+
+    public Encabezadorequerimiento getEncabezadoRequerimientoId() {
+        return encabezadoRequerimientoId;
+    }
+
+    public void setEncabezadoRequerimientoId(Encabezadorequerimiento encabezadoRequerimientoId) {
+        this.encabezadoRequerimientoId = encabezadoRequerimientoId;
+    }
+
 }

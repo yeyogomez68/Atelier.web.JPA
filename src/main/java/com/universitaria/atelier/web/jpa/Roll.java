@@ -35,6 +35,9 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Roll.findByRollDesc", query = "SELECT r FROM Roll r WHERE upper (r.rollDesc) = upper (:rollDesc)")})
 public class Roll implements Serializable {
 
+    @OneToMany(mappedBy = "rollId")
+    private Collection<Cliente> clienteCollection;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -130,5 +133,14 @@ public class Roll implements Serializable {
     public String toString() {
         return "com.universitaria.atelier.web.jpa.Roll[ rollId=" + rollId + " ]";
     }
-    
+
+    @XmlTransient
+    public Collection<Cliente> getClienteCollection() {
+        return clienteCollection;
+    }
+
+    public void setClienteCollection(Collection<Cliente> clienteCollection) {
+        this.clienteCollection = clienteCollection;
+    }
+
 }
