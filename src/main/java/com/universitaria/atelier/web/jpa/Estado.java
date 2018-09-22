@@ -34,8 +34,6 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Estado implements Serializable {
 
     @OneToMany(mappedBy = "estadoId")
-    private Collection<Ordencompradeta> ordencompradetaCollection;
-    @OneToMany(mappedBy = "estadoId")
     private Collection<Producciondeta> producciondetaCollection;
 
     @OneToMany(mappedBy = "estadoId")
@@ -54,8 +52,6 @@ public class Estado implements Serializable {
     @OneToMany(mappedBy = "estadoId")
     private Collection<Facturaencab> facturaencabCollection;
     @OneToMany(mappedBy = "estadoId")
-    private Collection<Ordencompra> ordencompraCollection;
-    @OneToMany(mappedBy = "estadoId")
     private Collection<Encabezadorequerimiento> encabezadorequerimientoCollection;
     @OneToMany(mappedBy = "estadoId")
     private Collection<Produccion> produccionCollection;
@@ -73,6 +69,10 @@ public class Estado implements Serializable {
     private Collection<Renta> rentaCollection;
     @OneToMany(mappedBy = "estadoId")
     private Collection<Renta> rentadetaCollection;
+    @OneToMany(mappedBy = "estadoId")
+    private Collection<Ordencompra> ordencompraCollection;
+    @OneToMany(mappedBy = "estadoId")
+    private Collection<Ordencompradeta> ordenCompraDetaCollection;
 
     public Estado() {
     }
@@ -170,6 +170,15 @@ public class Estado implements Serializable {
     }
 
     @XmlTransient
+    public Collection<Ordencompradeta> getOrdenCompraDetaCollection() {
+        return ordenCompraDetaCollection;
+    }
+
+    public void setOrdenCompraDetaCollection(Collection<Ordencompradeta> ordenCompraDetaCollection) {
+        this.ordenCompraDetaCollection = ordenCompraDetaCollection;
+    }
+
+    @XmlTransient
     public Collection<Proveedor> getProveedorCollection() {
         return proveedorCollection;
     }
@@ -203,15 +212,6 @@ public class Estado implements Serializable {
 
     public void setPrendaCollection(Collection<Prenda> prendaCollection) {
         this.prendaCollection = prendaCollection;
-    }
-
-    @XmlTransient
-    public Collection<Ordencompradeta> getOrdencompradetaCollection() {
-        return ordencompradetaCollection;
-    }
-
-    public void setOrdencompradetaCollection(Collection<Ordencompradeta> ordencompradetaCollection) {
-        this.ordencompradetaCollection = ordencompradetaCollection;
     }
 
     @XmlTransient

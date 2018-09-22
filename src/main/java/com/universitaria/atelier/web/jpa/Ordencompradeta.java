@@ -13,7 +13,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -22,7 +21,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author jeisson.gomez
+ * @author SoulHunter
  */
 @Entity
 @Table(name = "ordencompradeta")
@@ -33,18 +32,11 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Ordencompradeta.findByOcId", query = "SELECT o FROM Ordencompradeta o WHERE o.ordenCompraId.ordenCompraId = :ordenCompraId")
     , @NamedQuery(name = "Ordencompradeta.findByOrdenCompraCantidad", query = "SELECT o FROM Ordencompradeta o WHERE o.ordenCompraCantidad = :ordenCompraCantidad")
     , @NamedQuery(name = "Ordencompradeta.findByOrdenCompraValorUnit", query = "SELECT o FROM Ordencompradeta o WHERE o.ordenCompraValorUnit = :ordenCompraValorUnit")
-    , @NamedQuery(name = "Ordencompradeta.findByOrdenCompraIVA", query = "SELECT o FROM Ordencompradeta o WHERE o.ordenCompraIVA = :ordenCompraIVA")
+    , @NamedQuery(name = "Ordencompradeta.findByOrdenCompraDetaTotBruto", query = "SELECT o FROM Ordencompradeta o WHERE o.ordenCompraDetaTotBruto = :ordenCompraDetaTotBruto")
     , @NamedQuery(name = "Ordencompradeta.findByEstadoId", query = "SELECT o FROM Ordencompradeta o WHERE o.estadoId = :estadoId")
+    , @NamedQuery(name = "Ordencompradeta.findByOrdenCompraIVA", query = "SELECT o FROM Ordencompradeta o WHERE o.ordenCompraIVA = :ordenCompraIVA")
     , @NamedQuery(name = "Ordencompradeta.findByOrdenCompraValorTot", query = "SELECT o FROM Ordencompradeta o WHERE o.ordenCompraValorTot = :ordenCompraValorTot")})
 public class Ordencompradeta implements Serializable {
-
-    @JoinColumn(name = "estadoId", referencedColumnName = "EstadoId")
-    @ManyToOne
-    private Estado estadoId;
-
-    @JoinColumn(name = "EncabezadoRequerimientoId", referencedColumnName = "EncabezadoRequerimientoId")
-    @ManyToOne
-    private Encabezadorequerimiento encabezadoRequerimientoId;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -52,19 +44,23 @@ public class Ordencompradeta implements Serializable {
     @Basic(optional = false)
     @Column(name = "OrdenCompraDetaId")
     private Integer ordenCompraDetaId;
-    @Basic(optional = false)
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "OrdenCompraCantidad")
     private Double ordenCompraCantidad;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "OrdenCompraValorUnit")
     private Double ordenCompraValorUnit;
-    @Lob
     @Column(name = "OrdenCompraDetaTotBruto")
     private Double ordenCompraDetaTotBruto;
     @Column(name = "OrdenCompraIVA")
     private Double ordenCompraIVA;
     @Column(name = "OrdenCompraValorTot")
     private Double ordenCompraValorTot;
+    @JoinColumn(name = "estadoId", referencedColumnName = "EstadoId")
+    @ManyToOne
+    private Estado estadoId;
+    @JoinColumn(name = "EncabezadoRequerimientoId", referencedColumnName = "EncabezadoRequerimientoId")
+    @ManyToOne
+    private Encabezadorequerimiento encabezadoRequerimientoId;
     @JoinColumn(name = "MaterialId", referencedColumnName = "MaterialId")
     @ManyToOne
     private Material materialId;
@@ -77,11 +73,6 @@ public class Ordencompradeta implements Serializable {
 
     public Ordencompradeta(Integer ordenCompraDetaId) {
         this.ordenCompraDetaId = ordenCompraDetaId;
-    }
-
-    public Ordencompradeta(Integer ordenCompraDetaId, Double ordenCompraCantidad) {
-        this.ordenCompraDetaId = ordenCompraDetaId;
-        this.ordenCompraCantidad = ordenCompraCantidad;
     }
 
     public Integer getOrdenCompraDetaId() {
@@ -132,6 +123,22 @@ public class Ordencompradeta implements Serializable {
         this.ordenCompraValorTot = ordenCompraValorTot;
     }
 
+    public Estado getEstadoId() {
+        return estadoId;
+    }
+
+    public void setEstadoId(Estado estadoId) {
+        this.estadoId = estadoId;
+    }
+
+    public Encabezadorequerimiento getEncabezadoRequerimientoId() {
+        return encabezadoRequerimientoId;
+    }
+
+    public void setEncabezadoRequerimientoId(Encabezadorequerimiento encabezadoRequerimientoId) {
+        this.encabezadoRequerimientoId = encabezadoRequerimientoId;
+    }
+
     public Material getMaterialId() {
         return materialId;
     }
@@ -146,14 +153,6 @@ public class Ordencompradeta implements Serializable {
 
     public void setOrdenCompraId(Ordencompra ordenCompraId) {
         this.ordenCompraId = ordenCompraId;
-    }
-
-    public Estado getEstadoId() {
-        return estadoId;
-    }
-
-    public void setEstadoId(Estado estadoId) {
-        this.estadoId = estadoId;
     }
 
     @Override
@@ -179,14 +178,6 @@ public class Ordencompradeta implements Serializable {
     @Override
     public String toString() {
         return "com.universitaria.atelier.web.jpa.Ordencompradeta[ ordenCompraDetaId=" + ordenCompraDetaId + " ]";
-    }
-
-    public Encabezadorequerimiento getEncabezadoRequerimientoId() {
-        return encabezadoRequerimientoId;
-    }
-
-    public void setEncabezadoRequerimientoId(Encabezadorequerimiento encabezadoRequerimientoId) {
-        this.encabezadoRequerimientoId = encabezadoRequerimientoId;
     }
 
 }
