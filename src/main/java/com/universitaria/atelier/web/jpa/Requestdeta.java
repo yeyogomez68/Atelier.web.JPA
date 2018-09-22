@@ -33,6 +33,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Requestdeta.findAll", query = "SELECT r FROM Requestdeta r")
     , @NamedQuery(name = "Requestdeta.findByRequestDetaId", query = "SELECT r FROM Requestdeta r WHERE r.requestDetaId = :requestDetaId")
     , @NamedQuery(name = "Requestdeta.findByPendCompra", query = "SELECT r FROM Requestdeta r WHERE r.estadoId.estadoId = :estadoId")
+    , @NamedQuery(name = "Requestdeta.findForBuy", query = "SELECT r FROM Requestdeta r WHERE r.encabezadoRequerimientoId.encabezadoRequerimientoId = :encabezadoRequerimientoId and r.materialId.materialId = :materialId")
     , @NamedQuery(name = "Requestdeta.findByRequestDetaFecha", query = "SELECT r FROM Requestdeta r WHERE r.requestDetaFecha = :requestDetaFecha")
     , @NamedQuery(name = "Requestdeta.findByRequestDetaCantidad", query = "SELECT r FROM Requestdeta r WHERE r.requestDetaCantidad = :requestDetaCantidad")
     , @NamedQuery(name = "Requestdeta.findByUsuarioId", query = "SELECT r FROM Requestdeta r WHERE r.usuarioId = :usuarioId")
