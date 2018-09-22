@@ -35,6 +35,7 @@ public class Estado implements Serializable {
 
     @OneToMany(mappedBy = "estadoId")
     private Collection<Ordencompradeta> ordencompradetaCollection;
+
     @OneToMany(mappedBy = "estadoId")
     private Collection<Producciondeta> producciondetaCollection;
 
@@ -256,4 +257,5 @@ public class Estado implements Serializable {
     public void setClienteCollection(Collection<Cliente> clienteCollection) {
         this.clienteCollection = clienteCollection;
     }
+
 }

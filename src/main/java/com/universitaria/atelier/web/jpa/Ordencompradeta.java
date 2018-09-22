@@ -78,7 +78,7 @@ public class Ordencompradeta implements Serializable {
         this.ordenCompraDetaId = ordenCompraDetaId;
     }
 
-    public Ordencompradeta(Integer ordenCompraDetaId, Double ordenCompraCantidad) {
+    public Ordencompradeta(Integer ordenCompraDetaId, double ordenCompraCantidad) {
         this.ordenCompraDetaId = ordenCompraDetaId;
         this.ordenCompraCantidad = ordenCompraCantidad;
     }
