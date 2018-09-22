@@ -142,5 +142,5 @@ public class Roll implements Serializable {
     public void setClienteCollection(Collection<Cliente> clienteCollection) {
         this.clienteCollection = clienteCollection;
     }
-    
+
 }

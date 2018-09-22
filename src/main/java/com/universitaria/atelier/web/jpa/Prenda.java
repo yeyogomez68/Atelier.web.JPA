@@ -37,12 +37,6 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Prenda.findByPrendaDescripcion", query = "SELECT p FROM Prenda p WHERE p.prendaDescripcion = :prendaDescripcion")})
 public class Prenda implements Serializable {
 
-    @Size(max = 60)
-    @Column(name = "ubicacion")
-    private String ubicacion;
-    @Size(max = 200)
-    @Column(name = "URL")
-    private String url;
     @OneToMany(mappedBy = "prendaId")
     private Collection<Prendamaterial> prendamaterialCollection;
     @JoinColumn(name = "tallaId", referencedColumnName = "TallaId")
@@ -57,8 +51,15 @@ public class Prenda implements Serializable {
     private Integer prendaId;
     @Column(name = "PrendaNombre")
     private String prendaNombre;
+    @Size(max = 60)
+    @Column(name = "ubicacion")
+    private String ubicacion;
+    @Size(max = 200)
+    @Column(name = "URL")
+    private String url;
     @Column(name = "PrendaDescripcion")
     private String prendaDescripcion;
+
     @OneToMany(mappedBy = "prendaId")
     private Collection<Rentadeta> rentadetaCollection;
     @OneToMany(mappedBy = "prendaId")
@@ -106,6 +107,22 @@ public class Prenda implements Serializable {
 
     public void setPrendaNombre(String prendaNombre) {
         this.prendaNombre = prendaNombre;
+    }
+
+    public String getUbicacion() {
+        return ubicacion;
+    }
+
+    public void setUbicacion(String ubicacion) {
+        this.ubicacion = ubicacion;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public String getPrendaDescripcion() {
@@ -224,22 +241,6 @@ public class Prenda implements Serializable {
     @Override
     public String toString() {
         return "com.universitaria.atelier.web.jpa.Prenda[ prendaId=" + prendaId + " ]";
-    }
-
-    public String getUbicacion() {
-        return ubicacion;
-    }
-
-    public void setUbicacion(String ubicacion) {
-        this.ubicacion = ubicacion;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
     }
 
     @XmlTransient

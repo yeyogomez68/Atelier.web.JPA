@@ -6,6 +6,7 @@
 package com.universitaria.atelier.web.jpa;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -37,8 +38,17 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Reservacion.findByReservacionId", query = "SELECT r FROM Reservacion r WHERE r.reservacionId = :reservacionId")
     , @NamedQuery(name = "Reservacion.findByReservacionFecha", query = "SELECT r FROM Reservacion r WHERE r.reservacionFecha = :reservacionFecha")
     , @NamedQuery(name = "Reservacion.findByReservacionLimit", query = "SELECT r FROM Reservacion r WHERE r.reservacionLimit = :reservacionLimit")
+    , @NamedQuery(name = "Reservacion.findByEstadoId", query = "SELECT r FROM Reservacion r WHERE r.estadoId = :estadoId")
+    , @NamedQuery(name = "Reservacion.findByEstadoIdClienteId", query = "SELECT r FROM Reservacion r WHERE r.estadoId = :estadoId and r.clienteId = :clienteId")
     , @NamedQuery(name = "Reservacion.findByReservacionLimitFecha", query = "SELECT r FROM Reservacion r WHERE r.reservacionLimitFecha = :reservacionLimitFecha")})
 public class Reservacion implements Serializable {
+
+    @Column(name = "ReservacionFecha")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Calendar reservacionFecha;
+    @Column(name = "ReservacionLimitFecha")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Calendar reservacionLimitFecha;
 
     @JoinColumn(name = "ClienteId", referencedColumnName = "ClienteId")
     @ManyToOne
@@ -50,19 +60,10 @@ public class Reservacion implements Serializable {
     @Basic(optional = false)
     @Column(name = "ReservacionId")
     private Integer reservacionId;
-    @Column(name = "ReservacionFecha")
-    @Temporal(TemporalType.DATE)
-    private Date reservacionFecha;
     @Column(name = "ReservacionLimit")
     private Integer reservacionLimit;
-    @Column(name = "ReservacionLimitFecha")
-    @Temporal(TemporalType.DATE)
-    private Date reservacionLimitFecha;
     @OneToMany(mappedBy = "reservacionId")
     private Collection<Rentadeta> rentadetaCollection;
-    @JoinColumn(name = "UsuarioReservacionId", referencedColumnName = "UsuarioId")
-    @ManyToOne
-    private Usuario usuarioReservacionId;
     @JoinColumn(name = "EstadoId", referencedColumnName = "EstadoId")
     @ManyToOne
     private Estado estadoId;
@@ -88,28 +89,12 @@ public class Reservacion implements Serializable {
         this.reservacionId = reservacionId;
     }
 
-    public Date getReservacionFecha() {
-        return reservacionFecha;
-    }
-
-    public void setReservacionFecha(Date reservacionFecha) {
-        this.reservacionFecha = reservacionFecha;
-    }
-
     public Integer getReservacionLimit() {
         return reservacionLimit;
     }
 
     public void setReservacionLimit(Integer reservacionLimit) {
         this.reservacionLimit = reservacionLimit;
-    }
-
-    public Date getReservacionLimitFecha() {
-        return reservacionLimitFecha;
-    }
-
-    public void setReservacionLimitFecha(Date reservacionLimitFecha) {
-        this.reservacionLimitFecha = reservacionLimitFecha;
     }
 
     @XmlTransient
@@ -119,14 +104,6 @@ public class Reservacion implements Serializable {
 
     public void setRentadetaCollection(Collection<Rentadeta> rentadetaCollection) {
         this.rentadetaCollection = rentadetaCollection;
-    }
-
-    public Usuario getUsuarioReservacionId() {
-        return usuarioReservacionId;
-    }
-
-    public void setUsuarioReservacionId(Usuario usuarioReservacionId) {
-        this.usuarioReservacionId = usuarioReservacionId;
     }
 
     public Estado getEstadoId() {
@@ -185,5 +162,21 @@ public class Reservacion implements Serializable {
     public void setClienteId(Cliente clienteId) {
         this.clienteId = clienteId;
     }
-    
+
+    public Calendar getReservacionFecha() {
+        return reservacionFecha;
+    }
+
+    public void setReservacionFecha(Calendar reservacionFecha) {
+        this.reservacionFecha = reservacionFecha;
+    }
+
+    public Calendar getReservacionLimitFecha() {
+        return reservacionLimitFecha;
+    }
+
+    public void setReservacionLimitFecha(Calendar reservacionLimitFecha) {
+        this.reservacionLimitFecha = reservacionLimitFecha;
+    }
+
 }

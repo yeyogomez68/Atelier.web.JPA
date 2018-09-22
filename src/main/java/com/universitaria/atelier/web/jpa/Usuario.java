@@ -51,7 +51,6 @@ public class Usuario implements Serializable {
 
     @OneToMany(mappedBy = "usuarioId")
     private Collection<Produccionusuario> produccionusuarioCollection;
-   
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -81,8 +80,7 @@ public class Usuario implements Serializable {
     private Collection<Encabezadorequerimiento> encabezadorequerimientoCollection;
     @OneToMany(mappedBy = "usuarioCreador")
     private Collection<Produccion> produccionCollection1;
-    @OneToMany(mappedBy = "usuarioReservacionId")
-    private Collection<Reservacion> reservacionCollection;
+
     @OneToMany(mappedBy = "usuarioId")
     private Collection<Reservacion> reservacionCollection1;
     @JoinColumn(name = "EstadoId", referencedColumnName = "EstadoId")
@@ -94,10 +92,6 @@ public class Usuario implements Serializable {
     @JoinColumn(name = "CiudadId", referencedColumnName = "CiudadId")
     @ManyToOne
     private Ciudad ciudadId;
-    @OneToMany(mappedBy = "usuarioId")
-    private Collection<Renta> rentaCollection;
-    @OneToMany(mappedBy = "usuarioCreador")
-    private Collection<Renta> rentaCollection1;
 
     public Usuario() {
     }
@@ -197,7 +191,6 @@ public class Usuario implements Serializable {
         this.encabezadorequerimientoCollection = encabezadorequerimientoCollection;
     }
 
-    
     @XmlTransient
     public Collection<Producciondeta> getProduccionCollection() {
         return producciondetaCollection;
@@ -214,15 +207,6 @@ public class Usuario implements Serializable {
 
     public void setProduccionCollection1(Collection<Produccion> produccionCollection1) {
         this.produccionCollection1 = produccionCollection1;
-    }
-
-    @XmlTransient
-    public Collection<Reservacion> getReservacionCollection() {
-        return reservacionCollection;
-    }
-
-    public void setReservacionCollection(Collection<Reservacion> reservacionCollection) {
-        this.reservacionCollection = reservacionCollection;
     }
 
     @XmlTransient
@@ -256,24 +240,6 @@ public class Usuario implements Serializable {
 
     public void setCiudadId(Ciudad ciudadId) {
         this.ciudadId = ciudadId;
-    }
-
-    @XmlTransient
-    public Collection<Renta> getRentaCollection() {
-        return rentaCollection;
-    }
-
-    public void setRentaCollection(Collection<Renta> rentaCollection) {
-        this.rentaCollection = rentaCollection;
-    }
-
-    @XmlTransient
-    public Collection<Renta> getRentaCollection1() {
-        return rentaCollection1;
-    }
-
-    public void setRentaCollection1(Collection<Renta> rentaCollection1) {
-        this.rentaCollection1 = rentaCollection1;
     }
 
     @Override
@@ -326,5 +292,5 @@ public class Usuario implements Serializable {
     public void setContratoId(Contrato contratoId) {
         this.contratoId = contratoId;
     }
-    
+
 }

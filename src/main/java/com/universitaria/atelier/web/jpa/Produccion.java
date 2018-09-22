@@ -22,6 +22,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -41,6 +42,13 @@ import javax.xml.bind.annotation.XmlTransient;
 
 public class Produccion implements Serializable {
 
+    @Column(name = "ProduccionFecha")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Calendar produccionFecha;
+    @Size(max = 300)
+    @Column(name = "produccionDescripcion")
+    private String produccionDescripcion;
+
     @Column(name = "avance")
     private Integer avance;
 
@@ -53,14 +61,9 @@ public class Produccion implements Serializable {
     @Basic(optional = false)
     @Column(name = "ProduccionId")
     private Integer produccionId;
-    @Column(name = "ProduccionFecha")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Calendar produccionFecha;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "ProduccionDiaEstimated")
     private Float produccionDiaEstimated;
-    @Column(name = "ProduccionDescripcion")
-    private String produccionDescripcion;
 
     @JoinColumn(name = "EstadoId", referencedColumnName = "EstadoId")
     @ManyToOne
@@ -69,7 +72,7 @@ public class Produccion implements Serializable {
     @JoinColumn(name = "PrendaId", referencedColumnName = "PrendaId")
     @ManyToOne
     private Prenda prendaId;
-    
+
     @JoinColumn(name = "UsuarioCreador", referencedColumnName = "UsuarioId")
     @ManyToOne
     private Usuario usuarioCreador;
@@ -89,14 +92,6 @@ public class Produccion implements Serializable {
 
     public void setProduccionId(Integer produccionId) {
         this.produccionId = produccionId;
-    }
-
-    public Calendar getProduccionFecha() {
-        return produccionFecha;
-    }
-
-    public void setProduccionFecha(Calendar produccionFecha) {
-        this.produccionFecha = produccionFecha;
     }
 
     public Float getProduccionDiaEstimated() {
@@ -155,8 +150,6 @@ public class Produccion implements Serializable {
     public void setPrendaId(Prenda prendaId) {
         this.prendaId = prendaId;
     }
-    
-    
 
     @Override
     public int hashCode() {
@@ -182,4 +175,13 @@ public class Produccion implements Serializable {
     public String toString() {
         return "com.universitaria.atelier.web.jpa.Produccion[ produccionId=" + produccionId + " ]";
     }
+
+    public Calendar getProduccionFecha() {
+        return produccionFecha;
+    }
+
+    public void setProduccionFecha(Calendar produccionFecha) {
+        this.produccionFecha = produccionFecha;
+    }
+
 }
