@@ -29,9 +29,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Prendamaterial.findAll", query = "SELECT p FROM Prendamaterial p")
     , @NamedQuery(name = "Prendamaterial.findByPrendaIdMaterialId", query = "SELECT p FROM Prendamaterial p WHERE p.prendaId = :prendaId and p.materialId = :materialId")
+        , @NamedQuery(name = "Prendamaterial.findByPrendaId", query = "SELECT p FROM Prendamaterial p WHERE p.prendaId = :prendaId")
     , @NamedQuery(name = "Prendamaterial.findByPrendaMaterial", query = "SELECT p FROM Prendamaterial p WHERE p.prendaMaterial = :prendaMaterial")})
 public class Prendamaterial implements Serializable {
 
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,6 +46,9 @@ public class Prendamaterial implements Serializable {
     @JoinColumn(name = "PrendaId", referencedColumnName = "PrendaId")
     @ManyToOne
     private Prenda prendaId;
+
+    @Column(name = "cantidad")
+    private Double cantidad;
 
     public Prendamaterial() {
     }
@@ -99,6 +104,14 @@ public class Prendamaterial implements Serializable {
     @Override
     public String toString() {
         return "com.universitaria.atelier.web.jpa.Prendamaterial[ prendaMaterial=" + prendaMaterial + " ]";
+    }
+
+    public Double getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(Double cantidad) {
+        this.cantidad = cantidad;
     }
 
 }

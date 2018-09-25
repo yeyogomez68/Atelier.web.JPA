@@ -161,5 +161,5 @@ public class Requestdeta implements Serializable {
     public void setRequestDetaCantidad(Double requestDetaCantidad) {
         this.requestDetaCantidad = requestDetaCantidad;
     }
-    
+
 }

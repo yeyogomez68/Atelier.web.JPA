@@ -61,7 +61,6 @@ public class Stockimagen implements Serializable {
         this.stockImagenId = stockImagenId;
     }
 
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -87,7 +86,6 @@ public class Stockimagen implements Serializable {
         return "com.universitaria.atelier.web.jpa.Stockimagen[ stockImagenId=" + stockImagenId + " ]";
     }
 
-
     @XmlTransient
     public Collection<Stockprenda> getStockprendaCollection() {
         return stockprendaCollection;
@@ -104,5 +102,5 @@ public class Stockimagen implements Serializable {
     public void setStockImagen(byte[] stockImagen) {
         this.stockImagen = stockImagen;
     }
-    
+
 }

@@ -81,7 +81,6 @@ public class Ordencompra implements Serializable {
     @ManyToOne
     private Usuario usuarioId;
 
-
     public Ordencompra() {
     }
 
@@ -200,5 +199,5 @@ public class Ordencompra implements Serializable {
     public void setOrdencompradetaCollection(Collection<Ordencompradeta> ordencompradetaCollection) {
         this.ordencompradetaCollection = ordencompradetaCollection;
     }
-    
+
 }

@@ -100,5 +100,5 @@ public class Pais implements Serializable {
     public String toString() {
         return "com.universitaria.atelier.web.jpa.Pais[ paisId=" + paisId + " ]";
     }
-    
+
 }

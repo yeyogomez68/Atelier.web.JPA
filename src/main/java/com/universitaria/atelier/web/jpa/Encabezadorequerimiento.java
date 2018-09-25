@@ -153,5 +153,5 @@ public class Encabezadorequerimiento implements Serializable {
     public void setOrdencompradetaCollection(Collection<Ordencompradeta> ordencompradetaCollection) {
         this.ordencompradetaCollection = ordencompradetaCollection;
     }
-    
+
 }

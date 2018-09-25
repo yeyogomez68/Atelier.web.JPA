@@ -40,7 +40,7 @@ public class Stockmateriales implements Serializable {
     @Column(name = "StockMaterialId")
     private Integer stockMaterialId;
     @Column(name = "Cantidad")
-    private Integer cantidad;
+    private Double cantidad;
     @JoinColumn(name = "MaterialId", referencedColumnName = "MaterialId")
     @ManyToOne
     private Material materialId;
@@ -60,11 +60,11 @@ public class Stockmateriales implements Serializable {
         this.stockMaterialId = stockMaterialId;
     }
 
-    public Integer getCantidad() {
+    public Double getCantidad() {
         return cantidad;
     }
 
-    public void setCantidad(Integer cantidad) {
+    public void setCantidad(Double cantidad) {
         this.cantidad = cantidad;
     }
 

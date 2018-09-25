@@ -39,8 +39,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Producciondeta implements Serializable {
 
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "ProduccionDetaCant")
-    private Float produccionDetaCant;
+    private Double produccionDetaCant;
 
     @JoinColumn(name = "estadoId", referencedColumnName = "EstadoId")
     @ManyToOne
@@ -88,7 +89,6 @@ public class Producciondeta implements Serializable {
     public void setMaterialId(Material materialId) {
         this.materialId = materialId;
     }
-
 
     public Date getProduccionDetaFecha() {
         return produccionDetaFecha;
@@ -147,11 +147,11 @@ public class Producciondeta implements Serializable {
         return "com.universitaria.atelier.web.jpa.Producciondeta[ produccionDetaId=" + produccionDetaId + " ]";
     }
 
-    public Float getProduccionDetaCant() {
+    public Double getProduccionDetaCant() {
         return produccionDetaCant;
     }
 
-    public void setProduccionDetaCant(Float produccionDetaCant) {
+    public void setProduccionDetaCant(Double produccionDetaCant) {
         this.produccionDetaCant = produccionDetaCant;
     }
 }

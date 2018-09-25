@@ -106,5 +106,5 @@ public class Materialtipo implements Serializable {
     public String toString() {
         return "com.universitaria.atelier.web.jpa.Materialtipo[ materialTipoId=" + materialTipoId + " ]";
     }
-    
+
 }

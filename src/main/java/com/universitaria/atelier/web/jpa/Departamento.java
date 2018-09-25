@@ -113,5 +113,5 @@ public class Departamento implements Serializable {
     public String toString() {
         return "com.universitaria.atelier.web.jpa.Departamento[ departamentoId=" + departamentoId + " ]";
     }
-    
+
 }

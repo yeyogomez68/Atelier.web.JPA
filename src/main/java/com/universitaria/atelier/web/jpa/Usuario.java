@@ -200,7 +200,7 @@ public class Usuario implements Serializable {
     public void setProduccionCollection(Collection<Producciondeta> produccionCollection) {
         this.producciondetaCollection = produccionCollection;
     }
-    
+
     @XmlTransient
     public Collection<Produccion> getProduccionCollection1() {
         return produccionCollection1;

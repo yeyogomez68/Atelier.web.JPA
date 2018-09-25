@@ -115,5 +115,5 @@ public class Contrato implements Serializable {
     public String toString() {
         return "com.universitaria.atelier.web.jpa.Contrato[ contratoId=" + contratoId + " ]";
     }
-    
+
 }

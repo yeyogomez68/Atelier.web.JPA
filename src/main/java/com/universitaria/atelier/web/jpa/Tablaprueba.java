@@ -75,5 +75,5 @@ public class Tablaprueba implements Serializable {
     public String toString() {
         return "com.universitaria.atelier.web.jpa.Tablaprueba[ idtablaprueba=" + idtablaprueba + " ]";
     }
-    
+
 }

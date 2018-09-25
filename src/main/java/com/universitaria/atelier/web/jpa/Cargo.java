@@ -47,7 +47,6 @@ public class Cargo implements Serializable {
     @Column(name = "CargoDesc")
     private String cargoDesc;
 
-
     public Cargo() {
     }
 
@@ -104,5 +103,5 @@ public class Cargo implements Serializable {
     public void setContratoCollection(Collection<Contrato> contratoCollection) {
         this.contratoCollection = contratoCollection;
     }
-    
+
 }

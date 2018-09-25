@@ -22,6 +22,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -29,6 +30,7 @@ import javax.xml.bind.annotation.XmlTransient;
 /**
  *
  * @author jeisson.gomez
+ *
  */
 @Entity
 @Table(name = "produccion")
@@ -42,15 +44,18 @@ import javax.xml.bind.annotation.XmlTransient;
 
 public class Produccion implements Serializable {
 
+    @Basic(optional = false)
+    @NotNull()
     @Column(name = "ProduccionFecha")
     @Temporal(TemporalType.TIMESTAMP)
     private Calendar produccionFecha;
     @Size(max = 300)
     @Column(name = "produccionDescripcion")
     private String produccionDescripcion;
-
     @Column(name = "avance")
     private Integer avance;
+    @Column(name = "cantidad")
+    private Integer cantidad;
 
     @OneToMany(mappedBy = "produccionId")
     private Collection<Produccionusuario> produccionusuarioCollection;
@@ -61,6 +66,7 @@ public class Produccion implements Serializable {
     @Basic(optional = false)
     @Column(name = "ProduccionId")
     private Integer produccionId;
+
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "ProduccionDiaEstimated")
     private Float produccionDiaEstimated;
@@ -84,6 +90,7 @@ public class Produccion implements Serializable {
 
     public Produccion(Integer produccionId) {
         this.produccionId = produccionId;
+
     }
 
     public Integer getProduccionId() {
@@ -104,18 +111,22 @@ public class Produccion implements Serializable {
 
     public Estado getEstadoId() {
         return estadoId;
+
     }
 
     public void setEstadoId(Estado estadoId) {
         this.estadoId = estadoId;
+
     }
 
     public Usuario getUsuarioCreador() {
         return usuarioCreador;
+
     }
 
     public void setUsuarioCreador(Usuario usuarioCreador) {
         this.usuarioCreador = usuarioCreador;
+
     }
 
     public Integer getAvance() {
@@ -137,10 +148,12 @@ public class Produccion implements Serializable {
 
     public String getProduccionDescripcion() {
         return produccionDescripcion;
+
     }
 
     public void setProduccionDescripcion(String produccionDescripcion) {
         this.produccionDescripcion = produccionDescripcion;
+
     }
 
     public Prenda getPrendaId() {
@@ -149,6 +162,14 @@ public class Produccion implements Serializable {
 
     public void setPrendaId(Prenda prendaId) {
         this.prendaId = prendaId;
+    }
+
+    public Integer getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(Integer cantidad) {
+        this.cantidad = cantidad;
     }
 
     @Override

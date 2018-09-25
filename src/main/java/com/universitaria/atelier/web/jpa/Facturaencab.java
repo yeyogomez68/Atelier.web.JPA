@@ -202,5 +202,5 @@ public class Facturaencab implements Serializable {
     public void setClienteId(Cliente clienteId) {
         this.clienteId = clienteId;
     }
-    
+
 }

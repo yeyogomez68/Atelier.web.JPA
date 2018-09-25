@@ -17,14 +17,14 @@ public abstract class AbstractFacade<T> {
 
     @PersistenceContext(unitName = "MySqlDSAtelier")
     protected EntityManager em;
-    
+
     private Class<T> entityClass;
 
     public AbstractFacade(Class<T> entityClass) {
         this.entityClass = entityClass;
     }
 
-    protected EntityManager getEntityManager(){
+    protected EntityManager getEntityManager() {
         return em;
     }
 

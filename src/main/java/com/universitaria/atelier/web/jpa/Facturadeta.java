@@ -153,5 +153,5 @@ public class Facturadeta implements Serializable {
     public String toString() {
         return "com.universitaria.atelier.web.jpa.Facturadeta[ facturaDetaId=" + facturaDetaId + " ]";
     }
-    
+
 }

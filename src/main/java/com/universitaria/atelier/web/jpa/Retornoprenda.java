@@ -132,5 +132,5 @@ public class Retornoprenda implements Serializable {
     public String toString() {
         return "com.universitaria.atelier.web.jpa.Retornoprenda[ retornoPrendaId=" + retornoPrendaId + " ]";
     }
-    
+
 }

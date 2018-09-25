@@ -99,5 +99,5 @@ public class Produccionusuario implements Serializable {
     public String toString() {
         return "com.universitaria.atelier.web.jpa.Produccionusuario[ productionUser=" + productionUser + " ]";
     }
-    
+
 }

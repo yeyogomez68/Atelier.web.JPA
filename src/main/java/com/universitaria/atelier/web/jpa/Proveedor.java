@@ -157,5 +157,5 @@ public class Proveedor implements Serializable {
     public String toString() {
         return "com.universitaria.atelier.web.jpa.Proveedor[ proveedorId=" + proveedorId + " ]";
     }
-    
+
 }

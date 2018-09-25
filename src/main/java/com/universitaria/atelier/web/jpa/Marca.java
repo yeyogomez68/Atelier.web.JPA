@@ -100,5 +100,5 @@ public class Marca implements Serializable {
     public String toString() {
         return "com.universitaria.atelier.web.jpa.Marca[ marcaId=" + marcaId + " ]";
     }
-    
+
 }

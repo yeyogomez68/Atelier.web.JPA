@@ -141,5 +141,5 @@ public class Opcion implements Serializable {
     public void setReferencia(String referencia) {
         this.referencia = referencia;
     }
-    
+
 }

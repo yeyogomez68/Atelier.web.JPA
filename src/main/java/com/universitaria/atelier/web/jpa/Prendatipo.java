@@ -100,5 +100,5 @@ public class Prendatipo implements Serializable {
     public String toString() {
         return "com.universitaria.atelier.web.jpa.Prendatipo[ prendaTipoId=" + prendaTipoId + " ]";
     }
-    
+
 }

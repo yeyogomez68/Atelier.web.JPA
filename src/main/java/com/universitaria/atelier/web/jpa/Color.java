@@ -106,5 +106,5 @@ public class Color implements Serializable {
     public String toString() {
         return "com.universitaria.atelier.web.jpa.Color[ colorId=" + colorId + " ]";
     }
-    
+
 }
